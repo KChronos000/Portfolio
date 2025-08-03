@@ -3,15 +3,15 @@ import { FacebookIcon, GithubIcon, GmailIcon } from '../Svgicon'
 
 export const Namecard = () => {
   return (
-    <div className="card">
+    <div className="card-vio-blu">
         <div className="card_content">
-            <div className="bg-gray-950 p-4 hover:shadow-lg rounded-xl hover:shadow-teal-500/50 duration-300 transition-all">
-            <span className="text-4xl sm:text-5xl md:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-green-500 to-violet-500 bg-clip-text text-transparent">
+            <div className="bg-gray-950 p-4 hover:shadow-lg rounded-xl hover:shadow-violet-500/50 duration-300 transition-all">
+            <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-green-500 to-violet-500 bg-clip-text text-transparent">
                 TAEMMMARIN TAPRAB
             </span>
             <p className="mt-4">
                 <span className="text-xl font-semibold text-teal-500">
-                Web Developer | UX/UI Designer : 
+                Game&Web Developer | UX/UI Designer : 
                 </span>
                 <br />
                 <span className="opacity-80">
