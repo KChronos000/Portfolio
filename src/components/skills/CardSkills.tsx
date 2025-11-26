@@ -1,8 +1,11 @@
-'use client'
-import React from 'react';
 import styled from 'styled-components';
-import { PHPIcon, TypeScriptIcon } from '../Svgicon';
 import Image from 'next/image';
+
+interface CardStyle extends React.CSSProperties {
+  '--index': number;
+  '--color-card': string;
+  '--quantity': number;
+}
 
 const CardSkills = () => {
   const colors = [
@@ -18,14 +21,20 @@ const CardSkills = () => {
     '142, 202, 252'
   ];
 
-  const skills = ['HTML', 'CSS', 'Javascript', 'Typescript', 'Python', 'PHP', 'Prompt-Engine', 'C#', 'C++' , 'SQL'];
+  const skills = ['HTML', 'CSS', 'Javascript', 'Typescript', 'Python', 'PHP', 'Unity', 'Cshrap', 'C' , 'SQL'];
 
   return (
     <StyledWrapper quantity={colors.length}>
       <div className="wrapper">
         <div className="inner">
           {colors.map((color, index) => (
-            <Card key={index} index={index} colorCard={color} quantity={colors.length} skillName={skills[index]} />
+            <Card
+              key={index}
+              index={index}
+              colorCard={color}
+              quantity={colors.length}
+              skillName={skills[index]}
+            />
           ))}
         </div>
       </div>
@@ -33,13 +42,23 @@ const CardSkills = () => {
   );
 };
 
-const Card = ({ index, colorCard, quantity, skillName }) => {
-  return (
-    <div className="card" style={{
-      '--index': index,
-      '--color-card': colorCard,
-      '--quantity': quantity
-    }}>
+const Card = ({
+  index,
+  colorCard,
+  quantity,
+  skillName,
+}: {
+  index: number;
+  colorCard: string;
+  quantity: number;
+  skillName: string;
+}) => {
+  const style: CardStyle = {
+    '--index': index,
+    '--color-card': colorCard,
+    '--quantity': quantity,
+  };  return (
+    <div className="card hover:scale-[105%]" style={style}>
       <div className="img">
         <div className="skill-content">
           <h3 className="skill-name">{skillName}</h3>
@@ -54,7 +73,7 @@ const Card = ({ index, colorCard, quantity, skillName }) => {
 
 
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div<{ quantity: number }>`
   .wrapper {
     width: 100%;
     height: 100vh;
