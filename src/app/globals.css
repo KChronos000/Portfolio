@@ -7,10 +7,8 @@
 
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: #000;
+  --color-foreground: #fff;
 }
 
 @font-face {font-family: 'K2D';src: url('assets/K2D/K2D-Regular.ttf') format('truetype');
@@ -23,6 +21,18 @@
     --foreground: #ededed;
   }
 }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 
 

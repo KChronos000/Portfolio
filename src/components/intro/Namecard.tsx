@@ -5,7 +5,7 @@ export const Namecard = () => {
     <div className="card-vio-blu duration-400 hover:scale-[102.5%]">
         <div className="card_content">
             <div className="bg-gray-950 p-4 hover:shadow-lg rounded-xl hover:shadow-violet-500/50 duration-300 transition-all">
-            <span className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold bg-gradient-to-r from-green-500 to-violet-600 bg-clip-text text-transparent">
+            <span className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold bg-gradient-to-r from-emerald-500 to-violet-600 bg-clip-text text-transparent">
                 TAEMMMARIN TAPRAB
             </span>
             <p className="mt-4">
@@ -20,14 +20,14 @@ export const Namecard = () => {
                 passionate about emerging technologies.
                 </span>
                 <br />
-                <span className="flex gap-4 opacity-70">
-                    <a href="" target="_blank" className="hover:scale-120 duration-300">
+                <span className="flex gap-4">
+                    <a href="" target="_blank" className="opacity-70 hover:opacity-100 hover:scale-120 duration-300">
                         <FacebookIcon />
                     </a>
-                    <a href="" target="_blank" className="hover:scale-120 duration-300">
+                    <a href="" target="_blank" className="opacity-70 hover:opacity-100 hover:scale-120 duration-300">
                         <GmailIcon />
                     </a>
-                    <a href="https://github.com/KChronos000" target="_blank" className="hover:scale-120 duration-300">
+                    <a href="https://github.com/KChronos000" target="_blank" className="opacity-70 hover:opacity-100 hover:scale-120 duration-300">
                         <GithubIcon />
                     </a>
                 </span>
