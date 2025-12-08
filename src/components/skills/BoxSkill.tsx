@@ -5,11 +5,12 @@ const BoxSkill = () => {
   return (
     <div>
       <div className="ml-4 md:ml-0 md:mb-10">
-        <div>
+        <div className='flex'>
+            <span className='text-shadow-lg text-shadow-gray-500 text-6xl lg:text-6xl font-bold'>⁘</span>
           <h2 className="bg-gradient-to-r from-emerald-400 via-violet-500 to-violet-500 bg-clip-text text-transparent uppercase font-bold text-6xl lg:text-6xl mb-4">
-            ⁘ SKILLS
+            SKILLS
+          <div className="w-50 h-1 rounded bg-gradient-to-r from-emerald-400/50 to-violet-500/50"></div>
           </h2>
-          <div className="w-64 h-1 rounded bg-gradient-to-r from-emerald-400/50 to-violet-500/50"></div>
         </div>
       </div>
       
@@ -36,7 +37,7 @@ const BoxSkill = () => {
         
         {/* Frameworks & Tools Card */}
         <div className="
-            bg-radial-[at_50%_75%] floating-400
+            bg-radial-[at_50%_75%] floating-delay
             p-8 w-full 
             border border-cyan-900 rounded-xl
             inset-shadow-sm inset-shadow-teal-500 
@@ -117,7 +118,10 @@ export const ProgramTools = () => {
     { name: 'Unity', file: 'Unityicon.png', color: 'from-gray-700 to-gray-400' },
     { name: 'Next.js', file: 'NextJsicon.png', color: 'from-black to-gray-300' },
     { name: 'React', file: 'Reacticon.png', color: 'from-cyan-400 to-blue-500' },
-    { name: 'MySQL', file: 'MySQLicon.png', color: 'from-blue-600 to-orange-400' }
+    { name: 'MySQL', file: 'MySQLicon.png', color: 'from-blue-600 to-orange-400' },
+    { name: 'TailwindCSS', file: 'TailwindCSS.png', color: 'from-cyan-600 to-cyan-400' },
+    { name: 'Postman', file: 'postman.png', color: 'from-yellow-600 to-orange-400' },
+    { name: 'Node.js', file: 'nodejs.png', color: 'from-yellow-600 to-green-400' }
   ];
 
   return (

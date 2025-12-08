@@ -1,5 +1,10 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
+import rawProjects from "@/app/assets/Projects/Projects.json";
+import type { Project } from "@/app/assets/Projects/types";
+
+const projects = rawProjects as Project[];
+
 
 const AchievementSection = () => {
   return (
@@ -10,7 +15,7 @@ const AchievementSection = () => {
             <span className='text-shadow-lg text-shadow-gray-500'>
               My
             </span>
-             <span className="bg-gradient-to-r from-teal-400 to-violet-500 bg-clip-text text-transparent">Projects</span>
+             <span className="bg-gradient-to-r from-emerald-400 to-violet-500 bg-clip-text text-transparent">Projects</span>
           </h2>
           <p className="text-gray-400 text-lg">ผลงานและโปรเจคที่ผมภูมิใจนำเสนอ</p>
         </div>
@@ -21,63 +26,9 @@ const AchievementSection = () => {
   );
 };
 
-const projects = [
-  {
-    id: 1,
-    title: "E-Commerce Platform",
-    description: "ระบบ E-Commerce เต็มรูปแบบพร้อม payment gateway และ admin dashboard",
-    image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop",
-    tags: ["Next.js", "TypeScript", "Stripe", "Prisma"],
-    demoUrl: "#",
-    githubUrl: "#",
-    category: "Web App"
-  },
-  {
-    id: 2,
-    title: "Task Management App",
-    description: "แอปพลิเคชันจัดการงานแบบ real-time พร้อม collaboration features",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop",
-    tags: ["React", "Firebase", "Tailwind"],
-    demoUrl: "#",
-    githubUrl: "#",
-    category: "Web App"
-  },
-  {
-    id: 3,
-    title: "Portfolio Website",
-    description: "เว็บไซต์ portfolio แบบ interactive พร้อม animations และ 3D elements",
-    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop",
-    tags: ["Next.js", "Three.js", "Framer Motion"],
-    demoUrl: "#",
-    githubUrl: "#",
-    category: "Design"
-  },
-  {
-    id: 4,
-    title: "AI Chat Application",
-    description: "แชทบอทที่ใช้ AI สำหรับตอบคำถามและช่วยเหลือผู้ใช้งาน",
-    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&h=600&fit=crop",
-    tags: ["Python", "OpenAI", "FastAPI", "React"],
-    demoUrl: "#",
-    githubUrl: "#",
-    category: "AI/ML"
-  }
-];
-
-type Project = {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-  demoUrl: string;
-  githubUrl: string;
-  category: string;
-};
-
 export const AGrid = () => {
   const [filter, setFilter] = useState("All");
-  const categories = ["All", "Web App", "Design", "AI/ML"];
+  const categories = ["All", "Web App", "Design", "Game"];
 
   const filteredProjects = filter === "All" 
     ? projects 
@@ -203,14 +154,5 @@ const ProjectCard = ({
     </div>
   );
 };
-
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-`;
-document.head.appendChild(style);
 
 export default AchievementSection;
