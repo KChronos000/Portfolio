@@ -5,19 +5,20 @@ const BoxSkill = () => {
   return (
     <div>
       <div className="ml-4 md:ml-0 md:mb-10">
-        <div className='flex'>
+        <div className='flex items-center justify-center'>
             <span className='text-shadow-lg text-shadow-gray-500 text-6xl lg:text-6xl font-bold'>⁘</span>
-          <h2 className="bg-gradient-to-r from-emerald-400 via-violet-500 to-violet-500 bg-clip-text text-transparent uppercase font-bold text-6xl lg:text-6xl mb-4">
+          <h2 className="bg-gradient-to-r from-violet-500 to-emerald-500 bg-clip-text text-transparent uppercase font-bold text-6xl lg:text-6xl mb-4">
             SKILLS
-          <div className="w-50 h-1 rounded bg-gradient-to-r from-emerald-400/50 to-violet-500/50"></div>
+          <div className="w-50 h-1 rounded bg-white shadow shadow-gray-500 mt-3"></div>
           </h2>
+            <span className='text-shadow-lg text-shadow-gray-500 text-6xl lg:text-6xl font-bold'>⁘</span>
         </div>
       </div>
       
       <div className="grid md:grid-cols-2 justify-between gap-6 p-4 md:p-0">
         {/* Programming Languages Card */}
         <div className="
-            bg-radial-[at_50%_75%] floating
+            bg-radial-[at_50%_75%] floating-400 mb:floating
             p-8 w-full 
             border border-purple-900 rounded-xl
             inset-shadow-sm inset-shadow-indigo-500 
@@ -37,7 +38,7 @@ const BoxSkill = () => {
         
         {/* Frameworks & Tools Card */}
         <div className="
-            bg-radial-[at_50%_75%] floating-delay
+            bg-radial-[at_50%_75%] floating-400-delay mb:floating-delay
             p-8 w-full 
             border border-cyan-900 rounded-xl
             inset-shadow-sm inset-shadow-teal-500 

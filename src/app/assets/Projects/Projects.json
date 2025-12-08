@@ -2,41 +2,163 @@
   {
     "id": 1,
     "title": "E-Commerce Platform",
-    "description": "ระบบ E-Commerce เต็มรูปแบบพร้อม payment gateway และ admin dashboard",
+    "description": "A full-stack e-commerce platform with payment integration",
     "image": "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop",
-    "tags": ["Next.js", "TypeScript", "Stripe", "Prisma"],
+    "otherImages": [
+      "https://images.unsplash.com/photo-1515165562835-c3b8e0f6f9b1?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=600&fit=crop"
+    ],
+    "category": "Web App",
+    "tags": ["React", "Node.js", "MongoDB", "Stripe"],
     "demoUrl": "#",
     "githubUrl": "#",
-    "category": "Web App"
+    "date": "2024-01-15",
+    "issuer": "มอบให้โดย CodeCamp Thailand",
+    "fullDescription": "A comprehensive e-commerce solution featuring user authentication, product management, shopping cart functionality, and secure payment processing through Stripe integration. Built with modern web technologies for optimal performance and user experience.",
+    "features": [
+      "User authentication and authorization",
+      "Product catalog with search and filters",
+      "Shopping cart and wishlist",
+      "Secure payment processing",
+      "Order tracking system",
+      "Admin dashboard"
+    ],
+    "technologies": [
+      "React 18",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Stripe API",
+      "JWT",
+      "Tailwind CSS"
+    ]
   },
   {
     "id": 2,
     "title": "Task Management App",
-    "description": "แอปพลิเคชันจัดการงานแบบ real-time พร้อม collaboration features",
+    "description": "Collaborative task management tool with real-time updates",
     "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop",
-    "tags": ["React", "Firebase", "Tailwind"],
+    "otherImages": [
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=800&h=600&fit=crop"
+    ],
+    "category": "Web App",
+    "tags": ["Vue.js", "Firebase", "Tailwind"],
     "demoUrl": "#",
     "githubUrl": "#",
-    "category": "Web App"
+    "date": "2023-11-20",
+    "issuer": "มอบให้โดย CodeCamp Thailand",
+    "fullDescription": "A real-time collaborative task management application that helps teams organize, prioritize, and track their work. Features include drag-and-drop task boards, team collaboration tools, and instant synchronization across all devices.",
+    "features": [
+      "Real-time collaboration",
+      "Drag-and-drop interface",
+      "Task priority system",
+      "Team member assignment",
+      "Progress tracking",
+      "Notification system"
+    ],
+    "technologies": [
+      "Vue.js 3",
+      "Firebase",
+      "Firestore",
+      "Tailwind CSS",
+      "WebSocket"
+    ]
   },
   {
     "id": 3,
-    "title": "Portfolio Website",
-    "description": "เว็บไซต์ portfolio แบบ interactive พร้อม animations และ 3D elements",
+    "title": "Portfolio Design",
+    "description": "Modern and minimal portfolio design for creatives",
     "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop",
-    "tags": ["Next.js", "Three.js", "Framer Motion"],
+    "otherImages": [
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&h=600&fit=crop"
+    ],
+    "category": "Design",
+    "tags": ["Figma", "UI/UX", "Prototyping"],
     "demoUrl": "#",
-    "githubUrl": "#",
-    "category": "Design"
+    "date": "2023-09-10",
+    "issuer": "มอบให้โดย CodeCamp Thailand",
+    "fullDescription": "A sleek and modern portfolio design crafted for creative professionals. Features smooth animations, responsive layouts, and an intuitive user experience that showcases work in the best possible light.",
+    "features": [
+      "Responsive design system",
+      "Interactive prototypes",
+      "Dark/Light mode",
+      "Animation library",
+      "Component documentation",
+      "Accessibility focused"
+    ],
+    "technologies": [
+      "Figma",
+      "Design System",
+      "Prototyping",
+      "Responsive Design"
+    ]
   },
   {
     "id": 4,
-    "title": "AI Chat Application",
-    "description": "แชทบอทที่ใช้ AI สำหรับตอบคำถามและช่วยเหลือผู้ใช้งาน",
-    "image": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&h=600&fit=crop",
-    "tags": ["Python", "OpenAI", "FastAPI", "React"],
+    "title": "2D Platformer Game",
+    "description": "Retro-style platformer game with pixel art graphics",
+    "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=600&fit=crop",
+    "otherImages": [
+      "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1616469829581-73993eb86f2c?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&h=600&fit=crop"
+    ],
+    "category": "Game",
+    "tags": ["Unity", "C#", "Pixel Art"],
     "demoUrl": "#",
     "githubUrl": "#",
-    "category": "Game"
+    "date": "2024-03-05",
+    "issuer": "มอบให้โดย CodeCamp Thailand",
+    "fullDescription": "A nostalgic 2D platformer game featuring pixel art graphics, challenging levels, and smooth gameplay mechanics. Includes multiple worlds, boss battles, and power-up systems reminiscent of classic platformers.",
+    "features": [
+      "Multiple game worlds",
+      "Boss battle system",
+      "Power-ups and abilities",
+      "Checkpoint system",
+      "Achievement tracking",
+      "Original soundtrack"
+    ],
+    "technologies": [
+      "Unity 2022",
+      "C#",
+      "Aseprite",
+      "FMOD Audio",
+      "Cinemachine"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Certificate of Completion – Web Development Bootcamp",
+    "description": "Certificate awarded for completing an intensive web development program",
+    "image": "https://images.unsplash.com/photo-1581093458791-9d173a0b1f5b?w=800&h=600&fit=crop",
+    "otherImages": [
+      "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1521790945508-bf2a36314e85?w=800&h=600&fit=crop"
+    ],
+    "category": "Certificate",
+    "tags": ["HTML", "CSS", "JavaScript"],
+    "date": "2023-12-01",
+    "issuer": "มอบให้โดย CodeCamp Thailand",
+    "fullDescription": "ใบเกียรติบัตรฉบับนี้มอบให้โดย CodeCamp Thailand เพื่อรับรองว่าผู้เรียนได้ผ่านการอบรมหลักสูตร Web Development Bootcamp ครอบคลุมทั้ง HTML, CSS, JavaScript และพื้นฐานการพัฒนาเว็บด้วยเครื่องมือสมัยใหม่",
+    "details": [
+      "Completed 300+ hours of training",
+      "Hands-on real projects",
+      "Front-end fundamentals",
+      "JavaScript problem-solving",
+      "Responsive web design"
+    ],
+    "technologies": [
+      "Unity 2022",
+      "C#",
+      "Aseprite",
+      "FMOD Audio",
+      "Cinemachine"
+    ]
   }
 ]
