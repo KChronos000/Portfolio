@@ -6,12 +6,12 @@ const BoxSkill = () => {
     <div>
       <div className="ml-4 md:ml-0 md:mb-10">
         <div className='flex items-center justify-center'>
-            <span className='text-shadow-lg text-shadow-gray-500 text-6xl lg:text-6xl font-bold'>⁘</span>
+            <span className='text-shadow-lg text-shadow-gray-500 text-6xl lg:text-6xl font-bold mr-4'>✦</span>
           <h2 className="bg-gradient-to-r from-violet-500 to-emerald-500 bg-clip-text text-transparent uppercase font-bold text-6xl lg:text-6xl mb-4">
             SKILLS
-          <div className="w-50 h-1 rounded bg-white shadow shadow-gray-500 mt-3"></div>
+            {/* <div className="w-50 h-1 rounded bg-white shadow shadow-gray-500 mt-3"></div> */}
           </h2>
-            <span className='text-shadow-lg text-shadow-gray-500 text-6xl lg:text-6xl font-bold'>⁘</span>
+            <span className='text-shadow-lg text-shadow-gray-500 text-6xl lg:text-6xl font-bold ml-4'>✦</span>
         </div>
       </div>
       
