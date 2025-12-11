@@ -17,7 +17,7 @@ const AchievementSection = () => {
             <span className='text-shadow-lg text-shadow-gray-500'>
               My
             </span>
-             <span className="bg-gradient-to-r from-emerald-400 to-violet-500 bg-clip-text text-transparent">Projects</span>
+             <span className="bg-linear-to-r from-emerald-400 to-violet-500 bg-clip-text text-transparent">Projects</span>
           </h2>
           <p className="text-gray-400 text-lg">ผลงานและโปรเจคที่ผมภูมิใจนำเสนอ</p>
         </div>
@@ -47,7 +47,7 @@ const AGrid = () => {
             onClick={() => setFilter(cat)}
             className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
               filter === cat
-                ? 'bg-gradient-to-r from-teal-400 to-violet-500 text-white shadow-lg shadow-violet-500/50'
+                ? 'bg-linear-to-r from-teal-400 to-violet-500 text-white shadow-lg shadow-violet-500/50'
                 : 'bg-neutral-800 text-gray-400 hover:bg-neutral-700 hover:text-white'
             }`}
           >
@@ -103,14 +103,14 @@ const ProjectCard = ({
       }}
     >
       {/* Gradient Border Effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-teal-400 to-violet-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" 
+      <div className="absolute inset-0 bg-linear-to-r from-teal-400 to-violet-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" 
            style={{ padding: '2px' }}>
         <div className="w-full h-full bg-neutral-900 rounded-2xl" />
       </div>
 
       <div className="relative z-10">
         {/* Image Section */}
-        <div className="relative h-64 overflow-hidden">
+        <div className="relative h-64 overflow-hidden rounded-t-xl shadow-2xl group-hover:shadow-violet-500/20 transition-shadow duration-500">
           <Image
             src={displayImage}
             alt={project.title}
@@ -119,7 +119,7 @@ const ProjectCard = ({
           />
           
           {/* Overlay */}
-          <div className={`absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/50 to-transparent transition-opacity duration-300 ${
+          <div className={`absolute inset-0 bg-linear-to-t from-neutral-900 via-neutral-900/50 to-transparent transition-opacity duration-300 ${
             isHovered ? 'opacity-90' : 'opacity-60'
           }`} />
 
@@ -145,7 +145,7 @@ const ProjectCard = ({
           }`}>
             <button
               onClick={onShowDetails}
-              className="px-6 py-3 bg-gradient-to-r from-teal-400 to-violet-500 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300 hover:scale-105"
+              className="px-6 py-3 bg-linear-to-r from-teal-400 to-violet-500 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300 hover:scale-105"
             >
               Show
             </button>
@@ -154,7 +154,7 @@ const ProjectCard = ({
 
         {/* Content Section */}
         <div className="p-6">
-          <h3 className="text-2xl font-bold text-white mb-3 group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-violet-500 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+          <h3 className="text-2xl font-bold text-white mb-3 group-hover:bg-linear-to-r group-hover:from-teal-400 group-hover:to-violet-500 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
             {project.title}
           </h3>
           
@@ -221,9 +221,9 @@ const ProjectModal = ({
             src={allImages[currentImageIndex]}
             alt={`${project.title} - Image ${currentImageIndex + 1}`}
             fill
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain transition-transform duration-300"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/50 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-neutral-900/50 via-neutral-900/20 to-transparent" />
           
           {/* Category Badge */}
           <div className="absolute top-4 left-4">
@@ -281,7 +281,7 @@ const ProjectModal = ({
                 <button
                   key={i}
                   onClick={() => setCurrentImageIndex(i)}
-                  className={`relative flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden transition-all duration-300 ${
+                  className={`relative shrink-0 w-20 h-20 rounded-lg overflow-hidden transition-all duration-300 ${
                     i === currentImageIndex 
                       ? 'ring-2 ring-teal-400 scale-105' 
                       : 'opacity-60 hover:opacity-100 hover:scale-105'
@@ -303,7 +303,7 @@ const ProjectModal = ({
         <div className="p-8">
           {/* Title, Date, and Issuer */}
           <div className="mb-6">
-            <h2 className="text-3xl md:text-xl font-bold text-white mb-3 bg-gradient-to-r from-teal-400 to-violet-500 bg-clip-text text-transparent">
+            <h2 className="text-3xl md:text-xl font-bold text-white mb-3 bg-linear-to-r from-teal-400 to-violet-500 bg-clip-text">
               {project.title}
             </h2>
             <div className="flex flex-col gap-2">
@@ -394,7 +394,7 @@ const ProjectModal = ({
                   href={project.demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-400 to-violet-500 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300 hover:scale-105"
+                  className="flex items-center gap-2 px-6 py-3 bg-linear-to-r from-teal-400 to-violet-500 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300 hover:scale-105"
                 >
                   <ExternalLink className="w-5 h-5" />
                   View Demo

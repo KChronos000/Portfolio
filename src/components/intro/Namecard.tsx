@@ -5,7 +5,7 @@ export const Namecard = () => {
     <div className="card-vio-blu duration-400 hover:scale-[102.5%]">
         <div className="card_content">
             <div className="bg-gray-950 p-4 hover:shadow-lg rounded-xl hover:shadow-violet-500/50 duration-300 transition-all">
-            <span className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold bg-gradient-to-r from-emerald-500 to-violet-600 bg-clip-text text-transparent">
+            <span className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold bg-linear-to-r from-emerald-500 to-violet-600 bg-clip-text text-transparent">
                 TAEMMMARIN TAPRAB
             </span>
             <p className="mt-4">
