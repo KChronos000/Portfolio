@@ -32,6 +32,7 @@ const AGrid = () => {
   const [filter, setFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const categories = ["All", "Web App", "Design", "Game", "Certificate"];
+  
 
   const filteredProjects = filter === "All" 
     ? projects 
@@ -47,7 +48,7 @@ const AGrid = () => {
             onClick={() => setFilter(cat)}
             className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
               filter === cat
-                ? 'bg-linear-to-r from-teal-400 to-violet-500 text-white shadow-lg shadow-violet-500/50'
+                ? 'bg-linear-to-r from-emerald-400 to-violet-500 text-white shadow-lg shadow-violet-500/50'
                 : 'bg-neutral-800 text-gray-400 hover:bg-neutral-700 hover:text-white'
             }`}
           >
@@ -103,14 +104,14 @@ const ProjectCard = ({
       }}
     >
       {/* Gradient Border Effect */}
-      <div className="absolute inset-0 bg-linear-to-r from-teal-400 to-violet-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" 
+      <div className="absolute inset-0 bg-linear-to-r from-emerald-400 to-violet-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" 
            style={{ padding: '2px' }}>
         <div className="w-full h-full bg-neutral-900 rounded-2xl" />
       </div>
 
       <div className="relative z-10">
         {/* Image Section */}
-        <div className="relative h-64 overflow-hidden rounded-t-xl shadow-2xl group-hover:shadow-violet-500/20 transition-shadow duration-500">
+        <div className="relative h-64 overflow-hidden rounded-t-xl shadow-2xl group-hover:shadow-indigo-500/15 transition-shadow duration-500">
           <Image
             src={displayImage}
             alt={project.title}
@@ -216,7 +217,7 @@ const ProjectModal = ({
         </button>
 
         {/* Hero Image with Gallery */}
-        <div className="relative h-64 md:h-80 overflow-hidden rounded-t-2xl">
+        <div className="relative h-64 md:h-80 overflow-hidden rounded-t-2xl mt-2">
           <Image
             src={allImages[currentImageIndex]}
             alt={`${project.title} - Image ${currentImageIndex + 1}`}

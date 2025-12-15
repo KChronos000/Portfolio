@@ -7,15 +7,15 @@ const Footer = () => {
     <footer id='footer' className='w-full relative z-10 flex flex-col justify-center bg-neutral-950 py-16'>
       <section className="w-full max-w-7xl mx-auto px-6">
         {/* Top gradient line */}
-        <div className="w-full h-0.5 bg-linear-to-r from-transparent via-indigo-500 to-transparent mb-12"></div>
+        <div className="w-full h-0.5 bg-linear-to-r from-transparent via-indigo-500/60 to-transparent mb-12"></div>
         
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* About Section */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold bg-linear-to-r from-teal-400 via-indigo-400 to-violet-500 bg-clip-text text-transparent">
+            <span className='text-xl font-bold bg-linear-to-r from-teal-400 via-indigo-400 to-violet-500 bg-clip-text text-transparent'>
               Web Developer
-            </h3>
+            </span>
             <p className="text-neutral-400 text-sm leading-relaxed">
               Awarded a certificate for successfully completing an intensive Web Development Program.
             </p>

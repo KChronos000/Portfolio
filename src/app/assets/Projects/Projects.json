@@ -44,7 +44,7 @@
       "/Pictures/LearnC_2.png",
       "/Pictures/LearnC_3.png"
     ],
-    "category": "Web App",
+    "category": "Certificate",
     "tags": ["Vue.js", "Firebase", "Tailwind"],
     "demoUrl": "#",
     "githubUrl": "#",
@@ -60,7 +60,7 @@
       "Notification system"
     ],
     "technologies": [
-      "Vue.js 3",
+      "Visual Studio 2022",
       "Firebase",
       "Firestore",
       "Tailwind CSS",
