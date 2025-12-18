@@ -13,8 +13,8 @@ export type Project = {
   otherImages?: string[];
   category: ProjectCategory;
   tags: string[];
-  demoUrl?: string;
-  githubUrl?: string;
+  demoUrl?: string | null;
+  githubUrl?: string | null;
   date: string;
   issuer?: string;
   fullDescription?: string;

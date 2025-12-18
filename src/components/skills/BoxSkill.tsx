@@ -81,7 +81,7 @@ export const ProgramLanguage = () => {
   ];
 
   return (
-    <div className="grid grid-cols-4 gap-4 pb-4">
+    <div className="grid grid-cols-3 md:grid-cols-4 gap-4 pb-4">
       {skills.map((skill, index) => (
         <div 
           key={index} 
@@ -134,7 +134,7 @@ export const ProgramTools = () => {
   ];
 
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
       {skills.map((skill, index) => (
         <div 
           key={index} 

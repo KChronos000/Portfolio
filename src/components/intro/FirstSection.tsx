@@ -27,9 +27,9 @@ export const ProfilePic = () => {
     <div>
       <div className="">
         <Image
-          src="/tools/Unityicon.png"
-          width={500}
-          height={500}
+          src="/Myself.png"
+          width={600}
+          height={600}
           alt="Picture of the author"
         />
       </div>

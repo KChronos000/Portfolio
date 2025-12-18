@@ -4,7 +4,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
+        hostname: '**', // อนุญาตทุก Domain ที่เป็น https
+      },
+      {
+        protocol: 'http',
+        hostname: '**', // อนุญาตทุก Domain ที่เป็น http (ถ้ามี)
       },
     ],
   },

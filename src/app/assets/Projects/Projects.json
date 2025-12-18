@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "title": "E-Commerce Platform",
+    "title": "E-Commerce Platform225556456",
     "description": "A full-stack e-commerce platform with payment integration",
     "image": "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop",
     "otherImages": [
@@ -10,9 +10,14 @@
       "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=600&fit=crop"
     ],
     "category": "Web App",
-    "tags": ["React", "Node.js", "MongoDB", "Stripe"],
-    "demoUrl": "#",
-    "githubUrl": "#",
+    "tags": [
+      "React",
+      "Node.js",
+      "MongoDB",
+      "Stripe"
+    ],
+    "demoUrl": null,
+    "githubUrl": null,
     "date": "2024-01-15",
     "issuer": "มอบให้โดย CodeCamp Thailand",
     "fullDescription": "A comprehensive e-commerce solution featuring user authentication, product management, shopping cart functionality, and secure payment processing through Stripe integration. Built with modern web technologies for optimal performance and user experience.",
@@ -45,9 +50,13 @@
       "/Pictures/LearnC_3.png"
     ],
     "category": "Certificate",
-    "tags": ["Vue.js", "Firebase", "Tailwind"],
-    "demoUrl": "#",
-    "githubUrl": "#",
+    "tags": [
+      "Vue.js",
+      "Firebase",
+      "Tailwind"
+    ],
+    "demoUrl": null,
+    "githubUrl": null,
     "date": "2023-11-20",
     "issuer": "มอบให้โดย DUARN K.",
     "fullDescription": "A real-time collaborative task management application that helps teams organize, prioritize, and track their work. Features include drag-and-drop task boards, team collaboration tools, and instant synchronization across all devices.",
@@ -78,8 +87,13 @@
       "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&h=600&fit=crop"
     ],
     "category": "Design",
-    "tags": ["Figma", "UI/UX", "Prototyping"],
-    "demoUrl": "#",
+    "tags": [
+      "Figma",
+      "UI/UX",
+      "Prototyping"
+    ],
+    "demoUrl": null,
+    "githubUrl": null,
     "date": "2023-09-10",
     "issuer": "มอบให้โดย CodeCamp Thailand",
     "fullDescription": "A sleek and modern portfolio design crafted for creative professionals. Features smooth animations, responsive layouts, and an intuitive user experience that showcases work in the best possible light.",
@@ -109,9 +123,13 @@
       "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&h=600&fit=crop"
     ],
     "category": "Game",
-    "tags": ["Unity", "C#", "Pixel Art"],
-    "demoUrl": "#",
-    "githubUrl": "#",
+    "tags": [
+      "Unity",
+      "C#",
+      "Pixel Art"
+    ],
+    "demoUrl": null,
+    "githubUrl": null,
     "date": "2024-03-05",
     "issuer": "มอบให้โดย CodeCamp Thailand",
     "fullDescription": "A nostalgic 2D platformer game featuring pixel art graphics, challenging levels, and smooth gameplay mechanics. Includes multiple worlds, boss battles, and power-up systems reminiscent of classic platformers.",
@@ -142,7 +160,13 @@
       "https://images.unsplash.com/photo-1521790945508-bf2a36314e85?w=800&h=600&fit=crop"
     ],
     "category": "Certificate",
-    "tags": ["HTML", "CSS", "JavaScript"],
+    "tags": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "demoUrl": null,
+    "githubUrl": null,
     "date": "2023-12-01",
     "issuer": "มอบให้โดย CodeCamp Thailand",
     "fullDescription": "ใบเกียรติบัตรฉบับนี้มอบให้โดย CodeCamp Thailand เพื่อรับรองว่าผู้เรียนได้ผ่านการอบรมหลักสูตร Web Development Bootcamp ครอบคลุมทั้ง HTML, CSS, JavaScript และพื้นฐานการพัฒนาเว็บด้วยเครื่องมือสมัยใหม่",
@@ -154,11 +178,34 @@
       "Responsive web design"
     ],
     "technologies": [
-      "Unity 2022",
-      "C#",
-      "Aseprite",
-      "FMOD Audio",
-      "Cinemachine"
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Responsive Design"
     ]
+  },
+  {
+    "title": "ชื่อโปรเจกต์ *",
+    "description": "คำอธิบายสั้นๆ",
+    "fullDescription": "รายละเอียดฉบับเต็ม\n",
+    "category": "หมวดหมู่",
+    "image": "https://google.com",
+    "otherImages": [
+      "https://google.com"
+    ],
+    "tags": [
+      "Tags (แยกด้วยคอมม่า)"
+    ],
+    "features": [
+      "ฟีเจอร์เด่น (แยกด้วยคอมม่า)"
+    ],
+    "technologies": [
+      "Nextjs"
+    ],
+    "demoUrl": "ลิงก์ Demo (URL)",
+    "githubUrl": "ลิงก์ GitHub (URL)",
+    "date": "2025-12-17",
+    "issuer": "ผู้มอบ (Issuer)",
+    "id": 6
   }
 ]
