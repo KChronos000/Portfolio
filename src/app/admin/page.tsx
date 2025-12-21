@@ -1,5 +1,6 @@
 "use client"
 
+import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
 
 const AdminPage = () => {
@@ -17,7 +18,7 @@ const AdminPage = () => {
     fullDescription: '',
     category: '',
     image: '',
-    otherImages: '',
+    otherImages: [] as string[],
     tags: '',
     features: '',
     technologies: '',
@@ -133,7 +134,7 @@ const AdminPage = () => {
       fullDescription: project.fullDescription,
       category: project.category,
       image: project.image,
-      otherImages: Array.isArray(project.otherImages) ? project.otherImages.join(', ') : project.otherImages,
+      otherImages: Array.isArray(project.otherImages) ? project.otherImages : [],
       tags: Array.isArray(project.tags) ? project.tags.join(', ') : project.tags,
       features: Array.isArray(project.features) ? project.features.join(', ') : project.features,
       technologies: Array.isArray(project.technologies) ? project.technologies.join(', ') : project.technologies,
@@ -144,6 +145,24 @@ const AdminPage = () => {
     });
     setMainFile(null);
     setOtherFiles([]);
+  };
+
+  const removeExistingImage = (index: number) => {
+    // ตรวจสอบว่าถ้าเป็น string ให้แปลงเป็น array ก่อน (ป้องกันตัวแดง)
+    const currentImages = Array.isArray(formData.otherImages) 
+      ? formData.otherImages 
+      : stringToArray(formData.otherImages as string);
+    
+    const updatedImages = currentImages.filter((_, i) => i !== index);
+    
+    // อัปเดตกลับไปเป็น Array (TypeScript อาจจะฟ้องถ้า initial state บอกว่าเป็น string)
+    setFormData({ ...formData, otherImages: updatedImages });
+  };
+
+  // เพิ่มฟังก์ชันนี้ต่อจาก removeExistingImage
+  const removeMainImage = () => {
+    setFormData({ ...formData, image: '' }); // ล้าง URL รูปเดิมใน state
+    setMainFile(null); // ล้างไฟล์ใหม่ที่อาจจะเลือกค้างไว้
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -322,20 +341,49 @@ const AdminPage = () => {
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">รูปภาพหลัก (Upload)</label>
-                    <input 
-                      type="file"
-                      accept="image/*"
-                      className="w-full text-sm text-gray-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl bg-linear-to-r file:from-cyan-500/10 file:to-blue-500/10 file:text-cyan-400 file:border file:border-cyan-500/30 hover:file:bg-cyan-500/20 file:transition-all cursor-pointer bg-gray-800/40 border border-gray-700/50 rounded-xl px-3 py-2"
-                      onChange={e => setMainFile(e.target.files?.[0] || null)} 
-                    />
-                    {mainFile && (
-                      <p className="text-xs text-cyan-400 mt-1.5 flex items-center gap-1">
-                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        {mainFile.name}
-                      </p>
+                    <label className="block text-sm font-medium text-gray-400 mb-2 items-center gap-2">
+                      <span className="w-1 h-4 bg-cyan-400 rounded-full"></span>
+                      รูปภาพหลัก (Upload)
+                    </label>
+
+                    {/* ส่วนแสดงรูปภาพหลัก (ไม่ว่าจะเป็นรูปเดิมจาก DB หรือรูปใหม่ที่เพิ่งเลือก) */}
+                    {(formData.image || mainFile) ? (
+                      <div className="relative w-40 h-40 mb-4 group">
+                        <div className="w-full h-full rounded-2xl overflow-hidden border-2 border-cyan-500/30 shadow-lg shadow-cyan-500/10">
+                          <Image 
+                            src={mainFile ? URL.createObjectURL(mainFile) : formData.image} 
+                            alt="Main Preview" 
+                            fill 
+                            className="object-cover" 
+                          />
+                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <p className="text-[10px] text-white font-medium uppercase tracking-wider">
+                              {mainFile ? 'รูปภาพใหม่' : 'รูปภาพปัจจุบัน'}
+                            </p>
+                          </div>
+                        </div>
+                        
+                        {/* ปุ่มลบรูปภาพหลัก */}
+                        <button
+                          type="button"
+                          onClick={removeMainImage}
+                          className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-7 h-7 flex items-center justify-center shadow-lg border-2 border-gray-950 transition-transform hover:scale-110"
+                          title="ลบรูปภาพหลัก"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ) : (
+                      /* แสดง Input เมื่อไม่มีรูปภาพ */
+                      <div className="relative">
+                        <input 
+                          type="file"
+                          accept="image/*"
+                          className="w-full text-sm text-gray-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl bg-linear-to-r file:from-cyan-500/10 file:to-blue-500/10 file:text-cyan-400 file:border file:border-cyan-500/30 hover:file:bg-cyan-500/20 file:transition-all cursor-pointer bg-gray-800/40 border border-gray-700/50 rounded-xl px-3 py-2"
+                          onChange={e => setMainFile(e.target.files?.[0] || null)} 
+                        />
+                        <p className="text-[11px] text-gray-500 mt-2 italic">* จำเป็นต้องมีรูปภาพหลักสำหรับหน้าปกโปรเจกต์</p>
+                      </div>
                     )}
                   </div>
                   
@@ -414,38 +462,56 @@ const AdminPage = () => {
                     />
                   </div>
                   
+                  {/* รูปภาพอื่นๆ ในโปรเจกต์ */}
                   <div className="space-y-2">
                     <label className="block text-sm font-medium text-gray-400 mb-2">
-                      รูปภาพอื่นๆ (เลือกเพิ่มได้หลายครั้ง)
+                      จัดการรูปภาพในโปรเจกต์
                     </label>
-                    <input 
-                      type="file"
-                      multiple
-                      accept="image/*"
-                      className="w-full text-sm text-gray-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:bg-linear-to-r file:from-cyan-500/10 file:to-blue-500/10 file:text-cyan-400 file:border file:border-cyan-500/30 hover:file:bg-cyan-500/20 file:transition-all cursor-pointer bg-gray-800/40 border border-gray-700/50 rounded-xl px-3 py-2"
-                      onChange={handleFileChange}
-                    />
-                    
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {otherFiles.map((file, idx) => (
-                        <span key={idx} className="flex items-center gap-1.5 text-xs bg-linear-to-r from-cyan-500/20 to-blue-500/20 text-cyan-400 px-3 py-1.5 rounded-lg border border-cyan-500/30">
-                          <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-                          </svg>
-                          {file.name.length > 15 ? file.name.substring(0, 15) + '...' : file.name}
-                          <button 
+
+                    {/* แสดงรูปภาพที่มีอยู่ใน Database */}
+                    <div className="flex flex-wrap gap-3">
+                      {(Array.isArray(formData.otherImages) 
+                        ? formData.otherImages 
+                        : stringToArray(formData.otherImages as string)).map((imgUrl, idx) => (
+                        <div key={`existing-${idx}`} className="relative group w-24 h-24 border border-gray-700 rounded-lg overflow-hidden bg-gray-800">
+                          <Image 
+                            src={imgUrl} 
+                            alt="project" 
+                            fill
+                            className="w-full h-full object-cover"
+                          />
+                          {/* ปุ่มลบรูปภาพเดิม */}
+                          <button
                             type="button"
-                            onClick={() => removeSelectedFile(idx)}
-                            className="hover:text-red-400 ml-1 font-bold transition-colors"
+                            onClick={() => removeExistingImage(idx)}
+                            className="absolute top-1 right-1 bg-red-500/80 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center transition-opacity"
+                            title="ลบรูปนี้"
                           >
                             ✕
                           </button>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* ส่วนการเลือกรูปภาพใหม่ (อัปโหลดเพิ่ม) */}
+                    <div className="relative">
+                      <input 
+                        type="file"
+                        multiple
+                        accept="image/*"
+                        className="w-full text-sm text-gray-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:bg-cyan-500/10 file:text-cyan-400 file:border-none cursor-pointer bg-gray-800/40 border border-gray-700/50 rounded-xl px-3 py-2"
+                        onChange={handleFileChange}
+                      />
+                    </div>
+
+                    {/* แสดง Preview ไฟล์ใหม่ที่กำลังเลือก */}
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {otherFiles.map((file, idx) => (
+                        <span key={`new-${idx}`} className="flex items-center gap-1.5 text-xs bg-cyan-500/20 text-cyan-400 px-3 py-1.5 rounded-lg border border-cyan-500/30">
+                          <span className="truncate max-w-[100px]">{file.name}</span>
+                          <button type="button" onClick={() => removeSelectedFile(idx)} className="hover:text-red-400">✕</button>
                         </span>
                       ))}
-                      
-                      {otherFiles.length === 0 && editingId && (
-                        <p className="text-xs text-gray-500 italic">ใช้รูปภาพเดิมที่มีอยู่ ({Array.isArray(formData.otherImages) ? formData.otherImages.length : 0} รูป)</p>
-                      )}
                     </div>
                   </div>
                 </div>

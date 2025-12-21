@@ -41,7 +41,6 @@
   {
     "id": 2,
     "title": "LOGIC LOVE LUCK",
-    "description": "Collaborative task management tool with real-time updates",
     "image": "/Pictures/Certi_LearnC.png",
     "otherImages": [
       "/Pictures/LearnC_1.png",
@@ -49,16 +48,13 @@
       "/Pictures/LearnC_3.png"
     ],
     "category": "Certificate",
+    "description": "Collaborative task management tool with real-time updates",
+    "fullDescription": "A real-time collaborative task management application that helps teams organize, prioritize, and track their work. Features include drag-and-drop task boards, team collaboration tools, and instant synchronization across all devices.",
     "tags": [
       "Vue.js",
       "Firebase",
       "Tailwind"
     ],
-    "demoUrl": null,
-    "githubUrl": null,
-    "date": "2023-11-20",
-    "issuer": "มอบให้โดย DUARN K.",
-    "fullDescription": "A real-time collaborative task management application that helps teams organize, prioritize, and track their work. Features include drag-and-drop task boards, team collaboration tools, and instant synchronization across all devices.",
     "features": [
       "Real-time collaboration",
       "Drag-and-drop interface",
@@ -68,12 +64,12 @@
       "Notification system"
     ],
     "technologies": [
-      "Visual Studio 2022",
-      "Firebase",
-      "Firestore",
-      "Tailwind CSS",
-      "WebSocket"
-    ]
+      "Visual Studio 2022"
+    ],
+    "demoUrl": null,
+    "githubUrl": null,
+    "date": "2025-08-20",
+    "issuer": "ผู้มอบ : DUARN K."
   },
   {
     "id": 3,
