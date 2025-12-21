@@ -13,7 +13,7 @@ const FirstSection = () => {
             <div className="w-full mx-auto floating">
               <ProfilePic />
             </div>
-            <div className="w-full mx-auto md:text-right floating-delay">
+            <div className="w-full mx-auto floating-delay">
               <Namecard />
             </div>
         </div>

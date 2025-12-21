@@ -1,13 +1,14 @@
 import { FacebookIcon, GithubIcon, GmailIcon } from '../Svgicon'
+import { useEffect, useState } from "react";
 
 export const Namecard = () => {
   return (
     <div className="card-vio-blu duration-400 hover:scale-[102.5%]">
-        <div className="card_content">
+        <div className="card_content md:text-right">
             <div className="bg-gray-950 p-4 hover:shadow-lg rounded-xl hover:shadow-violet-500/50 duration-300 transition-all">
-            <span className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold bg-linear-to-r from-emerald-500 to-violet-600 bg-clip-text text-transparent">
-                TAEMMMARIN TAPRAB
-            </span>
+            {/* <div className=""> */}
+               <Title/>
+            {/* </div> */}
             <p className="mt-4">
                 <span className="text-xl font-semibold text-violet-500">
                 Game • Website  | Developer : 
@@ -39,3 +40,26 @@ export const Namecard = () => {
 }
 
 
+
+export default function Title() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 640px)");
+
+    const update = () => setIsMobile(media.matches);
+    update();
+
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  const className =
+    "text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold bg-linear-to-r from-emerald-500 to-violet-600 bg-clip-text text-transparent";
+
+  return isMobile ? (
+    <h1 className={className}>TAEMMMARIN TAPRAB</h1>
+  ) : (
+    <span className={className}>TAEMMMARIN TAPRAB</span>
+  );
+}

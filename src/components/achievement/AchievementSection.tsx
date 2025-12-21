@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import rawProjects from "@/app/assets/Projects/Projects.json";
 import type { Project } from "@/app/assets/Projects/types";
 import { Calendar, Tag, ExternalLink, Github, X, ChevronLeft, ChevronRight } from "lucide-react";
-
+import { Palette, Gamepad2, Award, Grid3x3, LayoutGrid } from 'lucide-react';
 
 const projects = rawProjects as Project[];
 const isValidUrl = (url?: string | null) => {
@@ -41,36 +41,107 @@ const AGrid = () => {
   const [filter, setFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const categories = ["All", "Web App", "Design", "Game", "Certificate"];
+  const categoryIcons: Record<string, React.ReactNode> = {
+    "All": <Grid3x3 size={18} />,
+    "Design": <Palette size={18} />,
+    "Game": <Gamepad2 size={18} />,
+    "Certificate": <Award size={18} />,
+    // เพิ่มเติมตามความเหมาะสม
+  };
+
+  
+
+  const [desktopCols, setDesktopCols] = useState<2 | 3 | 4>(2);
+
   
 
   const filteredProjects = filter === "All" 
     ? projects 
     : projects.filter(p => p.category === filter);
+
+  const gridColsClass =
+    desktopCols === 2
+      ? "md:grid-cols-2"
+      : desktopCols === 3
+      ? "md:grid-cols-3"
+      : "md:grid-cols-4";
   
   return (
     <div>
       {/* Filter Buttons */}
-      <div className="flex flex-wrap justify-center gap-3 mb-12">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setFilter(cat)}
-            className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
-              filter === cat
-                ? 'bg-linear-to-r from-emerald-400 to-violet-500 text-white shadow-lg shadow-violet-500/50'
-                : 'bg-neutral-800 text-gray-400 hover:bg-neutral-700 hover:text-white'
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
+      <div className="flex flex-wrap justify-center gap-3 mb-8">
+        {categories.map((cat) => {
+          const isActive = filter === cat;
+          return (
+            <button
+              key={cat}
+              onClick={() => setFilter(cat)}
+              className={`
+                group flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold
+                transition-all duration-500 ease-out
+                ${isActive 
+                  ? 'bg-linear-to-r from-emerald-400 to-violet-500 text-white shadow-[0_0_20px_rgba(139,92,246,0.4)] scale-105 border-transparent' 
+                  // ใส่ border-transparent เพื่อรักษาขนาด Box Model และป้องกันการแวบของสีขอบ
+                  : 'bg-neutral-900/50 text-gray-400 border border-neutral-700/50 hover:border-violet-500/50 hover:text-white hover:bg-neutral-800'
+                }
+              `}
+            >
+              <span className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:rotate-12'}`}>
+                {categoryIcons[cat] || <LayoutGrid size={18} />}
+              </span>
+              <span className="text-sm tracking-wide">{cat}</span>
+            </button>
+          );
+        })}
       </div>
 
+      {/* Desktop Columns Selector */} {/* ✅ View Switcher: แสดงเฉพาะ md ขึ้นไป */}
+      <div className="hidden md:flex justify-center gap-3 mb-12">
+          {[2, 3].map((n) => (
+            <button
+              key={n}
+              onClick={() => setDesktopCols(n as 2 | 3 | 4)}
+              className={`
+                group relative px-5 py-2 rounded-full text-sm font-semibold 
+                transition-all duration-300 ease-out
+                ${
+                  desktopCols === n
+                    ? "bg-linear-to-br from-violet-600 to-purple-700 text-white shadow-lg shadow-violet-500/40 scale-105 ring-2 ring-violet-500/50 border-transparent" 
+                    : "bg-neutral-800/80 text-gray-400 hover:bg-neutral-700 hover:text-white hover:scale-102 border border-neutral-700/50 hover:border-violet-500/30"
+                }
+              `}
+              aria-pressed={desktopCols === n}
+            >
+              {/* Glow effect เมื่อเลือก */}
+              {desktopCols === n && (
+                <span className="absolute inset-0 rounded-xl bg-violet-400/20 blur-xl -z-10 animate-pulse" />
+              )}
+              
+              {/* Icon แสดงจำนวนคอลัมน์ */}
+              <span className="flex items-center gap-2">
+                <span className="flex gap-0.5">
+                  {Array.from({ length: n }).map((_, i) => (
+                    <span
+                      key={i}
+                      className={`w-1.5 h-4 rounded-full transition-all ${
+                        desktopCols === n
+                          ? "bg-green-200"
+                          : "bg-gray-600 group-hover:bg-gray-400"
+                      }`}
+                    />
+                  ))}
+                </span>
+                {/* <span>{n}l</span> */}
+              </span>
+            </button>
+          ))}
+        </div>
+
       {/* Projects Grid */}
-      <div className="grid md:grid-cols-2 gap-8">
+      <div className={`grid  grid-cols-1 ${gridColsClass} gap-8`}>
         {filteredProjects.map((project, index) => (
           <ProjectCard 
-            key={project.id} 
+            key={`${project.id}-${desktopCols}`} 
             project={project} 
             index={index}
             onShowDetails={() => setSelectedProject(project)}

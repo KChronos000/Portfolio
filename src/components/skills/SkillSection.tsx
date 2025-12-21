@@ -4,7 +4,7 @@ import BoxSkill from "./BoxSkill"
 
 const SkillSection = () => {
   return (
-    <main id='skills' className=' w-full relative z-10 flex flex-col justify-center min-h-screen items-center '>
+    <main id='skills' className=' w-full relative z-10 flex flex-col justify-center min-h-screen items-center'>
       <section>
         <div className="flex justify-center items-center">
           <div className="mx-auto rounded-xl w-full">

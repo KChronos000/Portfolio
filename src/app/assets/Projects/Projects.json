@@ -2,25 +2,20 @@
   {
     "id": 1,
     "title": "E-Commerce Platform225556456",
-    "description": "A full-stack e-commerce platform with payment integration",
     "image": "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop",
     "otherImages": [
-      "https://images.unsplash.com/photo-1515165562835-c3b8e0f6f9b1?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=600&fit=crop"
+      "/Pictures/1766205063504-Bird.png",
+      "/Pictures/1766205063506-Untitled.png"
     ],
     "category": "Web App",
+    "description": "A full-stack e-commerce platform with payment integration",
+    "fullDescription": "A comprehensive e-commerce solution featuring user authentication, product management, shopping cart functionality, and secure payment processing through Stripe integration. Built with modern web technologies for optimal performance and user experience.",
     "tags": [
       "React",
       "Node.js",
       "MongoDB",
       "Stripe"
     ],
-    "demoUrl": null,
-    "githubUrl": null,
-    "date": "2024-01-15",
-    "issuer": "มอบให้โดย CodeCamp Thailand",
-    "fullDescription": "A comprehensive e-commerce solution featuring user authentication, product management, shopping cart functionality, and secure payment processing through Stripe integration. Built with modern web technologies for optimal performance and user experience.",
     "features": [
       "User authentication and authorization",
       "Product catalog with search and filters",
@@ -37,7 +32,11 @@
       "Stripe API",
       "JWT",
       "Tailwind CSS"
-    ]
+    ],
+    "demoUrl": null,
+    "githubUrl": null,
+    "date": "2024-01-15",
+    "issuer": "มอบให้โดย CodeCamp Thailand"
   },
   {
     "id": 2,
