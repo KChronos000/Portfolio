@@ -4,7 +4,7 @@ import { Namecard } from './Namecard'
 
 const FirstSection = () => {
   return (
-    <section className="w-full z-10 flex flex-col justify-center min-h-screen items-center">
+    <section id='#home' className="w-full z-10 flex flex-col justify-center min-h-screen items-center">
         <div className="grid md:grid-cols-2 items-center justify-center gap-4 container p-3 lg:p-0">
             {/* <div className="w-full md:w-1/2 mx-auto text-right rounded-xl"> */}
               {/* <AFuckingBlub /> */}

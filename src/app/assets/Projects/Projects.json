@@ -40,7 +40,7 @@
   },
   {
     "id": 2,
-    "title": "LOGIC LOVE LUCK",
+    "title": "Think Like a Programmer — Learn C (02)",
     "image": "/Pictures/Certi_LearnC.png",
     "otherImages": [
       "/Pictures/LearnC_1.png",
@@ -48,28 +48,35 @@
       "/Pictures/LearnC_3.png"
     ],
     "category": "Certificate",
-    "description": "Collaborative task management tool with real-time updates",
-    "fullDescription": "A real-time collaborative task management application that helps teams organize, prioritize, and track their work. Features include drag-and-drop task boards, team collaboration tools, and instant synchronization across all devices.",
+    "description": "ใบประกาศนียบัตรผ่านการอบรมหลักสูตรการเขียนโปรแกรมภาษา C เบื้องต้นและตรรกะโปรแกรมเมอร์",
+    "fullDescription": "เกียรติบัตรฉบับนี้มอบให้เพื่อแสดงว่า ดิฉัน นางสาวแทมมารีน ตาปราบ ได้เข้าร่วมและผ่านการเรียนในกิจกรรม Think Like a Programmer — Learn C (02) จัดขึ้นระหว่างวันที่ 9-10 สิงหาคม 2568 และได้ส่งผลงาน Final Project ครบถ้วนตามเกณฑ์ที่กำหนด",
     "tags": [
-      "Vue.js",
-      "Firebase",
-      "Tailwind"
+      "C Programming",
+      "Logic",
+      "Problem Solving",
+      "Basic Coding"
     ],
     "features": [
-      "Real-time collaboration",
-      "Drag-and-drop interface",
-      "Task priority system",
-      "Team member assignment",
-      "Progress tracking",
-      "Notification system"
+      "Structure of a basic C program",
+      "Variables",
+      "data types",
+      "and input/output",
+      "Conditional statements (if",
+      "if-else)",
+      "Basic loops and repetition",
+      "Functions",
+      "arrays",
+      "Final project to apply logical problem-solving"
     ],
     "technologies": [
-      "Visual Studio 2022"
+      "Visual Studio 2022",
+      "Visual Studio Code",
+      "C Language"
     ],
     "demoUrl": null,
     "githubUrl": null,
     "date": "2025-08-20",
-    "issuer": "ผู้มอบ : DUARN K."
+    "issuer": "มอบโดย : LOGIC OVER LUCK (Director: DUARN K.)"
   },
   {
     "id": 3,
@@ -110,24 +117,19 @@
   {
     "id": 4,
     "title": "2D Platformer Game",
-    "description": "Retro-style platformer game with pixel art graphics",
     "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=600&fit=crop",
     "otherImages": [
       "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1616469829581-73993eb86f2c?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&h=600&fit=crop"
     ],
     "category": "Game",
+    "description": "Retro-style platformer game with pixel art graphics",
+    "fullDescription": "A nostalgic 2D platformer game featuring pixel art graphics, challenging levels, and smooth gameplay mechanics. Includes multiple worlds, boss battles, and power-up systems reminiscent of classic platformers.",
     "tags": [
       "Unity",
       "C#",
       "Pixel Art"
     ],
-    "demoUrl": null,
-    "githubUrl": null,
-    "date": "2024-03-05",
-    "issuer": "มอบให้โดย CodeCamp Thailand",
-    "fullDescription": "A nostalgic 2D platformer game featuring pixel art graphics, challenging levels, and smooth gameplay mechanics. Includes multiple worlds, boss battles, and power-up systems reminiscent of classic platformers.",
     "features": [
       "Multiple game worlds",
       "Boss battle system",
@@ -142,42 +144,40 @@
       "Aseprite",
       "FMOD Audio",
       "Cinemachine"
-    ]
-  },
-  {
-    "id": 5,
-    "title": "Certificate of Completion – Web Development Bootcamp",
-    "description": "Certificate awarded for completing an intensive web development program",
-    "image": "/Pictures/Mooccertificate.png",
-    "otherImages": [
-      "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1521790945508-bf2a36314e85?w=800&h=600&fit=crop"
-    ],
-    "category": "Certificate",
-    "tags": [
-      "HTML",
-      "CSS",
-      "JavaScript"
     ],
     "demoUrl": null,
     "githubUrl": null,
-    "date": "2023-12-01",
-    "issuer": "มอบให้โดย CodeCamp Thailand",
-    "fullDescription": "ใบเกียรติบัตรฉบับนี้มอบให้โดย CodeCamp Thailand เพื่อรับรองว่าผู้เรียนได้ผ่านการอบรมหลักสูตร Web Development Bootcamp ครอบคลุมทั้ง HTML, CSS, JavaScript และพื้นฐานการพัฒนาเว็บด้วยเครื่องมือสมัยใหม่",
-    "details": [
-      "Completed 300+ hours of training",
-      "Hands-on real projects",
-      "Front-end fundamentals",
-      "JavaScript problem-solving",
-      "Responsive web design"
+    "date": "2024-03-05",
+    "issuer": "มอบให้โดย CodeCamp Thailand"
+  },
+  {
+    "id": 5,
+    "title": "Certificate: Basic Cybersecurity",
+    "image": "/Pictures/Mooccertificate.png",
+    "otherImages": [],
+    "category": "Certificate",
+    "description": "ใบประกาศนียบัตรหลักสูตรความปลอดภัยไซเบอร์พื้นฐานจาก NCSA Thailand",
+    "fullDescription": "สำเร็จการศึกษาหลักสูตรความปลอดภัยไซเบอร์จากแพลตฟอร์มการเรียนรู้ NCSA Thailand (สกมช.) โดยเนื้อหาครอบคลุมทักษะที่จำเป็นในยุคดิจิทัล เช่น การตระหนักรู้ถึงภัยคุกคามออนไลน์ (Cyber Threat Awareness), การป้องกันข้อมูลส่วนบุคคล และแนวทางปฏิบัติที่ปลอดภัยในการใช้งานระบบเครือข่าย เพื่อเตรียมความพร้อมสู่การทำงานที่เป็นระบบและปลอดภัย",
+    "tags": [
+      "Cybersecurity",
+      "Compliance",
+      "Digital Safety"
+    ],
+    "features": [
+      "Fundamental of Cybersecurity",
+      "Cyber Threat Prevention",
+      "Data Privacy Awareness",
+      "Network Security Basics"
     ],
     "technologies": [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "Responsive Design"
-    ]
+      "Cyber Hygiene",
+      "Information Security",
+      "NCSA WEB Platform"
+    ],
+    "demoUrl": null,
+    "githubUrl": null,
+    "date": "2025-08-15",
+    "issuer": "มอบโดย : NCSA Thailand (National Cyber Security Agency)"
   },
   {
     "title": "ชื่อโปรเจกต์ *",
@@ -202,5 +202,37 @@
     "date": "2025-12-17",
     "issuer": "ผู้มอบ (Issuer)",
     "id": 6
+  },
+  {
+    "id": 7,
+    "title": "Thailand Cyber Talent 2025",
+    "image": "/Pictures/1766652567361-Part_3_Junior_Top_Talent_Page176.png",
+    "otherImages": [],
+    "category": "Certificate",
+    "description": "ใบประกาศเกียรติคุณสำหรับการเข้าร่วมการแข่งขันด้านความมั่นคงปลอดภัยไซเบอร์ระดับประเทศ",
+    "fullDescription": "ใบประกาศเกียรติคุณฉบับนี้มอบให้แก่ นางสาว แทมมารีน ตาปราบ ในฐานะสมาชิกทีม Cyber Chili จากโรงเรียนภูเขียว เพื่อแสดงว่าเป็นผู้มีความสำเร็จอันทรงเกียรติในการเข้าร่วมการแข่งขัน Thailand Cyber Talent 2025",
+    "tags": [
+      "Cybersecurity",
+      "CTF",
+      "Network Security",
+      "Information Security"
+    ],
+    "features": [
+      "Honorable Achievement in Cybersecurity competition",
+      "Participation in Thailand Cyber Talent 2025",
+      "Representing team 'Cyber Chili'",
+      "Endorsed by National Cyber Security Agency (NCSA)"
+    ],
+    "technologies": [
+      "Cybersecurity Fundamentals",
+      "Ethical",
+      "Hacking",
+      "Digital Forensics",
+      "Network Defense"
+    ],
+    "demoUrl": null,
+    "githubUrl": null,
+    "date": "2025-08-30",
+    "issuer": "มอบโดย : National Cyber Security Agency (NCSA), Thailand"
   }
 ]

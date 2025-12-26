@@ -19,7 +19,7 @@ const isValidUrl = (url?: string | null) => {
 
 const AchievementSection = () => {
   return (
-    <main id='achievement' className='w-full relative z-10 flex flex-col justify-center min-h-screen items-center bg-neutral-950 py-20'>
+    <main id='#Projects' className='w-full relative z-10 flex flex-col justify-center min-h-screen items-center bg-neutral-950 py-20'>
       <section className="w-full max-w-7xl px-4">
         <div className="mb-12 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -438,7 +438,7 @@ const ProjectModal = ({
                 <h3 className="text-xl font-semibold text-white mb-3">ฟีเจอร์หลัก</h3>
                 <ul className="grid md:grid-cols-2 gap-3">
                   {project.features.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-2 text-gray-400">
+                    <li key={i} className="flex items-center gap-2 text-gray-400">
                       <span className="text-teal-400 mt-1">•</span>
                       <span>{feature}</span>
                     </li>
@@ -464,7 +464,7 @@ const ProjectModal = ({
             {/* Technologies */}
             {project.technologies && (
               <div className="mb-6">
-                <h3 className="text-xl font-semibold text-white mb-3 flex items-center gap-2">
+                <h3 className="text-xl font-semibold text-purple-500 mb-3 flex items-center gap-2">
                   <Tag className="w-5 h-5" />
                   เทคโนโลยีที่ใช้
                 </h3>

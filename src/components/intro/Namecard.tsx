@@ -22,10 +22,10 @@ export const Namecard = () => {
                 </span>
                 <br />
                 <span className="flex gap-4">
-                    <a href="" target="_blank" className="opacity-70 hover:opacity-100 hover:scale-120 duration-300">
+                    <a href="https://www.facebook.com/taemmarin.taprab" target="_blank" className="opacity-70 hover:opacity-100 hover:scale-120 duration-300">
                         <FacebookIcon />
                     </a>
-                    <a href="" target="_blank" className="opacity-70 hover:opacity-100 hover:scale-120 duration-300">
+                    <a href="mailto:damnwork186@gmail.com" target="_blank" className="opacity-70 hover:opacity-100 hover:scale-120 duration-300">
                         <GmailIcon />
                     </a>
                     <a href="https://github.com/KChronos000" target="_blank" className="opacity-70 hover:opacity-100 hover:scale-120 duration-300">
