@@ -1,6 +1,107 @@
 [
   {
+    "id": 3,
+    "order_index": 0,
+    "title": "Portfolio Design",
+    "description": "Modern and minimal portfolio design for creatives",
+    "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop",
+    "otherImages": [
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?w=800&h=600&fit=crop"
+    ],
+    "category": "Design",
+    "tags": [
+      "Figma",
+      "UI/UX",
+      "Prototyping"
+    ],
+    "demoUrl": null,
+    "githubUrl": null,
+    "date": "2023-09-10",
+    "issuer": "มอบให้โดย CodeCamp Thailand",
+    "fullDescription": "A sleek and modern portfolio design crafted for creative professionals.",
+    "features": [
+      "Responsive design system",
+      "Interactive prototypes",
+      "Dark/Light mode"
+    ],
+    "technologies": [
+      "Figma",
+      "Design System",
+      "Prototyping",
+      "Responsive Design"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Think Like a Programmer — Learn C (02)",
+    "image": "/Pictures/Certi_LearnC.png",
+    "otherImages": [
+      "/Pictures/LearnC_1.png",
+      "/Pictures/LearnC_2.png",
+      "/Pictures/LearnC_3.png"
+    ],
+    "category": "Certificate",
+    "description": "ใบประกาศนียบัตรผ่านการอบรมหลักสูตรการเขียนโปรแกรมภาษา C เบื้องต้นและตรรกะโปรแกรมเมอร์",
+    "fullDescription": "เข้าร่วมหลักสูตรการเขียนโปรแกรมด้วยภาษา C ซึ่งเป็นภาษาพื้นฐานที่มีประสิทธิภาพสูงในการทำความเข้าใจการทำงานของคอมพิวเตอร์ โดยเนื้อหาครอบคลุมตั้งแต่โครงสร้างพื้นฐาน (Structure), การจัดการตัวแปรและประเภทข้อมูล (Variables & Data types), การใช้ตรรกะควบคุมทิศทาง (Conditional statements) ไปจนถึงการวนซ้ำ (Loops) และการจัดการหน่วยความจำผ่าน Functions และ Arrays\r\n\r\nนอกจากทักษะด้านการเขียนโค้ด ข้าพเจ้ายังได้ฝึกฝน กระบวนการคิดอย่างเป็นระบบ (Logic Over Luck) ผ่านการทำ Final Project ที่ต้องนำความรู้ทั้งหมดมาประยุกต์ใช้เพื่อแก้ปัญหาจริง ซึ่งเป็นรากฐานสำคัญในการพัฒนาทักษะการเป็นนักพัฒนาระบบ (Developer) และต่อยอดสู่ภาษาโปรแกรมระดับสูงอื่นๆ ในอนาคต",
+    "tags": [
+      "C Programming",
+      "Logic",
+      "Problem Solving",
+      "Basic Coding"
+    ],
+    "features": [
+      "Structure of a basic C program",
+      "Variables",
+      "data types",
+      "and input/output",
+      "Conditional statements",
+      "Basic loops",
+      "Functions",
+      "arrays",
+      "Final project"
+    ],
+    "technologies": [
+      "Visual Studio 2022",
+      "Visual Studio Code",
+      "C Language"
+    ],
+    "demoUrl": null,
+    "githubUrl": null,
+    "date": "2025-08-20",
+    "issuer": "มอบโดย : LOGIC OVER LUCK (Director: DUARN K.)"
+  },
+  {
+    "id": 7,
+    "order_index": 2,
+    "title": "Thailand Cyber Talent 2025",
+    "image": "/Pictures/1766652567361-Part_3_Junior_Top_Talent_Page176.png",
+    "otherImages": [],
+    "category": "Certificate",
+    "description": "ใบประกาศเกียรติคุณสำหรับการเข้าร่วมการแข่งขันด้านความมั่นคงปลอดภัยไซเบอร์ระดับประเทศ",
+    "fullDescription": "ใบประกาศเกียรติคุณฉบับนี้มอบให้แก่ นางสาว แทมมารีน ตาปราบ ในฐานะสมาชิกทีม Cyber Chili จากโรงเรียนภูเขียว",
+    "tags": [
+      "Cybersecurity",
+      "CTF",
+      "Network Security"
+    ],
+    "features": [
+      "Honorable Achievement",
+      "Participation in Thailand Cyber Talent 2025"
+    ],
+    "technologies": [
+      "Cybersecurity Fundamentals",
+      "Ethical Hacking",
+      "Digital Forensics"
+    ],
+    "demoUrl": null,
+    "githubUrl": null,
+    "date": "2025-08-30",
+    "issuer": "มอบโดย : National Cyber Security Agency (NCSA), Thailand"
+  },
+  {
     "id": 1,
+    "order_index": 3,
     "title": "E-Commerce Platform225556456",
     "image": "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop",
     "otherImages": [
@@ -9,7 +110,7 @@
     ],
     "category": "Web App",
     "description": "A full-stack e-commerce platform with payment integration",
-    "fullDescription": "A comprehensive e-commerce solution featuring user authentication, product management, shopping cart functionality, and secure payment processing through Stripe integration. Built with modern web technologies for optimal performance and user experience.",
+    "fullDescription": "A comprehensive e-commerce solution featuring user authentication, product management, shopping cart functionality, and secure payment processing through Stripe integration.",
     "tags": [
       "React",
       "Node.js",
@@ -39,92 +140,16 @@
     "issuer": "มอบให้โดย CodeCamp Thailand"
   },
   {
-    "id": 2,
-    "title": "Think Like a Programmer — Learn C (02)",
-    "image": "/Pictures/Certi_LearnC.png",
-    "otherImages": [
-      "/Pictures/LearnC_1.png",
-      "/Pictures/LearnC_2.png",
-      "/Pictures/LearnC_3.png"
-    ],
-    "category": "Certificate",
-    "description": "ใบประกาศนียบัตรผ่านการอบรมหลักสูตรการเขียนโปรแกรมภาษา C เบื้องต้นและตรรกะโปรแกรมเมอร์",
-    "fullDescription": "เกียรติบัตรฉบับนี้มอบให้เพื่อแสดงว่า ดิฉัน นางสาวแทมมารีน ตาปราบ ได้เข้าร่วมและผ่านการเรียนในกิจกรรม Think Like a Programmer — Learn C (02) จัดขึ้นระหว่างวันที่ 9-10 สิงหาคม 2568 และได้ส่งผลงาน Final Project ครบถ้วนตามเกณฑ์ที่กำหนด",
-    "tags": [
-      "C Programming",
-      "Logic",
-      "Problem Solving",
-      "Basic Coding"
-    ],
-    "features": [
-      "Structure of a basic C program",
-      "Variables",
-      "data types",
-      "and input/output",
-      "Conditional statements (if",
-      "if-else)",
-      "Basic loops and repetition",
-      "Functions",
-      "arrays",
-      "Final project to apply logical problem-solving"
-    ],
-    "technologies": [
-      "Visual Studio 2022",
-      "Visual Studio Code",
-      "C Language"
-    ],
-    "demoUrl": null,
-    "githubUrl": null,
-    "date": "2025-08-20",
-    "issuer": "มอบโดย : LOGIC OVER LUCK (Director: DUARN K.)"
-  },
-  {
-    "id": 3,
-    "title": "Portfolio Design",
-    "description": "Modern and minimal portfolio design for creatives",
-    "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop",
-    "otherImages": [
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&h=600&fit=crop"
-    ],
-    "category": "Design",
-    "tags": [
-      "Figma",
-      "UI/UX",
-      "Prototyping"
-    ],
-    "demoUrl": null,
-    "githubUrl": null,
-    "date": "2023-09-10",
-    "issuer": "มอบให้โดย CodeCamp Thailand",
-    "fullDescription": "A sleek and modern portfolio design crafted for creative professionals. Features smooth animations, responsive layouts, and an intuitive user experience that showcases work in the best possible light.",
-    "features": [
-      "Responsive design system",
-      "Interactive prototypes",
-      "Dark/Light mode",
-      "Animation library",
-      "Component documentation",
-      "Accessibility focused"
-    ],
-    "technologies": [
-      "Figma",
-      "Design System",
-      "Prototyping",
-      "Responsive Design"
-    ]
-  },
-  {
     "id": 4,
+    "order_index": 4,
     "title": "2D Platformer Game",
     "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=600&fit=crop",
     "otherImages": [
-      "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&h=600&fit=crop"
+      "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?w=800&h=600&fit=crop"
     ],
     "category": "Game",
     "description": "Retro-style platformer game with pixel art graphics",
-    "fullDescription": "A nostalgic 2D platformer game featuring pixel art graphics, challenging levels, and smooth gameplay mechanics. Includes multiple worlds, boss battles, and power-up systems reminiscent of classic platformers.",
+    "fullDescription": "A nostalgic 2D platformer game featuring pixel art graphics, challenging levels, and smooth gameplay mechanics.",
     "tags": [
       "Unity",
       "C#",
@@ -133,17 +158,13 @@
     "features": [
       "Multiple game worlds",
       "Boss battle system",
-      "Power-ups and abilities",
-      "Checkpoint system",
-      "Achievement tracking",
-      "Original soundtrack"
+      "Power-ups"
     ],
     "technologies": [
       "Unity 2022",
       "C#",
       "Aseprite",
-      "FMOD Audio",
-      "Cinemachine"
+      "FMOD Audio"
     ],
     "demoUrl": null,
     "githubUrl": null,
@@ -157,7 +178,7 @@
     "otherImages": [],
     "category": "Certificate",
     "description": "ใบประกาศนียบัตรหลักสูตรความปลอดภัยไซเบอร์พื้นฐานจาก NCSA Thailand",
-    "fullDescription": "สำเร็จการศึกษาหลักสูตรความปลอดภัยไซเบอร์จากแพลตฟอร์มการเรียนรู้ NCSA Thailand (สกมช.) โดยเนื้อหาครอบคลุมทักษะที่จำเป็นในยุคดิจิทัล เช่น การตระหนักรู้ถึงภัยคุกคามออนไลน์ (Cyber Threat Awareness), การป้องกันข้อมูลส่วนบุคคล และแนวทางปฏิบัติที่ปลอดภัยในการใช้งานระบบเครือข่าย เพื่อเตรียมความพร้อมสู่การทำงานที่เป็นระบบและปลอดภัย",
+    "fullDescription": "สำเร็จการศึกษาหลักสูตรความปลอดภัยไซเบอร์จากแพลตฟอร์มการเรียนรู้ NCSA Thailand (สกมช.) ดิฉันได้สำเร็จหลักสูตร Basic Cybersecurity จากแพลตฟอร์มการเรียนรู้ของ NCSA โดยมีความตั้งใจที่จะเสริมสร้างองค์ความรู้ด้านความปลอดภัยดิจิทัล ซึ่งเป็นทักษะสำคัญในโลกปัจจุบัน เนื้อหาครอบคลุมถึงการเข้าใจภัยคุกคามไซเบอร์และการป้องกันตนเองในโลกออนไลน์ ข้าพเจ้าพร้อมที่จะนำความรู้และทักษะเหล่านี้ไปประยุกต์ใช้ในการทำงาน เพื่อรักษาความปลอดภัยของข้อมูลและต่อยอดสู่ทักษะการจัดการด้านไอทีขั้นสูงต่อไปในอนาคต",
     "tags": [
       "Cybersecurity",
       "Compliance",
@@ -165,9 +186,7 @@
     ],
     "features": [
       "Fundamental of Cybersecurity",
-      "Cyber Threat Prevention",
-      "Data Privacy Awareness",
-      "Network Security Basics"
+      "Cyber Threat Prevention"
     ],
     "technologies": [
       "Cyber Hygiene",
@@ -177,22 +196,22 @@
     "demoUrl": null,
     "githubUrl": null,
     "date": "2025-08-15",
-    "issuer": "มอบโดย : NCSA Thailand (National Cyber Security Agency)"
+    "issuer": "มอบโดย : NCSA Thailand (National Cyber Security Agency)",
+    "order_index": 5
   },
   {
+    "id": 6,
     "title": "ชื่อโปรเจกต์ *",
     "description": "คำอธิบายสั้นๆ",
-    "fullDescription": "รายละเอียดฉบับเต็ม\n",
+    "fullDescription": "รายละเอียดฉบับเต็ม\r\n",
     "category": "หมวดหมู่",
-    "image": "https://google.com",
-    "otherImages": [
-      "https://google.com"
-    ],
+    "image": "/Pictures/1767250787888-c4.png",
+    "otherImages": [],
     "tags": [
-      "Tags (แยกด้วยคอมม่า)"
+      "Tags"
     ],
     "features": [
-      "ฟีเจอร์เด่น (แยกด้วยคอมม่า)"
+      "ฟีเจอร์เด่น"
     ],
     "technologies": [
       "Nextjs"
@@ -201,38 +220,6 @@
     "githubUrl": "ลิงก์ GitHub (URL)",
     "date": "2025-12-17",
     "issuer": "ผู้มอบ (Issuer)",
-    "id": 6
-  },
-  {
-    "id": 7,
-    "title": "Thailand Cyber Talent 2025",
-    "image": "/Pictures/1766652567361-Part_3_Junior_Top_Talent_Page176.png",
-    "otherImages": [],
-    "category": "Certificate",
-    "description": "ใบประกาศเกียรติคุณสำหรับการเข้าร่วมการแข่งขันด้านความมั่นคงปลอดภัยไซเบอร์ระดับประเทศ",
-    "fullDescription": "ใบประกาศเกียรติคุณฉบับนี้มอบให้แก่ นางสาว แทมมารีน ตาปราบ ในฐานะสมาชิกทีม Cyber Chili จากโรงเรียนภูเขียว เพื่อแสดงว่าเป็นผู้มีความสำเร็จอันทรงเกียรติในการเข้าร่วมการแข่งขัน Thailand Cyber Talent 2025",
-    "tags": [
-      "Cybersecurity",
-      "CTF",
-      "Network Security",
-      "Information Security"
-    ],
-    "features": [
-      "Honorable Achievement in Cybersecurity competition",
-      "Participation in Thailand Cyber Talent 2025",
-      "Representing team 'Cyber Chili'",
-      "Endorsed by National Cyber Security Agency (NCSA)"
-    ],
-    "technologies": [
-      "Cybersecurity Fundamentals",
-      "Ethical",
-      "Hacking",
-      "Digital Forensics",
-      "Network Defense"
-    ],
-    "demoUrl": null,
-    "githubUrl": null,
-    "date": "2025-08-30",
-    "issuer": "มอบโดย : National Cyber Security Agency (NCSA), Thailand"
+    "order_index": 6
   }
 ]

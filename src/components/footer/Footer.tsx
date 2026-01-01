@@ -42,10 +42,10 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-neutral-200">Quick Links</h3>
             <ul className="space-y-2 grid grid-cols-4 md:grid-cols-1 gap-2">
-              {['Home', 'Skills', 'Projects', 'Contact'].map((link) => (
-                <Link key={link} href={`#${link.toLowerCase()}`} className="text-neutral-400 hover:text-violet-400 transition-colors duration-300 text-sm flex items-center gap-2 group">
+              {['home', 'skills', 'projects'].map((link) => (
+                <Link key={link} href={`#${link}`} className="text-neutral-400 hover:text-violet-400 transition-colors duration-300 text-sm flex items-center gap-2 group">
                   <span className="w-0 group-hover:w-4 h-0.5 bg-teal-400 transition-all duration-300"></span>
-                  {link}
+                  <span className="capitalize">{link}</span>
                 </Link>
               ))}
             </ul>

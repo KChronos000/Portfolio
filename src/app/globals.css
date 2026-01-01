@@ -50,6 +50,9 @@ body {
   font-family: 'K2D', 'sans-serif';
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
 .card-vio-blu {
   border-radius: 20px;

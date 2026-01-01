@@ -43,6 +43,7 @@ const AdminPage = () => {
     githubUrl: string | null;
     date: string;
     issuer: string;
+    order_index?: number;
   }
 
   const [formData, setFormData] = useState(initialFormState)
@@ -72,6 +73,34 @@ const AdminPage = () => {
       setError('รหัสผ่านไม่ถูกต้อง')
     }
   }
+
+  const handleMove = async (id: number, direction: 'up' | 'down') => {
+  const index = projects.findIndex(p => p.id === id);
+  if (index === -1) return;
+  if (direction === 'up' && index === 0) return;
+  if (direction === 'down' && index === projects.length - 1) return;
+
+  const newProjects = [...projects];
+  const targetIndex = direction === 'up' ? index - 1 : index + 1;
+  
+  // สลับตำแหน่งใน Array (Local State เพื่อความลื่นไหล)
+  [newProjects[index], newProjects[targetIndex]] = [newProjects[targetIndex], newProjects[index]];
+  setProjects(newProjects);
+
+  // ส่งข้อมูลลำดับใหม่ทั้งหมดไปที่ API (แนะนำให้สร้าง API เฉพาะสำหรับ Reorder)
+  try {
+    await fetch('/api/projects/reorder', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        orders: newProjects.map((p, idx) => ({ id: p.id, order_index: idx })) 
+      })
+    });
+  } catch (err) {
+    console.error("Reorder error:", err);
+    fetchProjects(); // ถ้า Error ให้โหลดข้อมูลจริงกลับมา
+  }
+};
 
   const stringToArray = (str: string) => str ? str.split(',').map(s => s.trim()).filter(s => s !== "") : []
 
@@ -554,11 +583,32 @@ const AdminPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {projects.map((p) => (
+                  {projects.map((p, index) => (
                     <tr 
                       key={p.id} 
                       className="border-b border-gray-700/50 hover:bg-gray-700/20 transition"
                     >
+                      <td className="px-6 py-4 text-sm text-gray-400">
+                        <div className="flex flex-col items-center gap-1">
+                          {/* ปุ่มขึ้น */}
+                          <button 
+                            onClick={() => p.id && handleMove(p.id, 'up')}
+                            disabled={index === 0}
+                            className={`hover:text-cyan-400 ${index === 0 ? 'opacity-20' : ''}`}
+                          >
+                            ▲
+                          </button>
+                          <span className="text-xs font-mono">{index + 1}</span>
+                          {/* ปุ่มลง */}
+                          <button 
+                            onClick={() => p.id && handleMove(p.id, 'down')}
+                            disabled={index === projects.length - 1}
+                            className={`hover:text-cyan-400 ${index === projects.length - 1 ? 'opacity-20' : ''}`}
+                          >
+                            ▼
+                          </button>
+                        </div>
+                      </td>
                       <td className="px-6 py-4 text-sm text-gray-400">{p.id}</td>
                       <td className="px-6 py-4 text-sm font-medium text-white">{p.title}</td>
                       <td className="px-6 py-4">

@@ -21,4 +21,5 @@ export type Project = {
   features?: string[];
   details?: string[];
   technologies?: string[];
+  order_index?: number;
 };

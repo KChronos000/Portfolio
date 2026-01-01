@@ -1,11 +1,11 @@
+"use client"
 import Image from 'next/image';
-import React, { useState } from 'react';
-import rawProjects from "@/app/assets/Projects/Projects.json";
+import React, { useState, useEffect } from 'react';
 import type { Project } from "@/app/assets/Projects/types";
 import { Calendar, Tag, ExternalLink, Github, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Palette, Gamepad2, Award, Grid3x3, LayoutGrid } from 'lucide-react';
 
-const projects = rawProjects as Project[];
+// const projects = rawProjects as Project[];
 const isValidUrl = (url?: string | null) => {
   if (!url) return false;
 
@@ -16,10 +16,31 @@ const isValidUrl = (url?: string | null) => {
 };
 
 
-
 const AchievementSection = () => {
+  const [projects, setProjects] = useState<Project[]>([]);
+  
+    // ดึงข้อมูลจาก API เมื่อหน้าเว็บโหลด
+    useEffect(() => {
+      const fetchProjects = async () => {
+        try {
+          const res = await fetch('/api/projects');
+          const data = await res.json();
+          
+          // เรียงลำดับข้อมูลก่อนเซ็ตค่า
+          const sortedData = [...data].sort((a: Project, b: Project) => 
+            (a.order_index ?? 0) - (b.order_index ?? 0)
+          );
+          
+          setProjects(sortedData); // ตอนนี้จะใช้งานได้แล้ว ไม่แดงแล้วครับ
+        } catch (err) {
+          console.error("Fetch error:", err);
+        }
+      };
+  
+      fetchProjects();
+    }, []);
   return (
-    <main id='#Projects' className='w-full relative z-10 flex flex-col justify-center min-h-screen items-center bg-neutral-950 py-20'>
+    <main id='projects' className='w-full relative z-10 flex flex-col justify-center min-h-screen items-center bg-neutral-950 py-20'>
       <section className="w-full max-w-7xl px-4">
         <div className="mb-12 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -31,13 +52,13 @@ const AchievementSection = () => {
           <p className="text-gray-400 text-lg">ผลงานและโปรเจคที่ผมภูมิใจนำเสนอ</p>
         </div>
 
-        <AGrid  />
+        <AGrid projects={projects} />
       </section>
     </main>
   );
 };
 
-const AGrid = () => {
+const AGrid = ({ projects }: { projects: Project[] }) => {
   const [filter, setFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const categories = ["All", "Web App", "Design", "Game", "Certificate"];
@@ -49,12 +70,7 @@ const AGrid = () => {
     // เพิ่มเติมตามความเหมาะสม
   };
 
-  
-
   const [desktopCols, setDesktopCols] = useState<2 | 3 | 4>(2);
-
-  
-
   const filteredProjects = filter === "All" 
     ? projects 
     : projects.filter(p => p.category === filter);
@@ -149,6 +165,12 @@ const AGrid = () => {
         ))}
       </div>
 
+      {filteredProjects.length === 0 && (
+        <div className="col-span-full py-20 text-center">
+          <p className="text-gray-500 text-xl">ยังไม่มีผลงานในหมวดหมู่นี้</p>
+        </div>
+      )}
+
       {/* Modal */}
       {selectedProject && (
         <ProjectModal 
@@ -173,6 +195,7 @@ const ProjectCard = ({
   const [isHovered, setIsHovered] = useState(false);
   const displayImage = project.image;
   const totalImages = project.otherImages ? project.otherImages.length + 1 : 1;
+  
 
   return (
     <div
