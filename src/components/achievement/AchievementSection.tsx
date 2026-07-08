@@ -49,7 +49,7 @@ const AchievementSection = () => {
             </span>
              <span className="bg-linear-to-r from-emerald-400 to-violet-500 bg-clip-text text-transparent">Projects</span>
           </h2>
-          <p className="text-gray-400 text-lg">ผลงานและโปรเจคที่ผมภูมิใจนำเสนอ</p>
+          <p className="text-gray-400 text-lg">ผลงานและโปรเจค</p>
         </div>
 
         <AGrid projects={projects} />
@@ -489,7 +489,7 @@ const ProjectModal = ({
               <div className="mb-6">
                 <h3 className="text-xl font-semibold text-purple-500 mb-3 flex items-center gap-2">
                   <Tag className="w-5 h-5" />
-                  เทคโนโลยีที่ใช้
+                  Tags
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech, i) => (
