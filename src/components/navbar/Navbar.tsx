@@ -6,8 +6,29 @@ import { Home, Cpu, Briefcase } from "lucide-react"
 export const Navbar = () => {
   const [visible, setVisible] = useState(true)
   const [activeSection, setActiveSection] = useState("home")
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const lastScrollY = useRef(0)
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  useEffect(() => {
+    // Initial check
+    setIsModalOpen(document.body.classList.contains("modal-open"))
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === "class") {
+          setIsModalOpen(document.body.classList.contains("modal-open"))
+        }
+      })
+    })
+
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"],
+    })
+
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,7 +106,7 @@ export const Navbar = () => {
   return (
     <nav
       className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-out select-none
-        ${visible 
+        ${visible && !isModalOpen
           ? "translate-y-0 opacity-100 scale-100" 
           : "-translate-y-16 opacity-0 scale-95 pointer-events-none"
         }`}
