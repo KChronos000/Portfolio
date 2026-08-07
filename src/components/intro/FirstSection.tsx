@@ -27,9 +27,9 @@ const FirstSection = () => {
             <div className="absolute -inset-1 rounded-full bg-linear-to-tr from-violet-500 via-fuchsia-500 to-emerald-500 opacity-60 blur-[3px] group-hover:opacity-100 transition-all duration-500 animate-spin-slow"></div>
             
             {/* Image Container with deep shadow */}
-            <div className="relative rounded-full p-1.5 bg-black overflow-hidden border border-white/10 w-full h-full flex items-center justify-center shadow-2xl shadow-violet-950/40">
+            <div className="relative rounded-full p-1.5 bg-black/90 overflow-hidden border border-white/10 w-full h-full flex items-center justify-center shadow-2xl shadow-violet-950/40">
               <Image
-                src="/Myself.png"
+                src="/me.png"
                 width={400}
                 height={400}
                 alt="Picture of แทมมารีน ตาปราบ"
@@ -45,7 +45,7 @@ const FirstSection = () => {
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
               </div>
               <span className="text-xs sm:text-sm font-semibold text-zinc-100 tracking-wider">
-                🎓 CPE Aspirant
+                Hi
               </span>
             </div>
 

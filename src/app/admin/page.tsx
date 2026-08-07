@@ -4,6 +4,9 @@ import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
 
 const AdminPage = () => {
+useEffect(() => {
+  fetch('/api/auth/check').then(res => setAuthorized(res.ok))
+}, [])
   const [password, setPassword] = useState('')
   const [authorized, setAuthorized] = useState(false)
   const [error, setError] = useState('')
@@ -48,8 +51,6 @@ const AdminPage = () => {
 
   const [formData, setFormData] = useState(initialFormState)
 
-  const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD ?? ''
-
   useEffect(() => {
     if (authorized) fetchProjects()
   }, [authorized])
@@ -64,15 +65,25 @@ const AdminPage = () => {
     }
   }
 
-  const handleSubmitAuth = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (password === ADMIN_PASSWORD) {
+const handleSubmitAuth = async (e: React.FormEvent) => {
+  e.preventDefault()
+  try {
+    const res = await fetch('/api/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password }),
+    })
+    if (res.ok) {
       setAuthorized(true)
       setError('')
     } else {
       setError('รหัสผ่านไม่ถูกต้อง')
     }
+  } catch (err) {
+    console.error('Auth error:', err)
+    setError('เกิดข้อผิดพลาด กรุณาลองใหม่')
   }
+}
 
   const handleMove = async (id: number, direction: 'up' | 'down') => {
   const index = projects.findIndex(p => p.id === id);
@@ -223,14 +234,6 @@ const AdminPage = () => {
       console.error("Delete error:", err);
     }
   };
-
-  if (!ADMIN_PASSWORD) return (
-    <div className="min-h-screen bg-linear-to-br from-gray-950 via-slate-900 to-black flex items-center justify-center">
-      <div className="bg-red-500/10 border border-red-500/50 rounded-xl p-6 text-red-300">
-        Config Error: Set NEXT_PUBLIC_ADMIN_PASSWORD in .env.local
-      </div>
-    </div>
-  )
 
   return (
     <div className="min-h-screen bg-linear-to-br from-gray-950 via-slate-900 to-black text-white">

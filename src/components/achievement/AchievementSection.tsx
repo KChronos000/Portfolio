@@ -18,16 +18,19 @@ const AchievementSection = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await fetch('/api/projects');
-        const data = await res.json();
-        const sortedData = [...data].sort((a: Project, b: Project) => 
-          (a.order_index ?? 0) - (b.order_index ?? 0)
-        );
-        setProjects(sortedData);
+        const res = await fetch('/api/projects')
+        if (!res.ok) {
+          console.error('Fetch failed:', res.status)
+          setProjects([])
+          return
+        }
+        const data = await res.json()
+        setProjects(Array.isArray(data) ? data : [])
       } catch (err) {
-        console.error("Fetch error:", err);
+        console.error("Fetch error:", err)
+        setProjects([])
       }
-    };
+    }
 
     fetchProjects();
   }, []);
@@ -414,7 +417,7 @@ const ProjectModal = ({
               {allImages.length > 1 && (
                 <div className="mt-4">
                   <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">
-                    {isCertificate ? "📸 ภาพกิจกรรม / แฟ้มสะสมงานเพิ่มเติม" : "📂 รูปภาพผลงาน"}
+                    {isCertificate ? "ภาพกิจกรรม / แฟ้มสะสมงานเพิ่มเติม" : "รูปภาพผลงาน"}
                   </p>
                   <div className="flex gap-2.5 overflow-x-auto pb-2 scrollbar-thin">
                     {allImages.map((img, i) => (
@@ -521,7 +524,7 @@ const ProjectModal = ({
                 {(project.features && project.features.length > 0) && (
                   <div className="mb-6">
                     <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                      {isCertificate ? "📚 เนื้อหาและหัวข้อหลักในการฝึกอบรม" : "💡 ฟีเจอร์เด่น / ระบบหลัก"}
+                      {isCertificate ? " เนื้อหาและหัวข้อหลักในการฝึกอบรม" : "💡 ฟีเจอร์เด่น / ระบบหลัก"}
                     </h3>
                     <ul className="space-y-1.5">
                       {project.features.map((feature, i) => (
@@ -538,7 +541,7 @@ const ProjectModal = ({
                 {(project.technologies && project.technologies.length > 0) && (
                   <div className="mb-6">
                     <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                      {isCertificate ? "🛠️ ทักษะที่ได้ฝึกฝน & เครื่องมือ" : "🛠️ เทคโนโลยีที่เลือกใช้"}
+                      {isCertificate ? "ทักษะที่ได้ฝึกฝน & เครื่องมือ" : "เทคโนโลยีที่เลือกใช้"}
                     </h3>
                     <div className="flex flex-wrap gap-1.5">
                       {project.technologies.map((tech, i) => (
