@@ -57,7 +57,7 @@ useEffect(() => {
 
   const fetchProjects = async () => {
     try {
-      const res = await fetch('/api/projects')
+      const res = await fetch('/api/projects', { cache: 'no-store' })
       const data = await res.json()
       setProjects(Array.isArray(data) ? data : [])
     } catch (err) {
@@ -166,26 +166,28 @@ const handleSubmitAuth = async (e: React.FormEvent) => {
     }
   };
 
-  const handleEditClick = (project: Project) => {
-    setEditingId(project.id || null);
-    setFormData({
-      title: project.title,
-      description: project.description,
-      fullDescription: project.fullDescription,
-      category: project.category,
-      image: project.image,
-      otherImages: Array.isArray(project.otherImages) ? project.otherImages : [],
-      tags: Array.isArray(project.tags) ? project.tags.join(', ') : project.tags,
-      features: Array.isArray(project.features) ? project.features.join(', ') : project.features,
-      technologies: Array.isArray(project.technologies) ? project.technologies.join(', ') : project.technologies,
-      demoUrl: project.demoUrl || '',
-      githubUrl: project.githubUrl || '',
-      date: project.date,
-      issuer: project.issuer
-    });
-    setMainFile(null);
-    setOtherFiles([]);
-  };
+const handleEditClick = (project: Project) => {
+  setEditingId(project.id || null);
+  setFormData({
+    title: project.title || '',
+    description: project.description || '',
+    fullDescription: project.fullDescription || '',
+    category: project.category || '',
+    image: project.image || '',
+    otherImages: Array.isArray(project.otherImages) 
+      ? project.otherImages 
+      : project.otherImages ? stringToArray(project.otherImages) : [],
+    tags: Array.isArray(project.tags) ? project.tags.join(', ') : project.tags || '',
+    features: Array.isArray(project.features) ? project.features.join(', ') : project.features || '',
+    technologies: Array.isArray(project.technologies) ? project.technologies.join(', ') : project.technologies || '',
+    demoUrl: project.demoUrl || '',
+    githubUrl: project.githubUrl || '',
+    date: project.date || new Date().toISOString().split('T')[0],
+    issuer: project.issuer || ''
+  });
+  setMainFile(null);
+  setOtherFiles([]);
+};
 
   const removeExistingImage = (index: number) => {
     // ตรวจสอบว่าถ้าเป็น string ให้แปลงเป็น array ก่อน (ป้องกันตัวแดง)
@@ -351,7 +353,7 @@ const handleSubmitAuth = async (e: React.FormEvent) => {
                     </label>
                     <input 
                       className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
-                      value={formData.issuer} 
+                      value={formData.issuer || ""}
                       onChange={e => setFormData({...formData, issuer: e.target.value})} 
                       placeholder="มอบให้โดย..." 
                     />
@@ -379,7 +381,7 @@ const handleSubmitAuth = async (e: React.FormEvent) => {
                     </label>
 
                     {/* ส่วนแสดงรูปภาพหลัก (ไม่ว่าจะเป็นรูปเดิมจาก DB หรือรูปใหม่ที่เพิ่งเลือก) */}
-                    {(formData.image || mainFile) ? (
+                    {(mainFile || (formData.image && formData.image.trim() !== "")) ? (
                       <div className="relative w-40 h-40 mb-4 group">
                         <div className="w-full h-full rounded-2xl overflow-hidden border-2 border-cyan-500/30 shadow-lg shadow-cyan-500/10">
                           <Image 

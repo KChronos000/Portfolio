@@ -1,7 +1,6 @@
 [
   {
     "id": 3,
-    "order_index": 0,
     "title": "Portfolio Design",
     "description": "Modern and minimal portfolio design for creatives",
     "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop",
@@ -9,7 +8,7 @@
       "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?w=800&h=600&fit=crop"
     ],
-    "category": "Design",
+    "category": "Design676767",
     "tags": [
       "Figma",
       "UI/UX",
@@ -198,29 +197,6 @@
     "date": "2025-08-15",
     "issuer": "มอบโดย : NCSA Thailand (National Cyber Security Agency)",
     "order_index": 5
-  },
-  {
-    "id": 6,
-    "title": "ชื่อโปรเจกต์ *",
-    "description": "คำอธิบายสั้นๆ",
-    "fullDescription": "รายละเอียดฉบับเต็ม\r\n",
-    "category": "หมวดหมู่",
-    "image": "/Pictures/1767250787888-c4.png",
-    "otherImages": [],
-    "tags": [
-      "Tags"
-    ],
-    "features": [
-      "ฟีเจอร์เด่น"
-    ],
-    "technologies": [
-      "Nextjs"
-    ],
-    "demoUrl": "ลิงก์ Demo (URL)",
-    "githubUrl": "ลิงก์ GitHub (URL)",
-    "date": "2025-12-17",
-    "issuer": "ผู้มอบ (Issuer)",
-    "order_index": 6
   },
   {
     "id": 8,

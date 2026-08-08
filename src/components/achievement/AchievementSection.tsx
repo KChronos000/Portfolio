@@ -71,6 +71,7 @@ const AGrid = ({ projects }: { projects: Project[] }) => {
 
   const gridColsClass = desktopCols === 2 ? "md:grid-cols-2" : "md:grid-cols-3";
   
+  
   return (
     <div>
       {/* Filter Buttons */}
@@ -200,12 +201,19 @@ const ProjectCard = ({
       <div className="relative z-10 flex flex-col h-full">
         {/* Image Section */}
         <div className="relative h-56 w-full overflow-hidden rounded-t-2xl">
-          <Image
-            src={displayImage}
-            alt={project.title}
-            fill
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          />
+          {displayImage ? (
+            <Image
+              src={displayImage}
+              alt={project.title}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            /* แสดง Placeholder หรือกรอบเปล่ากรณีไม่มีรูป */
+            <div className="w-full h-full bg-gray-800 flex items-center justify-center text-gray-500 text-sm">
+              ไม่มีรูปภาพ
+            </div>
+          )}
           
           {/* Elegant Overlay */}
           <div className="absolute inset-0 bg-linear-to-t from-neutral-950 via-neutral-900/40 to-transparent opacity-90" />
@@ -288,11 +296,21 @@ const ProjectModal = ({
   layoutMode: 'side' | 'top';
   onChangeLayoutMode: (mode: 'side' | 'top') => void;
   onClose: () => void;
-}) => {
+}) => {                                          // ← เปิดวงเล็บฟังก์ชันตรงนี้
   const allImages = [project.image, ...(project.otherImages || [])];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isImageExpanded, setIsImageExpanded] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {                              // ← ต้องอยู่ตรงนี้ ก่อนวงเล็บปิดของฟังก์ชัน
+    document.body.classList.add('modal-open');
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.classList.remove('modal-open');
+      document.body.style.overflow = '';
+    };
+  }, []);
+
 
   const isCertificate = project.category === "Certificate";
   const hasDemo = isValidUrl(project.demoUrl);
@@ -391,6 +409,8 @@ const ProjectModal = ({
                   src={allImages[currentImageIndex]}
                   alt={`${project.title} - Full size`}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'cover' }}
                   className="object-contain p-2"
                 />
                 
@@ -430,7 +450,7 @@ const ProjectModal = ({
                             : 'border-neutral-800 opacity-60 hover:opacity-100 hover:scale-102'
                         }`}
                       >
-                        <Image src={img} alt={`Thumb ${i}`} fill className="object-cover" />
+                        <Image src={img} alt={`Thumb ${i}`} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: 'cover' }} className="object-cover" />
                       </button>
                     ))}
                   </div>

@@ -87,7 +87,8 @@ export const ProgramLanguage = () => {
           key={index} 
           className="group/item relative"
           style={{
-            animation: `fadeInUp 0.5s ease-out ${index * 0.1}s both`
+            animation: `fadeInUp 0.5s ease-out ${index * 0.1}s both`,
+            width: "auto"
           }}
         >
           {/* Card */}
@@ -103,7 +104,8 @@ export const ProgramLanguage = () => {
                   alt={skill.name}
                   width={48}
                   height={48}
-                  className="object-contain filter group-hover/item:drop-shadow-lg transition-all duration-300"
+                  style={{ width: 'auto', height: 'auto' }}
+                  className="max-w-full max-h-full object-contain filter group-hover/item:drop-shadow-lg transition-all duration-300"
                 />
               </div>
               
@@ -140,7 +142,8 @@ export const ProgramTools = () => {
           key={index} 
           className="group/item relative"
           style={{
-            animation: `fadeInUp 0.5s ease-out ${index * 0.1}s both`
+            animation: `fadeInUp 0.5s ease-out ${index * 0.1}s both`,
+            width: "auto"
           }}
         >
           {/* Card */}
@@ -156,7 +159,8 @@ export const ProgramTools = () => {
                   alt={skill.name}
                   width={48}
                   height={48}
-                  className="object-contain filter group-hover/item:drop-shadow-lg transition-all duration-300"
+                  style={{ width: 'auto', height: 'auto' }}
+                  className="max-w-full max-h-full object-contain filter group-hover/item:drop-shadow-lg transition-all duration-300"
                 />
               </div>
               

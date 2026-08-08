@@ -96,12 +96,14 @@ export const Navbar = () => {
       }, 1000)
     }
   }
+  
 
   const navItems = [
     { id: "home", label: "Home", icon: <Home size={16} /> },
     { id: "skills", label: "Skills", icon: <Cpu size={16} /> },
     { id: "projects", label: "Projects", icon: <Briefcase size={16} /> },
   ]
+  
 
   return (
     <nav
