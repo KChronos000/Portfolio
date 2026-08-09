@@ -503,7 +503,7 @@ const ProjectModal = ({
                     </div>
 
                     {/* Example Credential ID support */}
-                    {project.id && (
+                    {/* {project.id && (
                       <div className="flex items-start gap-2.5 border-t border-neutral-900 pt-2 mt-1">
                         <Bookmark className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
                         <div className="w-full flex justify-between items-center">
@@ -520,7 +520,7 @@ const ProjectModal = ({
                           </button>
                         </div>
                       </div>
-                    )}
+                    )} */}
                   </div>
                 ) : (
                   /* Standard Project Info Block */
@@ -591,7 +591,7 @@ const ProjectModal = ({
                     className="flex items-center justify-center gap-2 px-5 py-2.5 w-full bg-linear-to-r from-emerald-400 to-teal-500 text-neutral-950 font-bold rounded-xl hover:shadow-lg hover:shadow-emerald-500/30 transition-all cursor-pointer"
                   >
                     <Globe className="w-4.5 h-4.5" />
-                    ตรวจสอบใบรับรองออนไลน์
+                    ลิงก์
                   </a>
                 ) : (
                   <>

@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
-
+import { ProjectCategory } from "@/app/api/projects/route";
 const AdminPage = () => {
 useEffect(() => {
   fetch('/api/auth/check').then(res => setAuthorized(res.ok))
@@ -338,12 +338,17 @@ const handleEditClick = (project: Project) => {
                       <span className="w-1 h-4 bg-purple-400 rounded-full"></span>
                       หมวดหมู่
                     </label>
-                    <input 
-                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
+                    <select 
+                      className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all appearance-none cursor-pointer"
                       value={formData.category} 
-                      onChange={e => setFormData({...formData, category: e.target.value})} 
-                      placeholder="เช่น Web App, Certificate" 
-                    />
+                      onChange={e => setFormData({...formData, category: e.target.value as ProjectCategory})}
+                    >
+                      <option value="" disabled>เลือกหมวดหมู่</option>
+                      <option value="Web App">Web App</option>
+                      <option value="Design">Design</option>
+                      <option value="Game">Game</option>
+                      <option value="Certificate">Certificate</option>
+                    </select>
                   </div>
                   
                   <div>

@@ -15,11 +15,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* About Section */}
           <div className="space-y-4">
-            <span className='text-xl font-bold bg-linear-to-r from-teal-400 via-indigo-400 to-violet-500 bg-clip-text text-transparent'>
-              Web Developer
+            <span className='text-xl font-bold bg-linear-to-r from-green-400 via-indigo-400 to-violet-500 bg-clip-text text-transparent'>
+              Web&Game Developer
             </span>
             <p className="text-neutral-400 text-sm leading-relaxed">
-              Awarded a certificate for successfully completing an intensive Web Development Program.
+              ผลงานของดิฉันเป็นการพัฒนาเว็บไซต์และเกมที่มีความทันสมัยและเข้าถึงได้ง่าย
             </p>
             <div className="flex gap-3">
               <span className="px-3 py-1 text-xs rounded-full bg-neutral-800/80 border border-neutral-700 text-neutral-300">HTML</span>

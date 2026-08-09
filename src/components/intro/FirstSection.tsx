@@ -3,7 +3,7 @@ import { Namecard } from './Namecard'
 
 const FirstSection = () => {
   return (
-    <section id='home' className="w-full relative z-10 flex flex-col justify-center min-h-screen items-center px-4 md:px-8 py-12 lg:py-0 overflow-hidden">
+    <section id='home' className="w-full relative z-10 flex flex-col justify-center min-h-screen items-center pt-24 sm:pt-0 px-4 md:px-8 py-12 lg:py-0 overflow-hidden">
       
       {/* Soft Ambient Background Glows */}
       <div className="absolute top-[15%] left-[5%] -z-10 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] rounded-full bg-violet-600/10 blur-3xl pointer-events-none"></div>

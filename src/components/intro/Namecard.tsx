@@ -38,11 +38,11 @@ export const Namecard = () => {
 
         {/* Bio Text */}
         <p className="fade-in-up mt-6 text-base sm:text-lg text-zinc-300 leading-relaxed font-normal" style={{ animationDelay: '400ms' }}>
-          ดิฉันมีความสามารถและความสนใจในเทคโนโลยีและคอมพิวเตอร์{" "}
+          จุดเริ่มต้นของดิฉันมาจากความอยากรู้อยากเห็นง่าย ๆ ว่าเว็บไซต์และเกมที่เล่นอยู่ทุกวันมันทำงานยังไงเบื้องหลัง ความสงสัยนั้นค่อย ๆ พาดิฉันเข้าสู่โลกของการเขียนโปรแกรมและ{" "}
           <span className="text-transparent bg-clip-text bg-linear-to-r from-teal-400 to-emerald-400 font-extrabold shadow-sm">
             "Computer Engineering"
           </span>{" "}
-          passionate about emerging technologies.
+          อย่างเต็มตัว ตลอดเส้นทางที่ผ่านมา ดิฉันได้ลองผิดลองถูก ล้มบ้าง เรียนรู้บ้าง แต่สิ่งที่ไม่เคยเปลี่ยนคือความตั้งใจที่จะพัฒนาตัวเองให้เก่งขึ้นในทุก ๆ วัน
         </p>
 
         {/* Social Links */}
