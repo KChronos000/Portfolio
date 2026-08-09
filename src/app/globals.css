@@ -22,6 +22,12 @@
   }
 }
 
+@media (hover: none) {
+  .group\/item:active {
+    transform: none !important;
+  }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -78,44 +84,64 @@ html {
   height: 100%;
 }
 
+/* เพิ่ม will-change + translateZ(0) เพื่อบังคับให้ browser ใช้ GPU
+   สำหรับ layer ที่มี animation ตลอดเวลา ลดอาการกระตุกตอน scroll */
 .floating {
     position: relative;
     animation: float 3s ease-in-out infinite;
+    will-change: transform;
+    transform: translateZ(0);
 }
 .floating-400 {
     position: relative;
     animation: float 4s ease-in-out infinite;
+    will-change: transform;
+    transform: translateZ(0);
 }
 .floating-600 {
   position: relative;
     animation: float 6s ease-in-out infinite;
+    will-change: transform;
+    transform: translateZ(0);
 }
 .floating-700 {
     position: relative;
     animation: float 7s ease-in-out infinite;
+    will-change: transform;
+    transform: translateZ(0);
 }
 .floating-1000 {
     position: relative;
     animation: float 10s ease-in-out infinite;
+    will-change: transform;
+    transform: translateZ(0);
 }
 .floating-2000 {
     position: relative;
     animation: float 20s ease-in-out infinite;
+    will-change: transform;
+    transform: translateZ(0);
 }
 .floating-3000 {
     position: relative;
     animation: float 3s ease-in-out infinite;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .floating-delay {
   animation: float 3s ease-in-out infinite;
   animation-delay: 0.8s;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .floating-400-delay {
     position: relative;
     animation: float 4s ease-in-out infinite;
     animation-delay: 0.7s;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 /* ----------------------------------------------
@@ -174,6 +200,7 @@ html {
     height: 20px;
     background: rgba(255, 255, 255, 0.099);
     animation: animate 19s linear infinite;
+    will-change: transform, opacity;
 }
 
 
@@ -333,4 +360,11 @@ html {
 }
 .skill-banner .skill-slider .skill:nth-child(5) {
   animation: skill5 20s infinite;
+}
+
+/* บังคับให้วงแหวนเรืองแสงรอบรูปโปรไฟล์ใช้ GPU layer แยกต่างหาก
+   ลด repaint ตอน scroll (ส่วนที่กระตุกหนักที่สุด) */
+.profile-glow-ring {
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }

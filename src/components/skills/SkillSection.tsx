@@ -12,22 +12,6 @@ const SkillSection = () => {
             <div className="">
               <BoxSkill/>
             </div>
-
-
-
-
-
-            {/* <div className="text-content">
-              <div className="">
-                <h2>programming language</h2> 
-                <div className="">
-                  
-                </div>
-              </div>
-            </div>
-            <div className="floating">
-              <CardSkills />
-            </div> */}
             
           </div>
         </div>

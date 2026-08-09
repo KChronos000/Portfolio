@@ -6,7 +6,7 @@ const BoxSkill = () => {
     <div>
       <div className="ml-4 md:ml-0 md:mb-10">
         <div className='flex items-center justify-center my-5 md:my-0'>
-          <span className='text-shadow-lg text-shadow-gray-500 text-6xl lg:text-6xl font-bold mr-4'>
+          <span className='text-shadow-lg text-white text-shadow-gray-500 text-6xl lg:text-6xl font-bold mr-4'>
               <span className="md:hidden">{`<`}</span>
                 {/* สำหรับหน้าจอใหญ่ */}
               <span className="hidden md:inline">✦</span>
@@ -15,7 +15,7 @@ const BoxSkill = () => {
             SKILLS
             {/* <div className="w-50 h-1 rounded bg-white shadow shadow-gray-500 mt-3"></div> */}
           </h2>
-            <span className='text-shadow-lg text-shadow-gray-500 text-6xl lg:text-6xl font-bold ml-4'>
+            <span className='text-shadow-lg text-white text-shadow-gray-500 text-6xl lg:text-6xl font-bold ml-4'>
               <span className="lg:hidden">{`/>`}</span>
                 {/* สำหรับหน้าจอใหญ่ */}
               <span className="hidden lg:inline">✦</span>
