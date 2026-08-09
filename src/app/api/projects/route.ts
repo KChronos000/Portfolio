@@ -1,187 +1,193 @@
-  import { promises as fs } from 'fs';
-  import { NextRequest, NextResponse } from 'next/server';
-  import path from 'path';
-  export const dynamic = 'force-dynamic';
+import { NextRequest, NextResponse } from 'next/server';
+import { getSupabaseClient } from '@/libary/supabase';
+import cloudinary from '@/libary/cloudinary';
 
-  // --- Types Definition (แนะนำให้แยกไฟล์ในอนาคต) ---
-  export type ProjectCategory = "Web App" | "Design" | "Game" | "Certificate";
+export const dynamic = 'force-dynamic';
 
-  export type Project = {
-    id: number;
-    title: string;
-    description: string;
-    image: string;
-    otherImages?: string[];
-    category: ProjectCategory;
-    tags: string[];
-    demoUrl?: string | null;
-    githubUrl?: string | null;
-    date: string;
-    issuer?: string;
-    fullDescription?: string;
-    features?: string[];
-    details?: string[];
-    technologies?: string[];
-    order_index?: number;
+// --- Types Definition ---
+export type ProjectCategory = "Web App" | "Design" | "Game" | "Certificate";
+
+export type Project = {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  otherImages?: string[];
+  category: ProjectCategory;
+  tags: string[];
+  demoUrl?: string | null;
+  githubUrl?: string | null;
+  date: string;
+  issuer?: string;
+  fullDescription?: string;
+  features?: string[];
+  details?: string[];
+  technologies?: string[];
+  order_index?: number;
+};
+
+// แปลงข้อมูลจากรูปแบบฐานข้อมูล (snake_case) เป็นรูปแบบที่หน้าเว็บใช้ (camelCase)
+function dbRowToProject(row: Record<string, unknown>): Project {
+  return {
+    id: row.id as number,
+    title: (row.title as string) || "",
+    description: (row.description as string) || "",
+    image: (row.image as string) || "",
+    otherImages: (row.other_images as string[]) || [],
+    category: (row.category as ProjectCategory) || "Web App",
+    tags: (row.tags as string[]) || [],
+    demoUrl: (row.demo_url as string) || null,
+    githubUrl: (row.github_url as string) || null,
+    date: (row.date as string) || "",
+    issuer: (row.issuer as string) || undefined,
+    fullDescription: (row.full_description as string) || undefined,
+    features: (row.features as string[]) || [],
+    details: (row.details as string[]) || [],
+    technologies: (row.technologies as string[]) || [],
+    order_index: (row.order_index as number) ?? 0,
   };
+}
 
-  const jsonPath = path.join(process.cwd(), 'src', 'app', 'assets', 'Projects', 'projects.json');
-  const uploadDir = path.join(process.cwd(), 'public', 'Pictures');
+function getErrorMessage(err: unknown): string {
+  if (err instanceof Error) return err.message;
+  return String(err);
+}
 
-  // --- Helper Functions ---
+function safeParseJSON<T>(data: string | null, fallback: T): T {
+  if (!data) return fallback;
+  try {
+    return JSON.parse(data) as T;
+  } catch {
+    return fallback;
+  }
+}
 
-  function getErrorMessage(err: unknown): string {
-    if (err instanceof Error) return err.message;
-    return String(err);
+// อัปโหลดไฟล์ขึ้น Cloudinary แทนการเขียนลง disk
+async function uploadToCloudinary(file: unknown): Promise<string> {
+  if (!file || !(file instanceof File)) {
+    return typeof file === 'string' ? file : "";
   }
 
-  // ฟังก์ชันสำหรับ Parse JSON ที่ปลอดภัย ป้องกัน App ค้างถ้าส่งค่ามาผิด
-  function safeParseJSON<T>(data: string | null, fallback: T): T {
-    if (!data) return fallback;
-    try {
-      return JSON.parse(data) as T;
-    } catch {
-      return fallback;
-    }
-  }
+  const buffer = Buffer.from(await file.arrayBuffer());
+  const base64 = `data:${file.type};base64,${buffer.toString('base64')}`;
 
-  async function saveFile(file: unknown): Promise<string> {
-    // ตรวจสอบว่าเป็น File Object จริงหรือไม่
-    if (!file || !(file instanceof File)) {
-      return typeof file === 'string' ? file : "";
-    }
-    
-    const buffer = Buffer.from(await file.arrayBuffer());
-    // ล้างชื่อไฟล์ให้ไม่มีช่องว่างและอักขระพิเศษ
-    const safeName = file.name.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9._-]/g, '');
-    const fileName = `${Date.now()}-${safeName}`;
-    const filePath = path.join(uploadDir, fileName);
+  const result = await cloudinary.uploader.upload(base64, {
+    folder: 'portfolio',
+  });
 
-    await fs.mkdir(uploadDir, { recursive: true });
-    await fs.writeFile(filePath, buffer);
-    
-    return `/Pictures/${fileName}`;
-  }
+  return result.secure_url;
+}
 
-  async function readProjects(): Promise<Project[]> {
-    try {
-      const fileContents = await fs.readFile(jsonPath, 'utf8');
-      return JSON.parse(fileContents) as Project[];
-    } catch (error) {
-      console.error("Read Error:", error);
-      return [];
-    }
-  }
+// --- Route Handlers ---
 
-  // --- Route Handlers ---
+export async function GET() {
+  try {
+    const supabase = getSupabaseClient();
+    const { data, error } = await supabase
+      .from('projects')
+      .select('*')
+      .order('order_index', { ascending: true });
 
-  export async function GET() {
-    const projects = await readProjects();
+    if (error) throw error;
+
+    const projects = (data || []).map(dbRowToProject);
     return NextResponse.json(projects);
+  } catch (error) {
+    console.error("GET Error:", error);
+    return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 });
   }
+}
 
-  export async function POST(request: NextRequest) {
-    try {
-      const formData = await request.formData();
-      const projects = await readProjects();
+export async function POST(request: NextRequest) {
+  try {
+    const supabase = getSupabaseClient();
+    const formData = await request.formData();
 
-      const idRaw = formData.get('id');
-      const id = idRaw ? parseInt(idRaw as string, 10) : null;
-      
-      // การจัดการรูปภาพหลัก
-      const imageFile = formData.get('mainImageFile');
-      let imagePath = (formData.get('image') as string) || ""; 
-      if (imageFile instanceof File) {
-        imagePath = await saveFile(imageFile);
-      }
+    const idRaw = formData.get('id');
+    const id = idRaw ? parseInt(idRaw as string, 10) : null;
 
-      // การจัดการรูปภาพประกอบ
-      const otherImageFiles = formData.getAll('otherImageFiles');
-      let otherImagesPaths: string[] = [];
-      
-      if (otherImageFiles.length > 0 && otherImageFiles[0] instanceof File) {
-        for (const file of otherImageFiles) {
-          const p = await saveFile(file);
-          if (p) otherImagesPaths.push(p);
-        }
-      } else {
-        otherImagesPaths = safeParseJSON(formData.get('otherImages') as string, []);
-      }
-
-      // สร้าง Object ข้อมูลใหม่
-      const projectData: Project = {
-        id: 0, // จะระบุอีกครั้งตอนหา Index
-        title: (formData.get('title') as string) || "",
-        image: imagePath,
-        otherImages: otherImagesPaths,
-        category: (formData.get('category') as ProjectCategory) || "Web App",
-        description: (formData.get('description') as string) || "",
-        fullDescription: (formData.get('fullDescription') as string) || "",
-        tags: safeParseJSON(formData.get('tags') as string, []),
-        features: safeParseJSON(formData.get('features') as string, []),
-        technologies: safeParseJSON(formData.get('technologies') as string, []),
-        demoUrl: (formData.get('demoUrl') as string) || null,
-        githubUrl: (formData.get('githubUrl') as string) || null,
-        date: (formData.get('date') as string) || new Date().toISOString().split('T')[0],
-        issuer: (formData.get('issuer') as string) || undefined,
-        order_index: idRaw ? undefined : projects.length // ถ้าเป็นโปรเจกต์ใหม่ ให้ต่อท้าย
-      };
-
-      const index = projects.findIndex((p) => p.id === id);
-      
-      if (index !== -1 && id !== null) {
-        // แก้ไขข้อมูลเดิม (รักษา order_index เดิมไว้)
-        projects[index] = { ...projects[index], ...projectData, id: id };
-      } else {
-        // เพิ่มข้อมูลใหม่
-        const maxId = projects.length > 0 ? Math.max(...projects.map(p => p.id)) : 0;
-        projects.push({ ...projectData, id: maxId + 1 });
-      }
-
-      await fs.writeFile(jsonPath, JSON.stringify(projects, null, 2), 'utf8');
-      return NextResponse.json({ message: 'Success' });
-
-    } catch (error) {
-      console.error("POST Error:", error);
-      return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 });
+    // รูปภาพหลัก
+    const imageFile = formData.get('mainImageFile');
+    let imagePath = (formData.get('image') as string) || "";
+    if (imageFile instanceof File) {
+      imagePath = await uploadToCloudinary(imageFile);
     }
-  }
 
-  export async function DELETE(request: NextRequest) {
-    try {
-      const { id } = await request.json();
-      const projects = await readProjects();
-      const projectToDelete = projects.find((p) => p.id === id);
+    // รูปภาพประกอบ
+    const otherImageFiles = formData.getAll('otherImageFiles');
+    let otherImagesPaths: string[] = [];
 
-      if (!projectToDelete) {
-        return NextResponse.json({ error: 'Project not found' }, { status: 404 });
+    if (otherImageFiles.length > 0 && otherImageFiles[0] instanceof File) {
+      for (const file of otherImageFiles) {
+        const url = await uploadToCloudinary(file);
+        if (url) otherImagesPaths.push(url);
       }
-
-      const deleteFile = async (imgUrl: string) => {
-        if (imgUrl && imgUrl.startsWith('/Pictures/')) {
-          const fullPath = path.join(process.cwd(), 'public', imgUrl);
-          try {
-            await fs.access(fullPath);
-            await fs.unlink(fullPath);
-          } catch {
-              console.warn(`File not found or cannot delete: ${imgUrl}`);
-          }
-        }
-      };
-
-      // ลบไฟล์ภาพออกจาก Server
-      await deleteFile(projectToDelete.image);
-      if (projectToDelete.otherImages) {
-        for (const img of projectToDelete.otherImages) {
-          await deleteFile(img);
-        }
-      }
-
-      const updatedProjects = projects.filter((p) => p.id !== id);
-      await fs.writeFile(jsonPath, JSON.stringify(updatedProjects, null, 2), 'utf8');
-
-      return NextResponse.json({ message: 'Success' });
-    } catch (error) {
-      return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 });
+    } else {
+      otherImagesPaths = safeParseJSON(formData.get('otherImages') as string, []);
     }
+
+    const projectData = {
+      title: (formData.get('title') as string) || "",
+      image: imagePath,
+      other_images: otherImagesPaths,
+      category: (formData.get('category') as ProjectCategory) || "Web App",
+      description: (formData.get('description') as string) || "",
+      full_description: (formData.get('fullDescription') as string) || "",
+      tags: safeParseJSON(formData.get('tags') as string, []),
+      features: safeParseJSON(formData.get('features') as string, []),
+      technologies: safeParseJSON(formData.get('technologies') as string, []),
+      demo_url: (formData.get('demoUrl') as string) || null,
+      github_url: (formData.get('githubUrl') as string) || null,
+      date: (formData.get('date') as string) || new Date().toISOString().split('T')[0],
+      issuer: (formData.get('issuer') as string) || null,
+    };
+
+    if (id !== null) {
+      // แก้ไขข้อมูลเดิม
+      const { error } = await supabase
+        .from('projects')
+        .update(projectData)
+        .eq('id', id);
+
+      if (error) throw error;
+    } else {
+      // เพิ่มโปรเจกต์ใหม่ ต่อท้ายลำดับ
+      const { count } = await supabase
+        .from('projects')
+        .select('*', { count: 'exact', head: true });
+
+      const { error } = await supabase
+        .from('projects')
+        .insert({ ...projectData, order_index: count || 0 });
+
+      if (error) throw error;
+    }
+
+    return NextResponse.json({ message: 'Success' });
+  } catch (error) {
+    console.error("POST Error:", error);
+    return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 });
   }
+}
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const supabase = getSupabaseClient();
+    const { id } = await request.json();
+
+    // ลบข้อมูลออกจากฐานข้อมูล
+    // หมายเหตุ: รูปภาพบน Cloudinary จะไม่ถูกลบอัตโนมัติ ต้องลบเองผ่าน Cloudinary dashboard
+    // หรือค่อยเพิ่มโค้ดเรียก cloudinary.uploader.destroy() ทีหลังได้
+    const { error } = await supabase
+      .from('projects')
+      .delete()
+      .eq('id', id);
+
+    if (error) throw error;
+
+    return NextResponse.json({ message: 'Success' });
+  } catch (error) {
+    console.error("DELETE Error:", error);
+    return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 });
+  }
+}

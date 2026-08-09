@@ -38,9 +38,7 @@ export const Namecard = () => {
 
         {/* Bio Text */}
         <p className="fade-in-up mt-6 text-base sm:text-lg text-zinc-300 leading-relaxed font-normal" style={{ animationDelay: '400ms' }}>
-          Creating digital experiences that make a difference. From concept to deployment, 
-          I specialize in building modern, accessible web applications and immersive game mechanics with user-first design principles. 
-          I intend to enroll in the faculty of{" "}
+          ดิฉันมีความสามารถและความสนใจในเทคโนโลยีและคอมพิวเตอร์{" "}
           <span className="text-transparent bg-clip-text bg-linear-to-r from-teal-400 to-emerald-400 font-extrabold shadow-sm">
             "Computer Engineering"
           </span>{" "}
