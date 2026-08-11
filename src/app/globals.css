@@ -169,15 +169,13 @@ html {
 }
 
 @keyframes animate {
-    0%{
+    0% {
         transform: translateY(0) rotate(0deg);
         opacity: 1;
-        border-radius: 0;
     }
-    100%{
+    100% {
         transform: translateY(-1000px) rotate(720deg);
         opacity: 0;
-        border-radius: 50%;
     }
 }
 
@@ -196,13 +194,11 @@ html {
     position: absolute;
     display: block;
     list-style: none;
-    width: 20px;
-    height: 20px;
     background: rgba(255, 255, 255, 0.099);
+    border-radius: 15%;
     animation: animate 19s linear infinite;
     will-change: transform, opacity;
 }
-
 
 
 

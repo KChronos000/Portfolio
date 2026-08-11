@@ -99,14 +99,15 @@ export const ProgramLanguage = () => {
             {/* Icon */}
             <div className="relative flex flex-col items-center justify-center">
               <div className="w-12 h-12 mb-3 flex items-center justify-center">
-                <Image
-                  src={`/programsLan/${skill.file}`}
-                  alt={skill.name}
-                  width={48}
-                  height={48}
-                  style={{ width: 'auto', height: 'auto' }}
-                  className="max-w-full max-h-full object-contain filter group-hover/item:drop-shadow-lg transition-all duration-300"
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={`/programsLan/${skill.file}`}
+                    alt={skill.name}
+                    fill
+                    sizes="48px"
+                    className="object-contain filter group-hover/item:drop-shadow-lg transition-all duration-300"
+                  />
+                </div>
               </div>
               
               {/* Name */}
@@ -153,16 +154,17 @@ export const ProgramTools = () => {
             
             {/* Icon */}
             <div className="relative flex flex-col items-center justify-center">
-              <div className="w-12 h-12 mb-3 flex items-center justify-center">
-                <Image 
-                  src={`/Tools/${skill.file}`} 
+             <div className="w-12 h-12 mb-3 flex items-center justify-center">
+              <div className="relative w-full h-full">
+                <Image
+                  src={`/Tools/${skill.file}`}
                   alt={skill.name}
-                  width={48}
-                  height={48}
-                  style={{ width: 'auto', height: 'auto' }}
-                  className="max-w-full max-h-full object-contain filter group-hover/item:drop-shadow-lg transition-all duration-300"
+                  fill
+                  sizes="48px"
+                  className="object-contain filter group-hover/item:drop-shadow-lg transition-all duration-300"
                 />
               </div>
+            </div>
               
               {/* Name */}
               <p className="text-xs font-medium text-gray-400 group-hover/item:text-white transition-colors duration-300 text-center">

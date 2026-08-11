@@ -206,7 +206,9 @@ const ProjectCard = ({
               src={displayImage}
               alt={project.title}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover"
+              priority={index < 3} // ใส่ priority เฉพาะการ์ด 3 อันแรก ถ้ามี index จาก .map()
             />
           ) : (
             /* แสดง Placeholder หรือกรอบเปล่ากรณีไม่มีรูป */
