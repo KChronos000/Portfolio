@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import type { Project } from "@/app/assets/Projects/types";
 import { Calendar, ExternalLink, Github, X, ChevronLeft, ChevronRight, Award, ShieldCheck, Bookmark, Globe, Copy, Check, Columns2, Rows2 } from "lucide-react";
 import { Palette, Gamepad2, Grid3x3, LayoutGrid } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 const isValidUrl = (url?: string | null) => {
   if (!url) return false;
@@ -70,6 +71,8 @@ const AGrid = ({ projects }: { projects: Project[] }) => {
     : projects.filter(p => p.category === filter);
 
   const gridColsClass = desktopCols === 2 ? "md:grid-cols-2" : "md:grid-cols-3";
+
+
   
   
   return (
@@ -126,7 +129,7 @@ const AGrid = ({ projects }: { projects: Project[] }) => {
                   />
                 ))}
               </span>
-              <span>{n}</span>
+              {/* <span>{n}</span> */}
             </span>
           </button>
         ))}
@@ -176,6 +179,17 @@ const ProjectCard = ({
   const displayImage = project.image;
   const isCertificate = project.category === "Certificate";
 
+    const [canHover, setCanHover] = useState(true);
+
+useEffect(() => {
+  const mq = window.matchMedia('(hover: hover) and (pointer: fine)');
+  setCanHover(mq.matches);
+
+  const handler = (e: MediaQueryListEvent) => setCanHover(e.matches);
+  mq.addEventListener('change', handler);
+  return () => mq.removeEventListener('change', handler);
+}, []);
+
   return (
     <div
       className={`group relative bg-neutral-900 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl ${
@@ -200,7 +214,13 @@ const ProjectCard = ({
       {/* Card Content */}
       <div className="relative z-10 flex flex-col h-full">
         {/* Image Section */}
-        <div className="relative h-56 w-full overflow-hidden rounded-t-2xl">
+        <div 
+          className="relative h-56 w-full overflow-hidden rounded-t-2xl"
+          style={{ cursor: canHover ? 'default' : 'pointer' }}
+          onClick={() => {
+            if (!canHover) onShowDetails();
+          }}
+        >
           {displayImage ? (
             <Image
               src={displayImage}
@@ -208,15 +228,14 @@ const ProjectCard = ({
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover"
-              priority={index < 3} // ใส่ priority เฉพาะการ์ด 3 อันแรก ถ้ามี index จาก .map()
+              priority={index < 3}
             />
           ) : (
-            /* แสดง Placeholder หรือกรอบเปล่ากรณีไม่มีรูป */
             <div className="w-full h-full bg-gray-800 flex items-center justify-center text-gray-500 text-sm">
               ไม่มีรูปภาพ
             </div>
           )}
-          
+
           {/* Elegant Overlay */}
           <div className="absolute inset-0 bg-linear-to-t from-neutral-950 via-neutral-900/40 to-transparent opacity-90" />
 
@@ -232,18 +251,25 @@ const ProjectCard = ({
             </span>
           </div>
 
-          {/* Action Hover Trigger */}
-          <div className={`absolute inset-0 flex items-center justify-center bg-neutral-950/40 backdrop-blur-xs transition-all duration-300 ${
-            isHovered ? 'opacity-100' : 'opacity-0'
-          }`}>
-            <button
-              onClick={onShowDetails}
-              className={`px-6 py-2.5 text-white font-bold rounded-xl shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-linear-to-r from-teal-400 to-violet-500 hover:shadow-violet-500/40'
-              `}
-            >
-              ดูรายละเอียด
-            </button>
-          </div>
+          {!canHover && (
+            <div className="absolute bottom-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-neutral-950/60 backdrop-blur-md">
+              <ArrowUpRight className="w-4 h-4 text-white" />
+            </div>
+          )}
+
+          {/* Desktop: overlay แบบเดิม hover-to-reveal ปุ่มเต็ม เฉพาะเครื่องที่ hover ได้จริง */}
+          {canHover && (
+            <div className={`absolute inset-0 flex items-center justify-center bg-neutral-950/40 backdrop-blur-xs transition-all duration-300 ${
+              isHovered ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+            }`}>
+              <button
+                onClick={onShowDetails}
+                className="px-6 py-2.5 text-white font-bold rounded-xl shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-linear-to-r from-teal-400 to-violet-500 hover:shadow-violet-500/40"
+              >
+                ดูรายละเอียด
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Content Details */}
@@ -412,7 +438,6 @@ const ProjectModal = ({
                   alt={`${project.title} - Full size`}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  style={{ objectFit: 'cover' }}
                   className="object-contain p-2"
                 />
                 
@@ -452,7 +477,7 @@ const ProjectModal = ({
                             : 'border-neutral-800 opacity-60 hover:opacity-100 hover:scale-102'
                         }`}
                       >
-                        <Image src={img} alt={`Thumb ${i}`} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: 'cover' }} className="object-cover" />
+                        <Image src={img} alt={`Thumb ${i}`} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" />
                       </button>
                     ))}
                   </div>
