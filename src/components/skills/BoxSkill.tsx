@@ -92,7 +92,7 @@ export const ProgramLanguage = () => {
           }}
         >
           {/* Card */}
-          <div className="relative bg-neutral-800/20 backdrop-blur-sm p-4 rounded-xl hover:border-block border border-transparent hover:border-purple-500/50 transition-all duration-300 hover:scale-110 hover:-translate-y-2 cursor-pointer">
+          <div className="relative bg-neutral-800/20 md:backdrop-blur-sm p-4 rounded-xl hover:border-block border border-transparent hover:border-purple-500/50 transition-all duration-300 hover:scale-110 hover:-translate-y-2 cursor-pointer">
             {/* Glow on hover */}
             <div className={`absolute inset-0 bg-linear-to-br ${skill.color} opacity-0 group-hover/item:opacity-20 rounded-xl transition-opacity duration-300 blur-xl`}></div>
             
@@ -148,7 +148,7 @@ export const ProgramTools = () => {
           }}
         >
           {/* Card */}
-          <div className="relative bg-neutral-800/20 backdrop-blur-sm p-4 rounded-xl border border-transparent hover:border-teal-500/50 transition-all duration-300 hover:scale-110 hover:-translate-y-2 cursor-pointer">
+          <div className="relative bg-neutral-800/20 md:backdrop-blur-sm p-4 rounded-xl border border-transparent hover:border-teal-500/50 transition-all duration-300 hover:scale-110 hover:-translate-y-2 cursor-pointer">
             {/* Glow on hover */}
             <div className={`absolute inset-0 bg-linear-to-br ${skill.color} opacity-0 group-hover/item:opacity-20 rounded-xl transition-opacity duration-300 blur-xl`}></div>
             
