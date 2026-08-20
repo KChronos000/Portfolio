@@ -13,7 +13,6 @@ export default function Home() {
   return (
     <main className="flex flex-col min-h-screen items-center relative"> 
       <Navbar />
-      <div className=""></div>
       <Boxs />      
       <FirstSection />
       <SkillSection />

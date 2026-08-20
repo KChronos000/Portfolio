@@ -12,6 +12,18 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/ate',
+        destination: 'https://ate-4sz.pages.dev',
+      },
+      {
+        source: '/ate/:path*',
+        destination: 'https://ate-4sz.pages.dev/:path*',
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
