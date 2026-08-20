@@ -133,7 +133,8 @@ export const ProgramTools = () => {
     { name: 'MySQL', file: 'MySQLicon.png', color: 'from-blue-600 to-orange-400' },
     { name: 'TailwindCSS', file: 'TailwindCSS.png', color: 'from-cyan-600 to-cyan-400' },
     { name: 'Postman', file: 'postman.png', color: 'from-yellow-600 to-orange-400' },
-    { name: 'Node.js', file: 'nodejs.png', color: 'from-yellow-600 to-green-400' }
+    { name: 'Node.js', file: 'nodejs.png', color: 'from-yellow-600 to-green-400' },
+    { name: 'Vite.js', file: 'Vite.png', color: 'from-violet-600 to-pink-400' }
   ];
 
   return (
