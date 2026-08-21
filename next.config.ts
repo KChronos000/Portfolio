@@ -31,11 +31,11 @@ const nextConfig = {
         destination: 'https://fruit-ripeness-detection.pages.dev/:path*',
       },
       {
-        source: '/recycle-Shop',
+        source: '/recycle-shop',
         destination: 'https://recycle-shop.pages.dev',
       },
       {
-        source: '/recycle-Shop/:path*',
+        source: '/recycle-shop/:path*',
         destination: 'https://recycle-shop.pages.dev/:path*',
       }
     ];
