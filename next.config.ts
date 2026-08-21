@@ -32,11 +32,11 @@ const nextConfig = {
       },
       {
         source: '/recycleshop',
-        destination: 'https://recycleshop.pages.dev',
+        destination: 'https://recycleshop.taemmarin.workers.dev/recycleshop',
       },
       {
         source: '/recycleshop/:path*',
-        destination: 'https://recycleshop.pages.dev/:path',
+        destination: 'https://recycleshop.taemmarin.workers.dev/recycleshop/:path*',
       },
     ];
   },
