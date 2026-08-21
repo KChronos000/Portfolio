@@ -36,6 +36,6 @@ export async function verifySessionToken(token?: string) {
   const expectedSigBuffer = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(payload))
   const expectedSig = bufferToHex(expectedSigBuffer)
 
-  if (sig !== expectedSig) return false // ปลอมไม่ได้เพราะไม่รู้ SECRET
-  return Date.now() < Number(payload) // ยังไม่หมดอายุ
+  if (sig !== expectedSig) return false 
+  return Date.now() < Number(payload) 
 }

@@ -22,6 +22,14 @@ const nextConfig = {
         source: '/ate/:path*',
         destination: 'https://ate-4sz.pages.dev/:path*',
       },
+      {
+        source: '/fruit-ripeness',
+        destination: 'https://fruit-ripeness-detection.pages.dev',
+      },
+      {
+        source: '/fruit-ripeness/:path*',
+        destination: 'https://fruit-ripeness-detection.pages.dev/:path*',
+      },
     ];
   },
 };

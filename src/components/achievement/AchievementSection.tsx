@@ -37,14 +37,17 @@ const AchievementSection = () => {
   }, []);
 
   return (
-    <main id='projects' className='w-full relative z-10 flex flex-col justify-center min-h-screen items-center bg-neutral-950 py-20'>
+    <main id='projects' className='w-full relative z-10 flex flex-col justify-center min-h-screen items-center bg-neutral-950 py-20 bg-grid-pattern'>
       <section className="w-full max-w-7xl px-4">
-        <div className="mb-12 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+        <div className="mb-12 text-center relative">
+          {/* Subtle radial gradient glow (purple/teal) behind hero title, low opacity */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-[280px] sm:w-[450px] md:w-[600px] h-[120px] sm:h-[180px] md:h-[220px] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.12)_0%,rgba(20,184,166,0.08)_50%,transparent_70%)] blur-2xl pointer-events-none" />
+
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 relative z-10">
             <span className='text-shadow-lg text-shadow-gray-500'>My</span>
             <span className="bg-linear-to-r from-emerald-400 to-violet-500 bg-clip-text text-transparent ml-3">Projects & Achievements</span>
           </h2>
-          <p className="text-gray-400 text-lg">ผลงาน การศึกษา และใบประกาศนียบัตร</p>
+          <p className="text-gray-400 text-lg relative z-10">ผลงาน การศึกษา และใบประกาศนียบัตร</p>
         </div>
 
         <AGrid projects={projects} />
@@ -192,8 +195,8 @@ useEffect(() => {
 
   return (
     <div
-      className={`group relative bg-neutral-900 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl ${
-        isCertificate ? 'hover:shadow-emerald-500/10 border border-neutral-800/80' : 'hover:shadow-violet-500/10'
+      className={`group relative bg-neutral-900 border border-neutral-800/60 shadow-lg shadow-black/40 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
+        isCertificate ? 'hover:shadow-emerald-500/10 hover:border-emerald-500/30' : 'hover:shadow-violet-500/10 hover:border-violet-500/30'
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

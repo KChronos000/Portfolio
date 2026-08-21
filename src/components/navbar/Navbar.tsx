@@ -116,8 +116,8 @@ export const Navbar = () => {
       {/* Outer Glow container */}
       <div className="relative group px-1 py-0.5 rounded-full bg-linear-to-r from-violet-500/20 via-transparent to-emerald-500/15 hover:from-violet-500/35 hover:to-emerald-500/30 transition-all duration-500 shadow-2xl">
         
-        {/* Subtle background blurred pill */}
-        <div className="flex items-center gap-1.5 sm:gap-4 bg-neutral-950/60 backdrop-blur-xl border border-white/5 hover:border-white/10 px-4 sm:px-6 py-2.5 rounded-full transition-all duration-500">
+        {/* Subtle background blurred pill (glassmorphism) */}
+        <div className="flex items-center gap-1.5 sm:gap-4 bg-neutral-950/45 backdrop-blur-xl border border-white/10 hover:border-white/15 hover:bg-neutral-950/50 px-4 sm:px-6 py-2.5 rounded-full transition-all duration-500 shadow-lg shadow-black/20">
           
           {navItems.map((item) => {
             const isActive = activeSection === item.id
