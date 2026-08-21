@@ -30,6 +30,14 @@ const nextConfig = {
         source: '/fruit-ripeness-detection/:path*',
         destination: 'https://fruit-ripeness-detection.pages.dev/:path*',
       },
+      {
+        source: '/recycle-Shop',
+        destination: 'https://recycle-shop.pages.dev',
+      },
+      {
+        source: '/recycle-Shop/:path*',
+        destination: 'https://recycle-shop.pages.dev/:path*',
+      }
     ];
   },
 };
