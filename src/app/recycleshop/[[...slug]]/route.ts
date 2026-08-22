@@ -6,11 +6,14 @@ async function handler(req: NextRequest) {
   const url = new URL(req.url);
   const targetUrl = TARGET + url.pathname + url.search;
 
-  const response = await fetch(targetUrl, {
-    method: req.method,
-    headers: req.headers,
-    body: req.method !== 'GET' && req.method !== 'HEAD' ? await req.blob() : undefined,
-  });
+const cleanHeaders = new Headers(req.headers);
+cleanHeaders.delete('host');
+
+const response = await fetch(targetUrl, {
+  method: req.method,
+  headers: cleanHeaders,
+  body: req.method !== 'GET' && req.method !== 'HEAD' ? await req.blob() : undefined,
+});
 
   return new NextResponse(response.body, {
     status: response.status,
