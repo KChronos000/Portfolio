@@ -173,7 +173,7 @@ export async function POST(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
   try {
     const supabase = getSupabaseClient();
-    const { id } = await request.json();
+    const { id } = await request.json() as { id: string };
 
     // ลบข้อมูลออกจากฐานข้อมูล
     // หมายเหตุ: รูปภาพบน Cloudinary จะไม่ถูกลบอัตโนมัติ ต้องลบเองผ่าน Cloudinary dashboard
