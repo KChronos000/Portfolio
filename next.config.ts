@@ -29,15 +29,7 @@ const nextConfig = {
       {
         source: '/fruit-ripeness-detection/:path*',
         destination: 'https://fruit-ripeness-detection.pages.dev/:path*',
-      },
-      {
-        source: '/recycleshop',
-        destination: 'https://recycleshop.taemmarin.workers.dev/recycleshop',
-      },
-      {
-        source: '/recycleshop/:path*',
-        destination: 'https://recycleshop.taemmarin.workers.dev/recycleshop/:path*',
-      },
+      }
     ];
   },
 };
