@@ -1,19 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
-
-const TARGET = 'https://recycleshop.taemmarin.workers.dev';
+import { getCloudflareContext } from '@opennextjs/cloudflare';
 
 async function handler(req: NextRequest) {
+  const { env } = getCloudflareContext();
+
   const url = new URL(req.url);
-  const targetUrl = TARGET + url.pathname + url.search;
+  const targetUrl = 'https://recycleshop.taemmarin.workers.dev' + url.pathname + url.search;
 
-const cleanHeaders = new Headers(req.headers);
-cleanHeaders.delete('host');
+  const cleanHeaders = new Headers(req.headers);
+  cleanHeaders.delete('host');
 
-const response = await fetch(targetUrl, {
-  method: req.method,
-  headers: cleanHeaders,
-  body: req.method !== 'GET' && req.method !== 'HEAD' ? await req.blob() : undefined,
-});
+const response = await (env as any).RECYCLESHOP.fetch(targetUrl, {
+    method: req.method,
+    headers: cleanHeaders,
+    body: req.method !== 'GET' && req.method !== 'HEAD' ? await req.blob() : undefined,
+  });
 
   return new NextResponse(response.body, {
     status: response.status,

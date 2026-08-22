@@ -3,8 +3,7 @@ import { cookies } from 'next/headers'
 import { createSessionToken } from '@/libary/session'
 
 export async function POST(req: NextRequest) {
-  const { password } = await req.json()
-  if (password !== process.env.ADMIN_PASSWORD) {
+const { password } = await req.json() as { password: string };  if (password !== process.env.ADMIN_PASSWORD) {
     return NextResponse.json({ ok: false }, { status: 401 })
   }
 const token = await createSessionToken()
