@@ -29,7 +29,7 @@ const FirstSection = () => {
             {/* Image Container with deep shadow */}
             <div className="relative rounded-full p-1.5 bg-black/90 overflow-hidden border border-white/10 w-full h-full flex items-center justify-center shadow-2xl shadow-violet-950/40">
               <Image
-                src="/me.png"
+                src="/me.webp"
                 width={400}
                 height={400}
                 alt="Picture of แทมมารีน ตาปราบ"
