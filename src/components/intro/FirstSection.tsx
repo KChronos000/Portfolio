@@ -24,7 +24,7 @@ const FirstSection = () => {
             <div className="absolute inset-0 rounded-full bg-linear-to-tr from-violet-600 via-teal-500 to-indigo-600 opacity-20 blur-2xl group-hover:opacity-40 transition-all duration-700 scale-95 group-hover:scale-105 pointer-events-none"></div>
             
             {/* Soft border ring */}
-            <div className="absolute -inset-1 rounded-full bg-linear-to-tr from-violet-500 via-fuchsia-500 to-emerald-500 opacity-60 blur-[3px] group-hover:opacity-100 transition-all duration-500 animate-spin-slow"></div>
+            <div className="absolute -inset-1 rounded-full bg-linear-to-tr from-violet-500 via-fuchsia-500 to-emerald-500 opacity-60 blur-[3px] group-hover:opacity-100 transition-all duration-500"></div>
             
             {/* Image Container with deep shadow */}
             <div className="relative rounded-full p-1.5 bg-black/90 overflow-hidden border border-white/10 w-full h-full flex items-center justify-center shadow-2xl shadow-violet-950/40">
