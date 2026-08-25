@@ -200,7 +200,13 @@ useEffect(() => {
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{ animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both` }}
+      onClick={() => {
+        if (!canHover) onShowDetails();
+      }}
+      style={{ 
+        animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
+        cursor: canHover ? 'default' : 'pointer'
+      }}
     >
       {/* Holographic glowing borders for Certificates */}
       <div className={`absolute inset-0 bg-linear-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl -z-10`}
@@ -219,10 +225,6 @@ useEffect(() => {
         {/* Image Section */}
         <div 
           className="relative h-56 w-full overflow-hidden rounded-t-2xl"
-          style={{ cursor: canHover ? 'default' : 'pointer' }}
-          onClick={() => {
-            if (!canHover) onShowDetails();
-          }}
         >
           {displayImage ? (
             <Image
