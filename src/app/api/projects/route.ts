@@ -59,6 +59,9 @@ function dbRowToProject(row: Record<string, unknown>): Project {
 
 function getErrorMessage(err: unknown): string {
   if (err instanceof Error) return err.message;
+  if (typeof err === 'object' && err !== null && 'message' in err) {
+    return String((err as { message: unknown }).message);
+  }
   return String(err);
 }
 
@@ -108,7 +111,7 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  const authError = await requireAuth(request);   // 👈 เพิ่มบรรทัดนี้
+  const authError = await requireAuth(request);   
   if (authError) return authError;    
   try {
     const supabase = getSupabaseClient();
@@ -189,9 +192,6 @@ export async function DELETE(request: NextRequest) {
     const supabase = getSupabaseClient();
     const { id } = await request.json() as { id: string };
 
-    // ลบข้อมูลออกจากฐานข้อมูล
-    // หมายเหตุ: รูปภาพบน Cloudinary จะไม่ถูกลบอัตโนมัติ ต้องลบเองผ่าน Cloudinary dashboard
-    // หรือค่อยเพิ่มโค้ดเรียก cloudinary.uploader.destroy() ทีหลังได้
     const { error } = await supabase
       .from('projects')
       .delete()
