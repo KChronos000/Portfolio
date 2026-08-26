@@ -86,6 +86,16 @@ const handleSubmitAuth = async (e: React.FormEvent) => {
   }
 }
 
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth', { method: 'DELETE' })
+    } catch (err) {
+      console.error('Logout error:', err)
+    } finally {
+      setAuthorized(false)
+    }
+  }
+
   const handleMove = async (id: number, direction: 'up' | 'down') => {
   const index = projects.findIndex(p => p.id === id);
   if (index === -1) return;
@@ -292,7 +302,7 @@ const handleEditClick = (project: Project) => {
               <p className="text-gray-400 text-sm">จัดการและแก้ไขโปรเจกต์ของคุณ</p>
             </div>
             <button 
-              onClick={() => setAuthorized(false)} 
+              onClick={handleLogout} 
               className="bg-gray-800/80 hover:bg-gray-700/80 text-gray-300 px-6 py-2.5 rounded-xl transition-all duration-200 font-medium border border-gray-700/50 hover:border-gray-600 backdrop-blur-sm"
             >
               <span className="flex items-center gap-2">

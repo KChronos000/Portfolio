@@ -71,14 +71,14 @@ const BoxSkill = () => {
 
 export const ProgramLanguage = () => {
 const skills = [
-  { name: "HTML", file: "HTMLicon.png", color: "from-orange-400 to-amber-500 dark:from-orange-500 dark:to-red-500" },
-  { name: "CSS", file: "CSSicon.png", color: "from-sky-400 to-blue-500 dark:from-blue-500 dark:to-blue-600" },
-  { name: "JavaScript", file: "Javascripticon.png", color: "from-amber-300 to-yellow-400 dark:from-yellow-400 dark:to-yellow-500" },
-  { name: "TypeScript", file: "Typescripticon.png", color: "from-sky-500 to-indigo-400 dark:from-blue-600 dark:to-blue-700" },
+  { name: "HTML", file: "HTMLicon.png", color: "from-orange-400 to-amber-400 dark:from-orange-500 dark:to-red-500" },
+  { name: "CSS", file: "CSSicon.png", color: "from-sky-400 to-blue-400 dark:from-blue-500 dark:to-blue-600" },
+  { name: "JavaScript", file: "Javascripticon.png", color: "from-amber-300 to-yellow-300 dark:from-yellow-400 dark:to-yellow-500" },
+  { name: "TypeScript", file: "Typescripticon.png", color: "from-sky-400 to-indigo-300 dark:from-blue-600 dark:to-blue-700" },
   { name: "Python", file: "Pythonicon.png", color: "from-sky-400 to-amber-300 dark:from-blue-400 dark:to-yellow-400" },
-  { name: "PHP", file: "PHPicon.png", color: "from-indigo-400 to-purple-400 dark:from-purple-500 dark:to-indigo-600" },
-  { name: "C#", file: "Csharpicon.png", color: "from-purple-400 to-pink-400 dark:from-purple-600 dark:to-pink-600" },
-  { name: "C", file: "Cicon.png", color: "from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-blue-700" },
+  { name: "PHP", file: "PHPicon.png", color: "from-indigo-400 to-purple-300 dark:from-purple-500 dark:to-indigo-600" },
+  { name: "C#", file: "Csharpicon.png", color: "from-purple-300 to-pink-300 dark:from-purple-600 dark:to-pink-600" },
+  { name: "C", file: "Cicon.png", color: "from-blue-300 to-cyan-300 dark:from-blue-500 dark:to-blue-700" },
 ];
 
   return (
@@ -123,14 +123,14 @@ const skills = [
 
 export const ProgramTools = () => {
 const skills = [
-  { name: 'Unity', file: 'Unityicon.png', color: 'from-slate-400 to-zinc-400 dark:from-gray-700 dark:to-gray-400' },
-  { name: 'Next.js', file: 'NextJsicon.png', color: 'from-slate-400 to-sky-300 dark:from-slate-700 dark:to-gray-300' },
-  { name: 'React', file: 'Reacticon.png', color: 'from-cyan-400 to-sky-400 dark:from-cyan-400 dark:to-blue-500' },
-  { name: 'MySQL', file: 'MySQLicon.png', color: 'from-sky-400 to-amber-400 dark:from-blue-600 dark:to-orange-400' },
-  { name: 'TailwindCSS', file: 'TailwindCSS.png', color: 'from-cyan-400 to-teal-400 dark:from-cyan-600 dark:to-cyan-400' },
-  { name: 'Postman', file: 'postman.png', color: 'from-orange-400 to-amber-400 dark:from-yellow-600 dark:to-orange-400' },
-  { name: 'Node.js', file: 'nodejs.png', color: 'from-emerald-400 to-green-400 dark:from-yellow-600 dark:to-green-400' },
-  { name: 'Vite.js', file: 'Vite.png', color: 'from-violet-400 to-fuchsia-400 dark:from-violet-600 dark:to-pink-400' }
+  { name: 'Unity', file: 'Unityicon.png', color: 'from-slate-300 to-zinc-300 dark:from-gray-700 dark:to-gray-400' },
+  { name: 'Next.js', file: 'NextJsicon.png', color: 'from-slate-300 to-sky-300 dark:from-slate-700 dark:to-gray-300' },
+  { name: 'React', file: 'Reacticon.png', color: 'from-cyan-300 to-sky-300 dark:from-cyan-400 dark:to-blue-500' },
+  { name: 'MySQL', file: 'MySQLicon.png', color: 'from-sky-300 to-amber-300 dark:from-blue-600 dark:to-orange-400' },
+  { name: 'TailwindCSS', file: 'TailwindCSS.png', color: 'from-cyan-300 to-teal-300 dark:from-cyan-600 dark:to-cyan-400' },
+  { name: 'Postman', file: 'postman.png', color: 'from-orange-300 to-amber-300 dark:from-yellow-600 dark:to-orange-400' },
+  { name: 'Node.js', file: 'nodejs.png', color: 'from-emerald-300 to-green-300 dark:from-yellow-600 dark:to-green-400' },
+  { name: 'Vite.js', file: 'Vite.png', color: 'from-violet-300 to-fuchsia-300 dark:from-violet-600 dark:to-pink-400' }
 ];
 
   return (

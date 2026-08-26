@@ -37,17 +37,17 @@ const AchievementSection = () => {
   }, []);
 
   return (
-    <main id='projects' className='w-full relative z-10 flex flex-col justify-center min-h-screen items-center bg-neutral-950 py-20 bg-grid-pattern'>
+    <main id='projects' className='w-full relative z-10 flex flex-col justify-center min-h-screen items-center bg-gray-200 dark:bg-neutral-950 py-20 bg-grid-pattern'>
       <section className="w-full max-w-7xl px-4">
         <div className="mb-12 text-center relative">
           {/* Subtle radial gradient glow (purple/teal) behind hero title, low opacity */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-[280px] sm:w-[450px] md:w-[600px] h-[120px] sm:h-[180px] md:h-[220px] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.12)_0%,rgba(20,184,166,0.08)_50%,transparent_70%)] blur-2xl pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-[280px] sm:w-[450px] md:w-[600px] h-[120px] sm:h-[180px] md:h-[220px] rounded-full bg-[radial-gradient(circle,rgba(167,139,250,0.08)_0%,rgba(45,212,191,0.05)_50%,transparent_70%)] dark:bg-[radial-gradient(circle,rgba(139,92,246,0.12)_0%,rgba(20,184,166,0.08)_50%,transparent_70%)] blur-2xl pointer-events-none" />
 
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 relative z-10">
             <span className='text-shadow-lg text-shadow-gray-500'>My</span>
-            <span className="bg-linear-to-r from-emerald-400 to-violet-500 bg-clip-text text-transparent ml-3">Projects & Achievements</span>
+            <span className="bg-linear-to-r dark:from-emerald-400 dark:to-violet-500 from-emerald-300 to-violet-400 bg-clip-text text-transparent ml-3">Projects & Achievements</span>
           </h2>
-          <p className="text-gray-400 text-lg relative z-10">ผลงาน การศึกษา และใบประกาศนียบัตร</p>
+          <p className="text-gray-500 dark:text-gray-400 text-lg relative z-10">ผลงาน การศึกษา และใบประกาศนียบัตร</p>
         </div>
 
         <AGrid projects={projects} />
@@ -92,8 +92,8 @@ const AGrid = ({ projects }: { projects: Project[] }) => {
                 group flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold
                 transition-all duration-500 ease-out cursor-pointer
                 ${isActive 
-                  ? 'bg-linear-to-r from-emerald-400 to-violet-500 text-gray-900 dark:text-white shadow-[0_0_20px_rgba(139,92,246,0.4)] scale-105 border-transparent' 
-                  : 'bg-neutral-900/50 text-gray-400 border border-neutral-700/50 hover:border-violet-500/50 hover:text-gray-900 dark:text-white hover:bg-neutral-800'
+                  ? 'bg-linear-to-r dark:from-emerald-400 dark:to-violet-500 from-emerald-300 to-violet-400 text-neutral-950 dark:text-white shadow-[0_0_20px_rgba(139,92,246,0.4)] scale-105 border-transparent' 
+                  : 'bg-neutral-100/70 dark:bg-neutral-900/60 text-neutral-500 dark:text-gray-400 border border-neutral-300/50 dark:border-neutral-700/50 hover:border-violet-500/50 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-200 dark:hover:bg-neutral-800'
                 }
               `}
             >
@@ -116,8 +116,8 @@ const AGrid = ({ projects }: { projects: Project[] }) => {
               group relative px-5 py-2 rounded-full text-sm font-semibold cursor-pointer
               transition-all duration-300 ease-out
               ${desktopCols === n
-                  ? "bg-linear-to-br from-violet-600 to-purple-700 text-gray-900 dark:text-white shadow-lg shadow-violet-500/40 scale-105 ring-2 ring-violet-500/50 border-transparent" 
-                  : "bg-neutral-800/80 text-gray-400 hover:bg-neutral-700 hover:text-gray-900 dark:text-white border border-neutral-700/50"
+                  ? "bg-linear-to-br from-violet-600 to-purple-700 dark:from-violet-600 dark:to-purple-700 text-white shadow-lg shadow-violet-500/40 scale-105 ring-2 ring-violet-500/50 border-transparent" 
+                  : "bg-neutral-100/80 dark:bg-neutral-800/80 text-neutral-500 dark:text-gray-400 hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-neutral-950 dark:hover:text-white border border-neutral-300/50 dark:border-neutral-700/50"
               }
             `}
           >
@@ -195,7 +195,7 @@ useEffect(() => {
 
   return (
     <div
-      className={`group relative bg-neutral-900 border border-neutral-800/60 shadow-lg shadow-black/40 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
+      className={`group relative bg-white dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800/60 shadow-md shadow-neutral-400/70 dark:shadow-black/40 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
         isCertificate ? 'hover:shadow-emerald-500/10 hover:border-emerald-500/30' : 'hover:shadow-violet-500/10 hover:border-violet-500/30'
       }`}
       onMouseEnter={() => setIsHovered(true)}
@@ -209,15 +209,13 @@ useEffect(() => {
       }}
     >
       {/* Holographic glowing borders for Certificates */}
-      <div className={`absolute inset-0 bg-linear-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl -z-10`}
-           style={{
-             padding: '1.5px',
-             backgroundImage: isCertificate 
-               ? 'linear-gradient(to right, #34d399, #10b981, #6366f1)' 
-               : 'linear-gradient(to right, #34d399, #8b5cf6)'
-           }}
+      <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl -z-10 p-[1.5px] ${
+        isCertificate
+          ? 'bg-linear-to-r from-[#6ee7b7] via-[#34d399] to-[#a5b4fc] dark:from-[#34d399] dark:via-[#10b981] dark:to-[#6366f1]'
+          : 'bg-linear-to-r from-[#6ee7b7] to-[#c084fc] dark:from-[#34d399] dark:to-[#8b5cf6]'
+      }`}
       >
-        <div className="w-full h-full bg-neutral-900 rounded-2xl" />
+        <div className="w-full h-full bg-white dark:bg-neutral-900 rounded-2xl" />
       </div>
 
       {/* Card Content */}
@@ -236,13 +234,13 @@ useEffect(() => {
               priority={index < 3}
             />
           ) : (
-            <div className="w-full h-full bg-gray-800 flex items-center justify-center text-gray-500 text-sm">
+            <div className="w-full h-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-400 dark:text-gray-500 text-sm">
               ไม่มีรูปภาพ
             </div>
           )}
 
           {/* Elegant Overlay */}
-          <div className="absolute inset-0 bg-linear-to-t from-neutral-950 via-neutral-900/40 to-transparent opacity-90" />
+          <div className="absolute inset-0 bg-linear-to-t dark:from-neutral-950 dark:via-neutral-900/40 from-neutral-700/30 via-35% to-transparent opacity-90" />
 
           {/* Special Ribbon/Badge for Achievements */}
           <div className="absolute top-4 left-4 flex gap-2">
@@ -258,7 +256,7 @@ useEffect(() => {
 
           {!canHover && (
             <div className="absolute bottom-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-neutral-950/60 backdrop-blur-md">
-              <ArrowUpRight className="w-4 h-4 text-gray-900 dark:text-white" />
+              <ArrowUpRight className="w-4 h-4 text-white" />
             </div>
           )}
 
@@ -269,7 +267,7 @@ useEffect(() => {
             }`}>
               <button
                 onClick={onShowDetails}
-                className="px-6 py-2.5 text-gray-900 dark:text-white font-bold rounded-xl shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-linear-to-r from-teal-400 to-violet-500 hover:shadow-violet-500/40"
+                className="px-6 py-2.5 dark:text-white font-bold rounded-xl shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-linear-to-r from-teal-300 to-violet-400 dark:from-teal-400 dark:to-violet-500 hover:shadow-violet-500/40"
               >
                 ดูรายละเอียด
               </button>
@@ -280,19 +278,19 @@ useEffect(() => {
         {/* Content Details */}
         <div className="p-6 flex flex-col grow justify-between">
           <div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 line-clamp-1 group-hover:text-emerald-300 transition-colors duration-300">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 line-clamp-1 group-hover:text-emerald-400 dark:group-hover:text-emerald-600 transition-colors duration-300">
               {project.title}
             </h3>
             
             {/* Show issuer if it's an achievement */}
             {isCertificate && project.issuer && (
-              <div className="flex items-center gap-1.5 text-emerald-400/80 text-xs font-medium mb-3">
+              <div className="flex items-center gap-1.5 dark:text-emerald-600/80 text-emerald-500/80 text-xs font-medium mb-3">
                 <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
                 <span className="truncate">{project.issuer.replace("มอบโดย : ", "")}</span>
               </div>
             )}
 
-            <p className="text-gray-400 text-sm mb-4 line-clamp-2 leading-relaxed">
+            <p className="text-gray-500 dark:text-gray-400 text-sm mb-4 line-clamp-2 leading-relaxed">
               {project.description}
             </p>
           </div>
@@ -302,13 +300,13 @@ useEffect(() => {
             {project.tags.slice(0, 3).map((tag, i) => (
               <span
                 key={i}
-                className="px-2.5 py-1 bg-neutral-850 text-gray-300 text-xs rounded-md border border-neutral-800"
+                className="px-2.5 py-1  text-neutral-600 dark:text-gray-300 text-xs rounded-md border border-neutral-200 dark:border-neutral-800"
               >
                 {tag}
               </span>
             ))}
             {project.tags.length > 3 && (
-              <span className="px-2.5 py-1 bg-neutral-800 text-neutral-400 text-xs rounded-md">
+              <span className="px-2.5 py-1 bg-neutral-200 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 text-xs rounded-md">
                 +{project.tags.length - 3}
               </span>
             )}
@@ -362,8 +360,8 @@ const ProjectModal = ({
 
   // Left Side (Images & Gallery) layout class
   const leftSideClass = isSideLayout
-    ? "lg:col-span-7 bg-neutral-950 p-6 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-neutral-800"
-    : "lg:col-span-12 bg-neutral-950 p-6 flex flex-col justify-center border-b border-neutral-800";
+    ? "lg:col-span-7 bg-neutral-50 dark:bg-neutral-950 p-6 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-neutral-200 dark:border-neutral-800"
+    : "lg:col-span-12 bg-neutral-50 dark:bg-neutral-950 p-6 flex flex-col justify-center border-b border-neutral-200 dark:border-neutral-800";
 
   // Right Side (Info Block) layout class
   const rightSideClass = isSideLayout
@@ -377,29 +375,29 @@ const ProjectModal = ({
 
   // Custom active background class for the layout toggle segment control
   const activeBgClass = isCertificate 
-    ? 'bg-linear-to-r from-emerald-400 to-teal-500 text-neutral-950 shadow-md shadow-emerald-400/20 font-bold' 
-    : 'bg-linear-to-r from-teal-400 to-violet-500 text-gray-900 dark:text-white shadow-md shadow-violet-500/20 font-bold';
+    ? 'bg-linear-to-r from-emerald-400 to-teal-500 dark:from-emerald-400 dark:to-teal-500 text-neutral-950 shadow-md shadow-emerald-400/20 font-bold' 
+    : 'bg-linear-to-r from-teal-400 to-violet-500 dark:from-teal-400 dark:to-violet-500 text-neutral-950 dark:text-white shadow-md shadow-violet-500/20 font-bold';
 
   return (
     <>
       <div 
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-white dark:bg-black/85 backdrop-blur-md animate-fadeIn"
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 dark:bg-black/85 backdrop-blur-md animate-fadeIn"
         onClick={onClose}
       >
         <div 
-          className="relative w-full max-w-5xl max-h-[92vh] overflow-y-auto bg-neutral-900 rounded-3xl border border-neutral-800 shadow-2xl animate-scaleIn"
+          className="relative w-full max-w-5xl max-h-[92vh] overflow-y-auto bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-200 dark:border-neutral-800 shadow-2xl animate-scaleIn"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Controls Bar (Layout Selector & Close Button) */}
           <div className="absolute top-5 right-5 z-20 flex items-center gap-2.5">
             {/* Layout Toggle - Hidden on mobile/tablet as layout is naturally stacked */}
-            <div className="hidden lg:flex bg-neutral-950/80 p-1.5 rounded-full border border-neutral-800/80 backdrop-blur-md items-center gap-1">
+            <div className="hidden lg:flex bg-neutral-100/80 dark:bg-neutral-950/80 p-1.5 rounded-full border border-neutral-200/80 dark:border-neutral-800/80 backdrop-blur-md items-center gap-1">
               <button
                 onClick={() => onChangeLayoutMode('side')}
                 className={`flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-300 cursor-pointer ${
                   isSideLayout
                     ? activeBgClass
-                    : 'text-gray-400 hover:text-gray-900 dark:text-white hover:bg-neutral-800/60'
+                    : 'text-neutral-500 dark:text-gray-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-200/60 dark:hover:bg-neutral-800/60'
                 }`}
                 title="แสดงรูปด้านข้าง (Side-by-Side)"
               >
@@ -411,7 +409,7 @@ const ProjectModal = ({
                 className={`flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-300 cursor-pointer ${
                   !isSideLayout
                     ? activeBgClass
-                    : 'text-gray-400 hover:text-gray-900 dark:text-white hover:bg-neutral-800/60'
+                    : 'text-neutral-500 dark:text-gray-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-200/60 dark:hover:bg-neutral-800/60'
                 }`}
                 title="แสดงรูปด้านบน (Top-to-Bottom)"
               >
@@ -423,7 +421,7 @@ const ProjectModal = ({
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="p-2.5 bg-neutral-800/80 hover:bg-neutral-700 text-gray-400 hover:text-gray-900 dark:text-white rounded-full transition-all cursor-pointer shadow-lg"
+              className="p-2.5 bg-neutral-100/80 dark:bg-neutral-800/80 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-500 dark:text-gray-400 hover:text-neutral-900 dark:hover:text-white rounded-full transition-all cursor-pointer shadow-lg"
               title="ปิด"
             >
               <X className="w-5 h-5" />
@@ -451,13 +449,13 @@ const ProjectModal = ({
                   <>
                     <button
                       onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(p => (p - 1 + allImages.length) % allImages.length) }}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-neutral-900/90 hover:bg-neutral-800 text-gray-900 dark:text-white rounded-full transition-colors backdrop-blur-xs z-10 cursor-pointer"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-white/90 dark:bg-neutral-900/90 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-900 dark:text-white rounded-full transition-colors backdrop-blur-xs z-10 cursor-pointer"
                     >
                       <ChevronLeft className="w-5 h-5" />
                     </button>
                     <button
                       onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(p => (p + 1) % allImages.length) }}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-neutral-900/90 hover:bg-neutral-800 text-gray-900 dark:text-white rounded-full transition-colors backdrop-blur-xs z-10 cursor-pointer"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-white/90 dark:bg-neutral-900/90 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-900 dark:text-white rounded-full transition-colors backdrop-blur-xs z-10 cursor-pointer"
                     >
                       <ChevronRight className="w-5 h-5" />
                     </button>
@@ -468,7 +466,7 @@ const ProjectModal = ({
               {/* Thumbnail Gallery (Shows Event photos nicely) */}
               {allImages.length > 1 && (
                 <div className="mt-4">
-                  <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">
+                  <p className="text-xs text-neutral-500 dark:text-gray-500 font-semibold uppercase tracking-wider mb-2">
                     {isCertificate ? "ภาพกิจกรรม / แฟ้มสะสมงานเพิ่มเติม" : "รูปภาพผลงาน"}
                   </p>
                   <div className="flex gap-2.5 overflow-x-auto pb-2 scrollbar-thin">
@@ -479,7 +477,7 @@ const ProjectModal = ({
                         className={`relative shrink-0 w-16 h-16 rounded-lg overflow-hidden transition-all border ${
                           i === currentImageIndex 
                             ? 'border-emerald-400 ring-2 ring-emerald-500/20 scale-105' 
-                            : 'border-neutral-800 opacity-60 hover:opacity-100 hover:scale-102'
+                            : 'border-neutral-200 dark:border-neutral-800 opacity-60 hover:opacity-100 hover:scale-102'
                         }`}
                       >
                         <Image src={img} alt={`Thumb ${i}`} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" />
@@ -496,8 +494,8 @@ const ProjectModal = ({
                 {/* Category & Badge */}
                 <span className={`inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full mb-4 border ${
                   isCertificate 
-                    ? 'bg-emerald-950/60 text-emerald-400 border-emerald-500/20' 
-                    : 'bg-violet-950/60 text-violet-400 border-violet-500/20'
+                    ? 'bg-emerald-100/60 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border-emerald-300/20 dark:border-emerald-500/20' 
+                    : 'bg-violet-100/60 dark:bg-violet-950/60 text-violet-700 dark:text-violet-400 border-violet-300/20 dark:border-violet-500/20'
                 }`}>
                   {isCertificate ? <Award className="w-3.5 h-3.5" /> : <LayoutGrid className="w-3.5 h-3.5" />}
                   {project.category}
@@ -509,22 +507,22 @@ const ProjectModal = ({
 
                 {/* Credential Block (Special for Certificates) */}
                 {isCertificate ? (
-                  <div className="bg-neutral-950/60 p-4 rounded-xl border border-neutral-800 mb-6 flex flex-col gap-3">
+                  <div className="bg-neutral-50 dark:bg-neutral-950/60 p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 mb-6 flex flex-col gap-3">
                     {project.issuer && (
                       <div className="flex items-start gap-2.5">
-                        <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                        <ShieldCheck className="w-5 h-5 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
                         <div>
-                          <p className="text-xs text-gray-500">ผู้มอบใบประกาศนียบัตร</p>
-                          <p className="text-sm font-semibold text-gray-200 leading-tight">{project.issuer.replace("มอบโดย : ", "")}</p>
+                          <p className="text-xs text-neutral-500 dark:text-gray-500">ผู้มอบใบประกาศนียบัตร</p>
+                          <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200 leading-tight">{project.issuer.replace("มอบโดย : ", "")}</p>
                         </div>
                       </div>
                     )}
                     
                     <div className="flex items-start gap-2.5">
-                      <Calendar className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                      <Calendar className="w-5 h-5 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
                       <div>
-                        <p className="text-xs text-gray-500">วันที่ออกใบรับรอง</p>
-                        <p className="text-sm font-semibold text-gray-200">
+                        <p className="text-xs text-neutral-500 dark:text-gray-500">วันที่ออกใบรับรอง</p>
+                        <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">
                           {new Date(project.date).toLocaleDateString("th-TH", {
                             year: "numeric",
                             month: "long",
@@ -556,9 +554,9 @@ const ProjectModal = ({
                   </div>
                 ) : (
                   /* Standard Project Info Block */
-                  <div className="flex flex-col gap-2.5 text-sm text-gray-400 mb-6">
+                  <div className="flex flex-col gap-2.5 text-sm text-neutral-500 dark:text-gray-400 mb-6">
                     <div className="flex items-center gap-2">
-                      <Calendar className="w-4.5 h-4.5 text-violet-400" />
+                      <Calendar className="w-4.5 h-4.5 text-violet-500 dark:text-violet-400" />
                       <span>{new Date(project.date).toLocaleDateString("th-TH", { year: "numeric", month: "long" })}</span>
                     </div>
                   </div>
@@ -566,8 +564,8 @@ const ProjectModal = ({
 
                 {/* Description */}
                 <div className="mb-6">
-                  <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">คำอธิบาย</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-line font-light">
+                  <h3 className="text-sm font-semibold text-neutral-500 dark:text-gray-400 uppercase tracking-wider mb-2">คำอธิบาย</h3>
+                  <p className="text-neutral-700 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line font-light">
                     {project.fullDescription || project.description}
                   </p>
                 </div>
@@ -575,13 +573,13 @@ const ProjectModal = ({
                 {/* Dynamic List: Curriculum/Learnings or Features */}
                 {(project.features && project.features.length > 0) && (
                   <div className="mb-6">
-                    <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                    <h3 className="text-sm font-semibold text-neutral-500 dark:text-gray-400 uppercase tracking-wider mb-2">
                       {isCertificate ? " เนื้อหาและหัวข้อหลักในการฝึกอบรม" : "💡 ฟีเจอร์เด่น / ระบบหลัก"}
                     </h3>
                     <ul className="space-y-1.5">
                       {project.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
-                          <span className={`mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 ${isCertificate ? 'bg-emerald-400' : 'bg-violet-400'}`} />
+                        <li key={i} className="flex items-start gap-2 text-sm text-neutral-700 dark:text-gray-300">
+                          <span className={`mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 ${isCertificate ? 'bg-emerald-500 dark:bg-emerald-400' : 'bg-violet-500 dark:bg-violet-400'}`} />
                           <span className="leading-tight">{feature}</span>
                         </li>
                       ))}
@@ -592,7 +590,7 @@ const ProjectModal = ({
                 {/* Technologies / Skills Used */}
                 {(project.technologies && project.technologies.length > 0) && (
                   <div className="mb-6">
-                    <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                    <h3 className="text-sm font-semibold text-neutral-500 dark:text-gray-400 uppercase tracking-wider mb-2">
                       {isCertificate ? "ทักษะที่ได้ฝึกฝน & เครื่องมือ" : "เทคโนโลยีที่เลือกใช้"}
                     </h3>
                     <div className="flex flex-wrap gap-1.5">
@@ -601,8 +599,8 @@ const ProjectModal = ({
                           key={i}
                           className={`px-3 py-1.5 text-xs rounded-lg font-medium border ${
                             isCertificate 
-                              ? 'bg-emerald-950/20 text-emerald-300 border-emerald-500/20' 
-                              : 'bg-violet-950/20 text-violet-300 border-violet-500/20'
+                              ? 'bg-emerald-100/20 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-300 border-emerald-300/20 dark:border-emerald-500/20' 
+                              : 'bg-violet-100/20 dark:bg-violet-950/20 text-violet-700 dark:text-violet-300 border-violet-300/20 dark:border-violet-500/20'
                           }`}
                         >
                           {tech}
@@ -614,13 +612,13 @@ const ProjectModal = ({
               </div>
 
               {/* Action Buttons Footer */}
-              <div className="flex flex-wrap gap-3 pt-6 border-t border-neutral-800">
+              <div className="flex flex-wrap gap-3 pt-6 border-t border-neutral-200 dark:border-neutral-800">
                 {isCertificate && project.demoUrl ? (
                   <a
                     href={project.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-5 py-2.5 w-full bg-linear-to-r from-emerald-400 to-teal-500 text-neutral-950 font-bold rounded-xl hover:shadow-lg hover:shadow-emerald-500/30 transition-all cursor-pointer"
+                    className="flex items-center justify-center gap-2 px-5 py-2.5 w-full bg-linear-to-r from-emerald-400 to-teal-500 dark:from-emerald-400 dark:to-teal-500 text-neutral-950 font-bold rounded-xl hover:shadow-lg hover:shadow-emerald-500/30 transition-all cursor-pointer"
                   >
                     <Globe className="w-4.5 h-4.5" />
                     ลิงก์
@@ -632,7 +630,7 @@ const ProjectModal = ({
                         href={project.demoUrl!}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 px-5 py-2.5 flex-1 bg-linear-to-r from-teal-400 to-violet-500 text-gray-900 dark:text-white font-bold rounded-xl hover:shadow-lg hover:shadow-violet-500/30 transition-all cursor-pointer"
+                        className="flex items-center justify-center gap-2 px-5 py-2.5 flex-1 bg-linear-to-r from-teal-400 to-violet-500 dark:from-teal-400 dark:to-violet-500 text-neutral-950 dark:text-white font-bold rounded-xl hover:shadow-lg hover:shadow-violet-500/30 transition-all cursor-pointer"
                       >
                         <ExternalLink className="w-4.5 h-4.5" />
                         View Project
@@ -644,7 +642,7 @@ const ProjectModal = ({
                         href={project.githubUrl!}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 px-5 py-2.5 flex-1 bg-neutral-800 hover:bg-neutral-750 text-gray-900 dark:text-white font-bold rounded-xl border border-neutral-700 hover:border-violet-500/30 transition-all cursor-pointer"
+                        className="flex items-center justify-center gap-2 px-5 py-2.5 flex-1 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-750 text-neutral-800 dark:text-white font-bold rounded-xl border border-neutral-300 dark:border-neutral-700 hover:border-violet-500/30 transition-all cursor-pointer"
                       >
                         <Github className="w-4.5 h-4.5" />
                         Source Code
@@ -661,12 +659,12 @@ const ProjectModal = ({
       {/* Full Screen Image Lightbox */}
       {isImageExpanded && (
         <div 
-          className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-white dark:bg-black/95 backdrop-blur-md animate-fadeIn"
+          className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-black/80 dark:bg-black/95 backdrop-blur-md animate-fadeIn"
           onClick={() => setIsImageExpanded(false)}
         >
           <button
             onClick={() => setIsImageExpanded(false)}
-            className="absolute top-5 right-5 z-20 p-3 bg-neutral-800/80 hover:bg-neutral-700 rounded-full text-gray-900 dark:text-white transition-colors cursor-pointer"
+            className="absolute top-5 right-5 z-20 p-3 bg-neutral-800/80 hover:bg-neutral-700 rounded-full text-white transition-colors cursor-pointer"
           >
             <X className="w-6 h-6" />
           </button>

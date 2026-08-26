@@ -1,7 +1,7 @@
 // import React from 'react'
 // import { Bulb2 } from '../Svgicon'
 
-// export const AFuckingBlub = () => {
+// export const ABlub = () => {
 //   return (
 //     <div className="">
 //       <div className='flex flex-col'>

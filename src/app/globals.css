@@ -371,8 +371,13 @@ html {
 }
 
 /* Faint grid background texture */
-.bg-grid-pattern {
+.dark .bg-grid-pattern {
   background-size: 40px 40px;
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                     linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(96, 96, 96, 0.1) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(96, 96, 96, 0.1) 1px, transparent 1px);
 }
