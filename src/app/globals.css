@@ -12,8 +12,8 @@
     font-style: normal;
 }
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8f8fb;   /* เทาอ่อนอมม่วงนิดๆ แทนขาวล้วน */
+  --foreground: #1a1a1a;
 }
 
 .dark {
@@ -186,17 +186,23 @@ html {
     left: 0;
     margin: 0;
     padding: 0;
-    background: #000000;
+    background: #dcdce5;
     overflow: hidden;
+}
+.dark .background {
+    background: #000000;
 }
 .background li {
     position: absolute;
     display: block;
     list-style: none;
-    background: rgba(255, 255, 255, 0.099);
+    background: rgba(29, 23, 43, 0.17);
     border-radius: 15%;
     animation: animate 19s linear infinite;
     will-change: transform, opacity;
+}
+.dark .background li {
+    background: rgba(255, 255, 255, 0.099);
 }
 
 

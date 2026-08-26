@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react"
 import { Home, Cpu, Briefcase } from "lucide-react"
+import Link from "next/link"
+import ThemeToggle from "../ThemeToggle";
 
 export const Navbar = () => {
   const [visible, setVisible] = useState(true)
@@ -117,20 +119,19 @@ export const Navbar = () => {
       <div className="relative group px-1 py-0.5 rounded-full bg-linear-to-r from-violet-500/20 via-transparent to-emerald-500/15 hover:from-violet-500/35 hover:to-emerald-500/30 transition-all duration-500 shadow-2xl">
         
         {/* Subtle background blurred pill (glassmorphism) */}
-        <div className="flex items-center gap-1.5 sm:gap-4 bg-neutral-950/45 backdrop-blur-xl border border-white/10 hover:border-white/15 hover:bg-neutral-950/50 px-4 sm:px-6 py-2.5 rounded-full transition-all duration-500 shadow-lg shadow-black/20">
-          
+        <div className="flex items-center gap-1.5 sm:gap-4 bg-white/70 dark:bg-neutral-950/45 backdrop-blur-xl border border-black/10 dark:border-white/10 hover:border-violet-500/20 dark:hover:border-white/15 hover:bg-white/90 dark:hover:bg-neutral-950/50 px-4 sm:px-6 py-2.5 rounded-full transition-all duration-500 shadow-lg shadow-black/10 dark:shadow-black/20">          
           {navItems.map((item) => {
             const isActive = activeSection === item.id
             return (
-              <a
+              <Link
                 key={item.id}
                 href={`#${item.id}`}
                 onClick={(e) => handleNavClick(e, item.id)}
                 className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium tracking-wide transition-all duration-300
-                  ${isActive 
-                    ? "text-zinc-100" 
-                    : "text-zinc-400 hover:text-zinc-200"
-                  }`}
+                ${isActive 
+                  ? "text-zinc-900 dark:text-zinc-100" 
+                  : "text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-600"
+                }`}
               >
                 {/* Background Active pill glow */}
                 {isActive && (
@@ -138,8 +139,7 @@ export const Navbar = () => {
                 )}
                 
                 {/* Icon */}
-                <span className={`transition-transform duration-300 ${isActive ? "text-violet-400 scale-110" : "text-zinc-400 group-hover:text-zinc-200"}`}>
-                  {item.icon}
+                <span className={`transition-transform duration-300 ${isActive ? "text-violet-500 dark:text-violet-400 scale-110" : "text-zinc-500 group-hover:text-zinc-800 dark:text-zinc-400 dark:group-hover:text-zinc-200"}`}>                  {item.icon}
                 </span>
 
                 {/* Text Label */}
@@ -149,9 +149,10 @@ export const Navbar = () => {
                 {isActive && (
                   <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
                 )}
-              </a>
+              </Link>
             )
           })}
+          <ThemeToggle />
 
         </div>
       </div>

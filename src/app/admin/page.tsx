@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
 import { ProjectCategory } from "@/app/api/projects/route";
+export const dynamic = 'force-dynamic'
 const AdminPage = () => {
 useEffect(() => {
   fetch('/api/auth/check').then(res => setAuthorized(res.ok))
@@ -238,7 +239,7 @@ const handleEditClick = (project: Project) => {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-950 via-slate-900 to-black text-white">
+    <div className="min-h-screen bg-linear-to-br from-gray-950 via-slate-900 to-black text-gray-900 dark:text-white">
       {!authorized ? (
         <div className="min-h-screen flex items-center justify-center p-4">
           <div className="w-full max-w-md">
@@ -261,13 +262,13 @@ const handleEditClick = (project: Project) => {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                    className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
                     placeholder="••••••••"
                   />
                 </div>
                 <button 
                   type="submit" 
-                  className="w-full bg-linear-to-r from-cyan-500 via-blue-500 to-purple-500 hover:from-cyan-600 hover:via-blue-600 hover:to-purple-600 text-white font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.02]"
+                  className="w-full bg-linear-to-r from-cyan-500 via-blue-500 to-purple-500 hover:from-cyan-600 hover:via-blue-600 hover:to-purple-600 text-gray-900 dark:text-white font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.02]"
                 >
                   เข้าสู่ระบบ
                 </button>
@@ -325,7 +326,7 @@ const handleEditClick = (project: Project) => {
                       ชื่อโปรเจกต์ *
                     </label>
                     <input 
-                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
+                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
                       value={formData.title} 
                       onChange={e => setFormData({...formData, title: e.target.value})} 
                       required 
@@ -339,7 +340,7 @@ const handleEditClick = (project: Project) => {
                       หมวดหมู่
                     </label>
                     <select 
-                      className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all appearance-none cursor-pointer"
+                      className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all appearance-none cursor-pointer"
                       value={formData.category} 
                       onChange={e => setFormData({...formData, category: e.target.value as ProjectCategory})}
                     >
@@ -357,7 +358,7 @@ const handleEditClick = (project: Project) => {
                       ผู้มอบ (Issuer)
                     </label>
                     <input 
-                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
+                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
                       value={formData.issuer || ""}
                       onChange={e => setFormData({...formData, issuer: e.target.value})} 
                       placeholder="มอบให้โดย..." 
@@ -371,7 +372,7 @@ const handleEditClick = (project: Project) => {
                     </label>
                     <input 
                       type="date" 
-                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
                       value={formData.date} 
                       onChange={e => setFormData({...formData, date: e.target.value})} 
                     />
@@ -395,8 +396,8 @@ const handleEditClick = (project: Project) => {
                             fill 
                             className="object-cover" 
                           />
-                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <p className="text-[10px] text-white font-medium uppercase tracking-wider">
+                          <div className="absolute inset-0 bg-white dark:bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <p className="text-[10px] text-gray-900 dark:text-white font-medium uppercase tracking-wider">
                               {mainFile ? 'รูปภาพใหม่' : 'รูปภาพปัจจุบัน'}
                             </p>
                           </div>
@@ -406,7 +407,7 @@ const handleEditClick = (project: Project) => {
                         <button
                           type="button"
                           onClick={removeMainImage}
-                          className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-7 h-7 flex items-center justify-center shadow-lg border-2 border-gray-950 transition-transform hover:scale-110"
+                          className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-gray-900 dark:text-white rounded-full w-7 h-7 flex items-center justify-center shadow-lg border-2 border-gray-950 transition-transform hover:scale-110"
                           title="ลบรูปภาพหลัก"
                         >
                           ✕
@@ -429,7 +430,7 @@ const handleEditClick = (project: Project) => {
                   <div>
                     <label className="block text-sm font-medium text-gray-400 mb-2">ลิงก์ Demo (URL)</label>
                     <input 
-                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
+                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
                       value={formData.demoUrl} 
                       onChange={e => setFormData({...formData, demoUrl: e.target.value})} 
                       placeholder="https://..."
@@ -439,7 +440,7 @@ const handleEditClick = (project: Project) => {
                   <div>
                     <label className="block text-sm font-medium text-gray-400 mb-2">ลิงก์ GitHub (URL)</label>
                     <input 
-                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
+                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
                       value={formData.githubUrl} 
                       onChange={e => setFormData({...formData, githubUrl: e.target.value})} 
                       placeholder="https://github.com/..."
@@ -451,7 +452,7 @@ const handleEditClick = (project: Project) => {
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-2">คำอธิบายสั้นๆ</label>
                 <input 
-                  className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
+                  className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
                   value={formData.description} 
                   onChange={e => setFormData({...formData, description: e.target.value})} 
                   placeholder="สรุปโปรเจกต์ในประโยคสั้นๆ"
@@ -461,7 +462,7 @@ const handleEditClick = (project: Project) => {
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-2">รายละเอียดฉบับเต็ม</label>
                 <textarea 
-                  className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all h-24 resize-none placeholder-gray-500"
+                  className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all h-24 resize-none placeholder-gray-500"
                   value={formData.fullDescription} 
                   onChange={e => setFormData({...formData, fullDescription: e.target.value})} 
                   placeholder="อธิบายรายละเอียดโปรเจกต์อย่างละเอียด..."
@@ -473,7 +474,7 @@ const handleEditClick = (project: Project) => {
                   <div>
                     <label className="block text-sm font-medium text-gray-400 mb-2">Tags (แยกด้วยคอมม่า)</label>
                     <input 
-                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
+                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
                       value={formData.tags} 
                       onChange={e => setFormData({...formData, tags: e.target.value})} 
                       placeholder="React, Node.js, CSS" 
@@ -483,7 +484,7 @@ const handleEditClick = (project: Project) => {
                   <div>
                     <label className="block text-sm font-medium text-gray-400 mb-2">เทคโนโลยีที่ใช้ (แยกด้วยคอมม่า)</label>
                     <input 
-                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
+                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
                       value={formData.technologies} 
                       onChange={e => setFormData({...formData, technologies: e.target.value})} 
                       placeholder="TypeScript, MongoDB, Tailwind"
@@ -494,7 +495,7 @@ const handleEditClick = (project: Project) => {
                   <div>
                     <label className="block text-sm font-medium text-gray-400 mb-2">ฟีเจอร์เด่น (แยกด้วยคอมม่า)</label>
                     <input 
-                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
+                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
                       value={formData.features} 
                       onChange={e => setFormData({...formData, features: e.target.value})} 
                       placeholder="Real-time updates, User authentication"
@@ -523,7 +524,7 @@ const handleEditClick = (project: Project) => {
                           <button
                             type="button"
                             onClick={() => removeExistingImage(idx)}
-                            className="absolute top-1 right-1 bg-red-500/80 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center transition-opacity"
+                            className="absolute top-1 right-1 bg-red-500/80 hover:bg-red-600 text-gray-900 dark:text-white rounded-full w-6 h-6 flex items-center justify-center transition-opacity"
                             title="ลบรูปนี้"
                           >
                             ✕
@@ -559,7 +560,7 @@ const handleEditClick = (project: Project) => {
               <div className="flex gap-3 pt-4">
                 <button 
                   type="submit" 
-                  className="flex-1 bg-linear-to-r from-cyan-500 via-blue-500 to-purple-500 hover:from-cyan-600 hover:via-blue-600 hover:to-purple-600 text-white font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.02] flex items-center justify-center gap-2"
+                  className="flex-1 bg-linear-to-r from-cyan-500 via-blue-500 to-purple-500 hover:from-cyan-600 hover:via-blue-600 hover:to-purple-600 text-gray-900 dark:text-white font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.02] flex items-center justify-center gap-2"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -570,7 +571,7 @@ const handleEditClick = (project: Project) => {
                   <button 
                     type="button" 
                     onClick={() => {setEditingId(null); setFormData(initialFormState); setMainFile(null); setOtherFiles([])}} 
-                    className="px-8 bg-gray-800/80 hover:bg-gray-700/80 text-white font-semibold py-3.5 rounded-xl transition-all duration-200 border border-gray-700/50 hover:border-gray-600"
+                    className="px-8 bg-gray-800/80 hover:bg-gray-700/80 text-gray-900 dark:text-white font-semibold py-3.5 rounded-xl transition-all duration-200 border border-gray-700/50 hover:border-gray-600"
                   >
                     ยกเลิก
                   </button>
@@ -620,7 +621,7 @@ const handleEditClick = (project: Project) => {
                         </div>
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-400">{p.id}</td>
-                      <td className="px-6 py-4 text-sm font-medium text-white">{p.title}</td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{p.title}</td>
                       <td className="px-6 py-4">
                         <span className="inline-block bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3 py-1 rounded-full text-xs font-medium">
                           {p.category}

@@ -43,7 +43,7 @@ const AchievementSection = () => {
           {/* Subtle radial gradient glow (purple/teal) behind hero title, low opacity */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-[280px] sm:w-[450px] md:w-[600px] h-[120px] sm:h-[180px] md:h-[220px] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.12)_0%,rgba(20,184,166,0.08)_50%,transparent_70%)] blur-2xl pointer-events-none" />
 
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 relative z-10">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 relative z-10">
             <span className='text-shadow-lg text-shadow-gray-500'>My</span>
             <span className="bg-linear-to-r from-emerald-400 to-violet-500 bg-clip-text text-transparent ml-3">Projects & Achievements</span>
           </h2>
@@ -92,8 +92,8 @@ const AGrid = ({ projects }: { projects: Project[] }) => {
                 group flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold
                 transition-all duration-500 ease-out cursor-pointer
                 ${isActive 
-                  ? 'bg-linear-to-r from-emerald-400 to-violet-500 text-white shadow-[0_0_20px_rgba(139,92,246,0.4)] scale-105 border-transparent' 
-                  : 'bg-neutral-900/50 text-gray-400 border border-neutral-700/50 hover:border-violet-500/50 hover:text-white hover:bg-neutral-800'
+                  ? 'bg-linear-to-r from-emerald-400 to-violet-500 text-gray-900 dark:text-white shadow-[0_0_20px_rgba(139,92,246,0.4)] scale-105 border-transparent' 
+                  : 'bg-neutral-900/50 text-gray-400 border border-neutral-700/50 hover:border-violet-500/50 hover:text-gray-900 dark:text-white hover:bg-neutral-800'
                 }
               `}
             >
@@ -116,8 +116,8 @@ const AGrid = ({ projects }: { projects: Project[] }) => {
               group relative px-5 py-2 rounded-full text-sm font-semibold cursor-pointer
               transition-all duration-300 ease-out
               ${desktopCols === n
-                  ? "bg-linear-to-br from-violet-600 to-purple-700 text-white shadow-lg shadow-violet-500/40 scale-105 ring-2 ring-violet-500/50 border-transparent" 
-                  : "bg-neutral-800/80 text-gray-400 hover:bg-neutral-700 hover:text-white border border-neutral-700/50"
+                  ? "bg-linear-to-br from-violet-600 to-purple-700 text-gray-900 dark:text-white shadow-lg shadow-violet-500/40 scale-105 ring-2 ring-violet-500/50 border-transparent" 
+                  : "bg-neutral-800/80 text-gray-400 hover:bg-neutral-700 hover:text-gray-900 dark:text-white border border-neutral-700/50"
               }
             `}
           >
@@ -258,7 +258,7 @@ useEffect(() => {
 
           {!canHover && (
             <div className="absolute bottom-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-neutral-950/60 backdrop-blur-md">
-              <ArrowUpRight className="w-4 h-4 text-white" />
+              <ArrowUpRight className="w-4 h-4 text-gray-900 dark:text-white" />
             </div>
           )}
 
@@ -269,7 +269,7 @@ useEffect(() => {
             }`}>
               <button
                 onClick={onShowDetails}
-                className="px-6 py-2.5 text-white font-bold rounded-xl shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-linear-to-r from-teal-400 to-violet-500 hover:shadow-violet-500/40"
+                className="px-6 py-2.5 text-gray-900 dark:text-white font-bold rounded-xl shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-linear-to-r from-teal-400 to-violet-500 hover:shadow-violet-500/40"
               >
                 ดูรายละเอียด
               </button>
@@ -280,7 +280,7 @@ useEffect(() => {
         {/* Content Details */}
         <div className="p-6 flex flex-col grow justify-between">
           <div>
-            <h3 className="text-xl font-bold text-white mb-2 line-clamp-1 group-hover:text-emerald-300 transition-colors duration-300">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 line-clamp-1 group-hover:text-emerald-300 transition-colors duration-300">
               {project.title}
             </h3>
             
@@ -378,12 +378,12 @@ const ProjectModal = ({
   // Custom active background class for the layout toggle segment control
   const activeBgClass = isCertificate 
     ? 'bg-linear-to-r from-emerald-400 to-teal-500 text-neutral-950 shadow-md shadow-emerald-400/20 font-bold' 
-    : 'bg-linear-to-r from-teal-400 to-violet-500 text-white shadow-md shadow-violet-500/20 font-bold';
+    : 'bg-linear-to-r from-teal-400 to-violet-500 text-gray-900 dark:text-white shadow-md shadow-violet-500/20 font-bold';
 
   return (
     <>
       <div 
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn"
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-white dark:bg-black/85 backdrop-blur-md animate-fadeIn"
         onClick={onClose}
       >
         <div 
@@ -399,7 +399,7 @@ const ProjectModal = ({
                 className={`flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-300 cursor-pointer ${
                   isSideLayout
                     ? activeBgClass
-                    : 'text-gray-400 hover:text-white hover:bg-neutral-800/60'
+                    : 'text-gray-400 hover:text-gray-900 dark:text-white hover:bg-neutral-800/60'
                 }`}
                 title="แสดงรูปด้านข้าง (Side-by-Side)"
               >
@@ -411,7 +411,7 @@ const ProjectModal = ({
                 className={`flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-300 cursor-pointer ${
                   !isSideLayout
                     ? activeBgClass
-                    : 'text-gray-400 hover:text-white hover:bg-neutral-800/60'
+                    : 'text-gray-400 hover:text-gray-900 dark:text-white hover:bg-neutral-800/60'
                 }`}
                 title="แสดงรูปด้านบน (Top-to-Bottom)"
               >
@@ -423,7 +423,7 @@ const ProjectModal = ({
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="p-2.5 bg-neutral-800/80 hover:bg-neutral-700 text-gray-400 hover:text-white rounded-full transition-all cursor-pointer shadow-lg"
+              className="p-2.5 bg-neutral-800/80 hover:bg-neutral-700 text-gray-400 hover:text-gray-900 dark:text-white rounded-full transition-all cursor-pointer shadow-lg"
               title="ปิด"
             >
               <X className="w-5 h-5" />
@@ -451,13 +451,13 @@ const ProjectModal = ({
                   <>
                     <button
                       onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(p => (p - 1 + allImages.length) % allImages.length) }}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-neutral-900/90 hover:bg-neutral-800 text-white rounded-full transition-colors backdrop-blur-xs z-10 cursor-pointer"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-neutral-900/90 hover:bg-neutral-800 text-gray-900 dark:text-white rounded-full transition-colors backdrop-blur-xs z-10 cursor-pointer"
                     >
                       <ChevronLeft className="w-5 h-5" />
                     </button>
                     <button
                       onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(p => (p + 1) % allImages.length) }}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-neutral-900/90 hover:bg-neutral-800 text-white rounded-full transition-colors backdrop-blur-xs z-10 cursor-pointer"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-neutral-900/90 hover:bg-neutral-800 text-gray-900 dark:text-white rounded-full transition-colors backdrop-blur-xs z-10 cursor-pointer"
                     >
                       <ChevronRight className="w-5 h-5" />
                     </button>
@@ -503,7 +503,7 @@ const ProjectModal = ({
                   {project.category}
                 </span>
 
-                <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-4 leading-snug">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white mb-4 leading-snug">
                   {project.title}
                 </h2>
 
@@ -545,7 +545,7 @@ const ProjectModal = ({
                           </div>
                           <button 
                             onClick={() => handleCopyId(`CRED-${project.id}2025`)}
-                            className="p-1.5 hover:bg-neutral-800 rounded-md text-gray-400 hover:text-white transition-colors cursor-pointer"
+                            className="p-1.5 hover:bg-neutral-800 rounded-md text-gray-400 hover:text-gray-900 dark:text-white transition-colors cursor-pointer"
                             title="คัดลอกรหัส"
                           >
                             {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
@@ -632,7 +632,7 @@ const ProjectModal = ({
                         href={project.demoUrl!}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 px-5 py-2.5 flex-1 bg-linear-to-r from-teal-400 to-violet-500 text-white font-bold rounded-xl hover:shadow-lg hover:shadow-violet-500/30 transition-all cursor-pointer"
+                        className="flex items-center justify-center gap-2 px-5 py-2.5 flex-1 bg-linear-to-r from-teal-400 to-violet-500 text-gray-900 dark:text-white font-bold rounded-xl hover:shadow-lg hover:shadow-violet-500/30 transition-all cursor-pointer"
                       >
                         <ExternalLink className="w-4.5 h-4.5" />
                         View Project
@@ -644,7 +644,7 @@ const ProjectModal = ({
                         href={project.githubUrl!}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 px-5 py-2.5 flex-1 bg-neutral-800 hover:bg-neutral-750 text-white font-bold rounded-xl border border-neutral-700 hover:border-violet-500/30 transition-all cursor-pointer"
+                        className="flex items-center justify-center gap-2 px-5 py-2.5 flex-1 bg-neutral-800 hover:bg-neutral-750 text-gray-900 dark:text-white font-bold rounded-xl border border-neutral-700 hover:border-violet-500/30 transition-all cursor-pointer"
                       >
                         <Github className="w-4.5 h-4.5" />
                         Source Code
@@ -661,12 +661,12 @@ const ProjectModal = ({
       {/* Full Screen Image Lightbox */}
       {isImageExpanded && (
         <div 
-          className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-black/95 backdrop-blur-md animate-fadeIn"
+          className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-white dark:bg-black/95 backdrop-blur-md animate-fadeIn"
           onClick={() => setIsImageExpanded(false)}
         >
           <button
             onClick={() => setIsImageExpanded(false)}
-            className="absolute top-5 right-5 z-20 p-3 bg-neutral-800/80 hover:bg-neutral-700 rounded-full text-white transition-colors cursor-pointer"
+            className="absolute top-5 right-5 z-20 p-3 bg-neutral-800/80 hover:bg-neutral-700 rounded-full text-gray-900 dark:text-white transition-colors cursor-pointer"
           >
             <X className="w-6 h-6" />
           </button>

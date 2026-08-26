@@ -1,9 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseClient } from '@/libary/supabase';
 import cloudinary from '@/libary/cloudinary';
+import { verifySessionToken } from '@/libary/session';
 
 export const dynamic = 'force-dynamic';
 
+// เพิ่มฟังก์ชันนี้ (เหมือนไฟล์ reorder)
+async function requireAuth(request: NextRequest): Promise<NextResponse | null> {
+  const token = request.cookies.get('admin_session')?.value;
+  if (!(await verifySessionToken(token))) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+  return null;
+}
 // --- Types Definition ---
 export type ProjectCategory = "Web App" | "Design" | "Game" | "Certificate";
 
@@ -99,6 +108,8 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+  const authError = await requireAuth(request);   // 👈 เพิ่มบรรทัดนี้
+  if (authError) return authError;    
   try {
     const supabase = getSupabaseClient();
     const formData = await request.formData();
@@ -171,6 +182,9 @@ export async function POST(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
+
+  const authError = await requireAuth(request);   // 👈 เพิ่มบรรทัดนี้
+  if (authError) return authError;  
   try {
     const supabase = getSupabaseClient();
     const { id } = await request.json() as { id: string };
