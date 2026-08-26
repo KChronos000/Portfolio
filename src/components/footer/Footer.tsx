@@ -105,8 +105,8 @@ const Footer = () => {
               © {currentYear} TAEMMARIN TAPRAB. All rights reserved.
             </p>
             <div className="flex gap-6 text-xs md:text-sm text-gray-500 dark:text-neutral-500">
-              <a href="#privacy" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors duration-300">Privacy Policy</a>
-              <a href="#terms" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors duration-300">Terms of Service</a>
+              <Link href="#privacy" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors duration-300">Privacy Policy</Link>
+              <Link href="#terms" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors duration-300">Terms of Service</Link>
             </div>
           </div>
         </div>

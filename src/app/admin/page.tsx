@@ -4,6 +4,7 @@ import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
 import { ProjectCategory } from "@/app/api/projects/route";
 export const dynamic = 'force-dynamic'
+import Link from 'next/link'
 const AdminPage = () => {
 useEffect(() => {
   fetch('/api/auth/check').then(res => setAuthorized(res.ok))
@@ -288,6 +289,16 @@ const handleEditClick = (project: Project) => {
                   </div>
                 )}
               </form>
+              {/* ปุ่มย้อนกลับ */}
+              <Link
+                href="/"
+                className="absolute top-6 left-6 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-300 bg-neutral-900/60 border border-neutral-800 rounded-full hover:bg-neutral-800 hover:text-white transition-all duration-300 backdrop-blur-md"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                หน้าแรก
+              </Link>
             </div>
           </div>
         </div>
