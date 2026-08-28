@@ -41,11 +41,12 @@ const AchievementSection = () => {
       <section className="w-full max-w-7xl px-4">
         <div className="mb-12 text-center relative">
           {/* Subtle radial gradient glow (purple/teal) behind hero title, low opacity */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-[280px] sm:w-[450px] md:w-[600px] h-[120px] sm:h-[180px] md:h-[220px] rounded-full bg-[radial-gradient(circle,rgba(167,139,250,0.08)_0%,rgba(45,212,191,0.05)_50%,transparent_70%)] dark:bg-[radial-gradient(circle,rgba(139,92,246,0.12)_0%,rgba(20,184,166,0.08)_50%,transparent_70%)] blur-2xl pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-[280px] sm:w-[450px] md:w-[600px] h-[120px] sm:h-[180px] md:h-[220px] rounded-full 
+          bg-[radial-gradient(circle,rgba(167,139,250,0.2)_0%,rgba(45,212,191,0.1)_50%,transparent_70%)] dark:bg-[radial-gradient(circle,rgba(139,92,246,0.12)_0%,rgba(20,184,166,0.08)_50%,transparent_70%)] blur-2xl pointer-events-none" />
 
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 relative z-10">
             <span className='text-shadow-lg text-shadow-gray-500'>My</span>
-            <span className="bg-linear-to-r dark:from-emerald-400 dark:to-violet-500 from-emerald-300 to-violet-400 bg-clip-text text-transparent ml-3">Projects & Achievements</span>
+            <span className="bg-linear-to-r dark:from-emerald-400 dark:to-violet-500 from-emerald-400 to-violet-400 bg-clip-text text-transparent ml-3">Projects & Achievements</span>
           </h2>
           <p className="text-gray-500 dark:text-gray-400 text-lg relative z-10">ผลงาน การศึกษา และใบประกาศนียบัตร</p>
         </div>
@@ -267,7 +268,7 @@ useEffect(() => {
             }`}>
               <button
                 onClick={onShowDetails}
-                className="px-6 py-2.5 dark:text-white font-bold rounded-xl shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-linear-to-r from-teal-300 to-violet-400 dark:from-teal-400 dark:to-violet-500 hover:shadow-violet-500/40"
+                className="px-6 py-2.5 text-gray-800 dark:text-white font-bold rounded-xl shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer bg-linear-to-r from-teal-300 to-violet-400 dark:from-teal-400 dark:to-violet-500 hover:shadow-violet-500/40"
               >
                 ดูรายละเอียด
               </button>
@@ -278,18 +279,25 @@ useEffect(() => {
         {/* Content Details */}
         <div className="p-6 flex flex-col grow justify-between">
           <div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 line-clamp-1 group-hover:text-emerald-400 dark:group-hover:text-emerald-600 transition-colors duration-300">
+            <h3 className={`text-xl font-bold text-gray-900 dark:text-white mb-2 line-clamp-1 transition-colors duration-300 ${
+              project.category === "Web App" || project.category === "Game"
+                ? "group-hover:text-violet-500 dark:group-hover:text-violet-500"
+                : "group-hover:text-emerald-400 dark:group-hover:text-emerald-500"
+            }`}>
               {project.title}
             </h3>
             
-            {/* Show issuer if it's an achievement */}
+           {/* Show issuer if it's an achievement */}
             {project.issuer && (
-              <div className="flex items-center gap-1.5 dark:text-emerald-600/80 text-emerald-500/80 text-xs font-medium mb-3">
+              <div className={`flex items-center gap-1.5 text-xs font-medium mb-3 ${
+                project.category === "Web App" || project.category === "Game"
+                  ? "text-violet-500/80 dark:text-violet-400/80"
+                  : "text-emerald-500/80 dark:text-emerald-600/80"
+              }`}>
                 <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
                 <span className="truncate">{project.issuer.replace("มอบโดย : ", "")}</span>
               </div>
             )}
-
             <p className="text-gray-500 dark:text-gray-400 text-sm mb-4 line-clamp-2 leading-relaxed">
               {project.description}
             </p>
