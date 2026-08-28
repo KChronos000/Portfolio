@@ -283,7 +283,7 @@ useEffect(() => {
             </h3>
             
             {/* Show issuer if it's an achievement */}
-            {isCertificate && project.issuer && (
+            {project.issuer && (
               <div className="flex items-center gap-1.5 dark:text-emerald-600/80 text-emerald-500/80 text-xs font-medium mb-3">
                 <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
                 <span className="truncate">{project.issuer.replace("มอบโดย : ", "")}</span>

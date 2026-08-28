@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseClient } from '@/libary/supabase';
-import cloudinary from '@/libary/cloudinary';
 import { verifySessionToken } from '@/libary/session';
 
 export const dynamic = 'force-dynamic';
 
-// เพิ่มฟังก์ชันนี้ (เหมือนไฟล์ reorder)
 async function requireAuth(request: NextRequest): Promise<NextResponse | null> {
   const token = request.cookies.get('admin_session')?.value;
   if (!(await verifySessionToken(token))) {
@@ -13,7 +11,7 @@ async function requireAuth(request: NextRequest): Promise<NextResponse | null> {
   }
   return null;
 }
-// --- Types Definition ---
+
 export type ProjectCategory = "Web App" | "Design" | "Game" | "Certificate";
 
 export type Project = {
@@ -35,7 +33,6 @@ export type Project = {
   order_index?: number;
 };
 
-// แปลงข้อมูลจากรูปแบบฐานข้อมูล (snake_case) เป็นรูปแบบที่หน้าเว็บใช้ (camelCase)
 function dbRowToProject(row: Record<string, unknown>): Project {
   return {
     id: row.id as number,
@@ -74,20 +71,49 @@ function safeParseJSON<T>(data: string | null, fallback: T): T {
   }
 }
 
-// อัปโหลดไฟล์ขึ้น Cloudinary แทนการเขียนลง disk
+// 🟢 แก้ไข: ใช้ REST API อัปโหลดตรงไปที่ Cloudinary (รองรับ Edge Worker 100%)
 async function uploadToCloudinary(file: unknown): Promise<string> {
   if (!file || !(file instanceof File)) {
     return typeof file === 'string' ? file : "";
   }
 
-  const buffer = Buffer.from(await file.arrayBuffer());
-  const base64 = `data:${file.type};base64,${buffer.toString('base64')}`;
+  const cloudName = process.env.CLOUDINARY_CLOUD_NAME || process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+  const apiKey = process.env.CLOUDINARY_API_KEY;
+  const apiSecret = process.env.CLOUDINARY_API_SECRET;
 
-  const result = await cloudinary.uploader.upload(base64, {
-    folder: 'portfolio',
+  if (!cloudName || !apiKey || !apiSecret) {
+    throw new Error(`Cloudinary config missing: cloudName=${cloudName}, apiKey=${apiKey}, secretExists=${!!apiSecret}`);
+  }
+
+  const timestamp = Math.floor(Date.now() / 1000).toString();
+  const folder = 'portfolio';
+
+  // สร้าง SHA-1 Signature สำหรับ Signed Upload บน Edge Runtime
+  const stringToSign = `folder=${folder}&timestamp=${timestamp}${apiSecret}`;
+  const msgUint8 = new TextEncoder().encode(stringToSign);
+  const hashBuffer = await crypto.subtle.digest('SHA-1', msgUint8);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const signature = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('api_key', apiKey);
+  formData.append('timestamp', timestamp);
+  formData.append('signature', signature);
+  formData.append('folder', folder);
+
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+    method: 'POST',
+    body: formData,
   });
 
-  return result.secure_url;
+  const data = await res.json() as { secure_url?: string; error?: { message: string } };
+  
+  if (!res.ok || data.error) {
+    throw new Error(data.error?.message || 'Failed to upload image to Cloudinary');
+  }
+
+  return data.secure_url || "";
 }
 
 // --- Route Handlers ---
@@ -157,7 +183,6 @@ export async function POST(request: NextRequest) {
     };
 
     if (id !== null) {
-      // แก้ไขข้อมูลเดิม
       const { error } = await supabase
         .from('projects')
         .update(projectData)
@@ -165,7 +190,6 @@ export async function POST(request: NextRequest) {
 
       if (error) throw error;
     } else {
-      // เพิ่มโปรเจกต์ใหม่ ต่อท้ายลำดับ
       const { count } = await supabase
         .from('projects')
         .select('*', { count: 'exact', head: true });
@@ -185,8 +209,7 @@ export async function POST(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
-
-  const authError = await requireAuth(request);   // 👈 เพิ่มบรรทัดนี้
+  const authError = await requireAuth(request);  
   if (authError) return authError;  
   try {
     const supabase = getSupabaseClient();
