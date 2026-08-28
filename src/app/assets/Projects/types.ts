@@ -22,4 +22,9 @@ export type Project = {
   details?: string[];
   technologies?: string[];
   order_index?: number;
+  startDate?: string;
+  endDate?: string;
+  durationValue?: number | string;
+  durationUnit?: string;
+
 };

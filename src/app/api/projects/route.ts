@@ -31,6 +31,10 @@ export type Project = {
   details?: string[];
   technologies?: string[];
   order_index?: number;
+  startDate?: string;
+  endDate?: string;
+  durationValue?: number | null;
+  durationUnit?: string;
 };
 
 function dbRowToProject(row: Record<string, unknown>): Project {
@@ -51,6 +55,10 @@ function dbRowToProject(row: Record<string, unknown>): Project {
     details: (row.details as string[]) || [],
     technologies: (row.technologies as string[]) || [],
     order_index: (row.order_index as number) ?? 0,
+    startDate: (row.start_date as string) || "",
+    endDate: (row.end_date as string) || "",
+    durationValue: (row.duration_value as number) ?? null,
+    durationUnit: (row.duration_unit as string) || "",
   };
 }
 
@@ -180,6 +188,10 @@ export async function POST(request: NextRequest) {
       github_url: (formData.get('githubUrl') as string) || null,
       date: (formData.get('date') as string) || new Date().toISOString().split('T')[0],
       issuer: (formData.get('issuer') as string) || null,
+      start_date: (formData.get('startDate') as string) || null,
+      end_date: (formData.get('endDate') as string) || null,
+      duration_value: formData.get('durationValue') ? Number(formData.get('durationValue')) : null,
+      duration_unit: (formData.get('durationUnit') as string) || null,
     };
 
     if (id !== null) {

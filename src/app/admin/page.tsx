@@ -30,7 +30,11 @@ useEffect(() => {
     demoUrl: '',
     githubUrl: '',
     date: new Date().toISOString().split('T')[0],
-    issuer: ''
+    startDate: '',
+    endDate: '',
+    durationValue: '',
+    durationUnit: '',
+    issuer: '',
   }
 
   interface Project {
@@ -49,6 +53,10 @@ useEffect(() => {
     date: string;
     issuer: string;
     order_index?: number;
+    startDate?: string;
+    endDate?: string;
+    durationValue?: number | string;
+    durationUnit?: string;
   }
 
   const [formData, setFormData] = useState(initialFormState)
@@ -145,6 +153,10 @@ const handleSubmitAuth = async (e: React.FormEvent) => {
     body.append('tags', JSON.stringify(stringToArray(formData.tags as string)));
     body.append('technologies', JSON.stringify(stringToArray(formData.technologies as string)));
     body.append('features', JSON.stringify(stringToArray(formData.features as string)));
+    body.append('startDate', formData.startDate || '');
+    body.append('endDate', formData.endDate || '');
+    body.append('durationValue', formData.durationValue?.toString() || '');
+    body.append('durationUnit', formData.durationUnit || '');
 
     if (mainFile) {
       body.append('mainImageFile', mainFile);
@@ -195,7 +207,11 @@ const handleEditClick = (project: Project) => {
     demoUrl: project.demoUrl || '',
     githubUrl: project.githubUrl || '',
     date: project.date || new Date().toISOString().split('T')[0],
-    issuer: project.issuer || ''
+    issuer: project.issuer || '',
+    startDate: project.startDate || '',
+    endDate: project.endDate || '',
+    durationValue: project.durationValue?.toString() || '',
+    durationUnit: project.durationUnit || '',
   });
   setMainFile(null);
   setOtherFiles([]);
@@ -387,18 +403,52 @@ const handleEditClick = (project: Project) => {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2 items-center gap-2">
+                    <label className="block text-sm font-medium text-gray-400 mb-2 flex items-center gap-2">
                       <span className="w-1 h-4 bg-pink-400 rounded-full"></span>
-                      วันที่
+                      ช่วงวันที่
                     </label>
-                    <input 
-                      type="date" 
-                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
-                      value={formData.date} 
-                      onChange={e => setFormData({...formData, date: e.target.value})} 
-                    />
+                    <div className="grid grid-cols-2 gap-3">
+                      <input
+                        type="date"
+                        className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                        value={formData.startDate}
+                        onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
+                      />
+                      <input
+                        type="date"
+                        className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                        value={formData.endDate}
+                        onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
+                      />
+                    </div>
                   </div>
-                </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-2 flex items-center gap-2">
+                      <span className="w-1 h-4 bg-orange-400 rounded-full"></span>
+                      ระยะเวลาที่ใช้ทำ
+                    </label>
+                    <div className="grid grid-cols-2 gap-3">
+                      <input
+                        type="number"
+                        min="0"
+                        className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                        value={formData.durationValue}
+                        onChange={(e) => setFormData({ ...formData, durationValue: e.target.value })}
+                        placeholder="เช่น 2"
+                      />
+                      <select
+                        className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                        value={formData.durationUnit}
+                        onChange={(e) => setFormData({ ...formData, durationUnit: e.target.value })}
+                      >
+                        <option value="">เลือกหน่วย</option>
+                        <option value="ชม.">ชั่วโมง</option>
+                        <option value="วัน">วัน</option>
+                        <option value="สัปดาห์">สัปดาห์</option>
+                      </select>
+                    </div>
+                  </div>
 
                 <div className="space-y-4">
                   <div>
@@ -446,26 +496,27 @@ const handleEditClick = (project: Project) => {
                         <p className="text-[11px] text-gray-500 mt-2 italic">* จำเป็นต้องมีรูปภาพหลักสำหรับหน้าปกโปรเจกต์</p>
                       </div>
                     )}
-                  </div>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-400 mb-2">ลิงก์ Demo (URL)</label>
+                      <input 
+                        className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
+                        value={formData.demoUrl} 
+                        onChange={e => setFormData({...formData, demoUrl: e.target.value})} 
+                        placeholder="https://..."
+                      />
+                    </div>
                   
-                  <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">ลิงก์ Demo (URL)</label>
-                    <input 
-                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
-                      value={formData.demoUrl} 
-                      onChange={e => setFormData({...formData, demoUrl: e.target.value})} 
-                      placeholder="https://..."
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">ลิงก์ GitHub (URL)</label>
-                    <input 
-                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
-                      value={formData.githubUrl} 
-                      onChange={e => setFormData({...formData, githubUrl: e.target.value})} 
-                      placeholder="https://github.com/..."
-                    />
+                    <div>
+                      <label className="block text-sm font-medium text-gray-400 mb-2">ลิงก์ GitHub (URL)</label>
+                      <input 
+                        className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
+                        value={formData.githubUrl} 
+                        onChange={e => setFormData({...formData, githubUrl: e.target.value})} 
+                        placeholder="https://github.com/..."
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -516,7 +567,8 @@ const handleEditClick = (project: Project) => {
                   <div>
                     <label className="block text-sm font-medium text-gray-400 mb-2">ฟีเจอร์เด่น (แยกด้วยคอมม่า)</label>
                     <input 
-                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
+                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 
+                      dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all placeholder-gray-500"
                       value={formData.features} 
                       onChange={e => setFormData({...formData, features: e.target.value})} 
                       placeholder="Real-time updates, User authentication"

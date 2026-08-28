@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import type { Project } from "@/app/assets/Projects/types";
-import { Calendar, ExternalLink, Github, X, ChevronLeft, ChevronRight, Award, ShieldCheck, Bookmark, Globe, Copy, Check, Columns2, Rows2 } from "lucide-react";
+import { Calendar, ExternalLink, Github, X, ChevronLeft, ChevronRight, Award, ShieldCheck, Bookmark, Globe, Copy, Check, Columns2, Rows2 ,Clock } from "lucide-react";
 import { Palette, Gamepad2, Grid3x3, LayoutGrid } from 'lucide-react';
 import { ArrowUpRight } from 'lucide-react';
 
@@ -316,7 +316,15 @@ useEffect(() => {
     </div>
   );
 };
-
+function formatDateRange(project: { date: string; startDate?: string; endDate?: string }) {
+  const opts: Intl.DateTimeFormatOptions = { year: "numeric", month: "long", day: "numeric" };
+  if (project.startDate && project.endDate) {
+    const s = new Date(project.startDate).toLocaleDateString("th-TH", opts);
+    const e = new Date(project.endDate).toLocaleDateString("th-TH", opts);
+    return `${s} - ${e}`;
+  }
+  return new Date(project.date).toLocaleDateString("th-TH", opts);
+}
 const ProjectModal = ({
   project,
   layoutMode,
@@ -505,62 +513,52 @@ const ProjectModal = ({
                   {project.title}
                 </h2>
 
-                {/* Credential Block (Special for Certificates) */}
-                {isCertificate ? (
-                  <div className="bg-neutral-50 dark:bg-neutral-950/60 p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 mb-6 flex flex-col gap-3">
-                    {project.issuer && (
-                      <div className="flex items-start gap-2.5">
-                        <ShieldCheck className="w-5 h-5 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
-                        <div>
-                          <p className="text-xs text-neutral-500 dark:text-gray-500">ผู้มอบใบประกาศนียบัตร</p>
-                          <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200 leading-tight">{project.issuer.replace("มอบโดย : ", "")}</p>
-                        </div>
-                      </div>
-                    )}
-                    
+               {isCertificate ? (
+                <div className="bg-neutral-50 dark:bg-neutral-950/60 p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 mb-6 flex flex-col gap-3">
+                  {project.issuer && (
                     <div className="flex items-start gap-2.5">
-                      <Calendar className="w-5 h-5 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
+                      <ShieldCheck className="w-5 h-5 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
                       <div>
-                        <p className="text-xs text-neutral-500 dark:text-gray-500">วันที่ออกใบรับรอง</p>
-                        <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">
-                          {new Date(project.date).toLocaleDateString("th-TH", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          })}
-                        </p>
+                        <p className="text-xs text-neutral-500 dark:text-gray-500">ผู้มอบ/ผู้รับรอง</p>
+                        <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200 leading-tight">{project.issuer.replace("มอบโดย : ", "")}</p>
                       </div>
                     </div>
-
-                    {/* Example Credential ID support */}
-                    {/* {project.id && (
-                      <div className="flex items-start gap-2.5 border-t border-neutral-900 pt-2 mt-1">
-                        <Bookmark className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                        <div className="w-full flex justify-between items-center">
-                          <div>
-                            <p className="text-xs text-gray-500">รหัสอ้างอิง</p>
-                            <p className="text-sm font-semibold text-gray-300 font-mono">CRED-{project.id}2025</p>
-                          </div>
-                          <button 
-                            onClick={() => handleCopyId(`CRED-${project.id}2025`)}
-                            className="p-1.5 hover:bg-neutral-800 rounded-md text-gray-400 hover:text-gray-900 dark:text-white transition-colors cursor-pointer"
-                            title="คัดลอกรหัส"
-                          >
-                            {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                          </button>
-                        </div>
-                      </div>
-                    )} */}
+                  )}
+                  <div className="flex items-start gap-2.5">
+                    <Calendar className="w-5 h-5 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-xs text-neutral-500 dark:text-gray-500">วันที่ออกใบรับรอง</p>
+                      <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{formatDateRange(project)}</p>
+                    </div>
                   </div>
-                ) : (
-                  /* Standard Project Info Block */
-                  <div className="flex flex-col gap-2.5 text-sm text-neutral-500 dark:text-gray-400 mb-6">
+                  {project.durationValue && project.durationUnit && (
+                    <div className="flex items-center gap-2 text-sm text-neutral-500 dark:text-gray-400">
+                      <Clock className="w-4.5 h-4.5 text-violet-500 dark:text-violet-400" />
+                      <span>ใช้เวลา {project.durationValue} {project.durationUnit}</span>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                /* Standard Project Info Block */
+                <div className="flex flex-col gap-2.5 text-sm text-neutral-500 dark:text-gray-400 mb-6">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4.5 h-4.5 text-violet-500 dark:text-violet-400" />
+                    <span>{formatDateRange(project)}</span>
+                  </div>
+                  {project.issuer && (
+                    <div className="flex items-start gap-2">
+                      <ShieldCheck className="w-4.5 h-4.5 text-violet-500 dark:text-violet-400 shrink-0 mt-0.5" />
+                      <span>{project.issuer.replace("มอบโดย : ", "")}</span>
+                    </div>
+                  )}
+                  {project.durationValue && project.durationUnit && (
                     <div className="flex items-center gap-2">
-                      <Calendar className="w-4.5 h-4.5 text-violet-500 dark:text-violet-400" />
-                      <span>{new Date(project.date).toLocaleDateString("th-TH", { year: "numeric", month: "long" })}</span>
+                      <Clock className="w-4.5 h-4.5 text-violet-500 dark:text-violet-400" />
+                      <span>ใช้เวลา {project.durationValue} {project.durationUnit}</span>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
+              )}
 
                 {/* Description */}
                 <div className="mb-6">
