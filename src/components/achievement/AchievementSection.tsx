@@ -5,6 +5,7 @@ import type { Project } from "@/app/assets/Projects/types";
 import { Calendar, ExternalLink, Github, X, ChevronLeft, ChevronRight, Award, ShieldCheck, Bookmark, Globe, Copy, Check, Columns2, Rows2 ,Clock } from "lucide-react";
 import { Palette, Gamepad2, Grid3x3, LayoutGrid } from 'lucide-react';
 import { ArrowUpRight } from 'lucide-react';
+import { SkeletonCardAchievement } from '@/components/SkeletonCardAchievement';
 
 const isValidUrl = (url?: string | null) => {
   if (!url) return false;
@@ -13,25 +14,30 @@ const isValidUrl = (url?: string | null) => {
   return /^https?:\/\//i.test(u);
 };
 
+
+
 const AchievementSection = () => {
+  const [loading, setLoading] = useState(true);
   const [projects, setProjects] = useState<Project[]>([]);
   
   useEffect(() => {
     const fetchProjects = async () => {
-      try {
-        const res = await fetch('/api/projects')
-        if (!res.ok) {
-          console.error('Fetch failed:', res.status)
-          setProjects([])
-          return
-        }
-        const data = await res.json()
-        setProjects(Array.isArray(data) ? data : [])
-      } catch (err) {
-        console.error("Fetch error:", err)
+    try {
+      const res = await fetch('/api/projects')
+      if (!res.ok) {
+        console.error('Fetch failed:', res.status)
         setProjects([])
+        return
       }
+      const data = await res.json()
+      setProjects(Array.isArray(data) ? data : [])
+    } catch (err) {
+      console.error("Fetch error:", err)
+      setProjects([])
+    } finally {
+      setLoading(false)
     }
+  }
 
     fetchProjects();
   }, []);
@@ -51,13 +57,14 @@ const AchievementSection = () => {
           <p className="text-gray-500 dark:text-gray-400 text-lg relative z-10">ผลงาน การศึกษา และใบประกาศนียบัตร</p>
         </div>
 
-        <AGrid projects={projects} />
+        <AGrid projects={projects} loading={loading} />
       </section>
     </main>
   );
 };
 
-const AGrid = ({ projects }: { projects: Project[] }) => {
+
+const AGrid = ({ projects, loading }: { projects: Project[]; loading: boolean }) => {
   const [filter, setFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [modalLayoutMode, setModalLayoutMode] = useState<'side' | 'top'>('side');
@@ -140,21 +147,31 @@ const AGrid = ({ projects }: { projects: Project[] }) => {
       </div>
 
       {/* Projects Grid */}
-      <div className={`grid grid-cols-1 ${gridColsClass} gap-8`}>
-        {filteredProjects.map((project, index) => (
-          <ProjectCard 
-            key={`${project.id}-${desktopCols}`} 
-            project={project} 
-            index={index}
-            onShowDetails={() => setSelectedProject(project)}
-          />
-        ))}
-      </div>
-
-      {filteredProjects.length === 0 && (
-        <div className="col-span-full py-20 text-center">
-          <p className="text-gray-500 text-xl">ยังไม่มีผลงานในหมวดหมู่นี้</p>
+      {loading ? (
+        <div className={`grid grid-cols-1 ${gridColsClass} gap-8`}>
+          {Array.from({ length: 6 }).map((_, i) => (
+            <SkeletonCardAchievement key={i} />
+          ))}
         </div>
+      ) : (
+        <>
+          <div className={`grid grid-cols-1 ${gridColsClass} gap-8`}>
+            {filteredProjects.map((project, index) => (
+              <ProjectCard
+                key={`${project.id}-${desktopCols}`}
+                project={project}
+                index={index}
+                onShowDetails={() => setSelectedProject(project)}
+              />
+            ))}
+          </div>
+
+          {filteredProjects.length === 0 && (
+            <div className="col-span-full py-20 text-center">
+              <p className="text-gray-500 dark:text-gray-400 text-xl">ยังไม่มีผลงานในหมวดหมู่นี้</p>
+            </div>
+          )}
+        </>
       )}
 
       {/* Modal */}
@@ -183,7 +200,12 @@ const ProjectCard = ({
   const displayImage = project.image;
   const isCertificate = project.category === "Certificate";
 
-    const [canHover, setCanHover] = useState(true);
+  const [canHover, setCanHover] = useState(true);
+
+  const category = project.category?.trim().toLowerCase();
+category === "web app" || category === "design"
+  ? "group-hover:text-violet-500 dark:group-hover:text-violet-500"
+  : "group-hover:text-emerald-400 dark:group-hover:text-emerald-500"
 
 useEffect(() => {
   const mq = window.matchMedia('(hover: hover) and (pointer: fine)');
@@ -196,7 +218,8 @@ useEffect(() => {
 
   return (
     <div
-      className={`group relative bg-white dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800/60 shadow-md shadow-neutral-400/70 dark:shadow-black/40 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
+      className={`group relative bg-white dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800/60 shadow-md shadow-neutral-400/70 dark:shadow-black/40 rounded-2xl
+         overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
         isCertificate ? 'hover:shadow-emerald-500/10 hover:border-emerald-500/30' : 'hover:shadow-violet-500/10 hover:border-violet-500/30'
       }`}
       onMouseEnter={() => setIsHovered(true)}
@@ -280,7 +303,7 @@ useEffect(() => {
         <div className="p-6 flex flex-col grow justify-between">
           <div>
             <h3 className={`text-xl font-bold text-gray-900 dark:text-white mb-2 line-clamp-1 transition-colors duration-300 ${
-              project.category === "Web App" || project.category === "Game"
+              category === "web app" || category === "design"
                 ? "group-hover:text-violet-500 dark:group-hover:text-violet-500"
                 : "group-hover:text-emerald-400 dark:group-hover:text-emerald-500"
             }`}>
@@ -290,7 +313,7 @@ useEffect(() => {
            {/* Show issuer if it's an achievement */}
             {project.issuer && (
               <div className={`flex items-center gap-1.5 text-xs font-medium mb-3 ${
-                project.category === "Web App" || project.category === "Game"
+                category === "web app" || category === "design"
                   ? "text-violet-500/80 dark:text-violet-400/80"
                   : "text-emerald-500/80 dark:text-emerald-600/80"
               }`}>
