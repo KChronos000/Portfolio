@@ -26,5 +26,6 @@ export type Project = {
   endDate?: string;
   durationValue?: number | string;
   durationUnit?: string;
-
+  rank?: string;
+  level?: string;
 };

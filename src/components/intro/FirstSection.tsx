@@ -6,8 +6,8 @@ const FirstSection = () => {
     <section id='home' className="w-full relative z-10 flex flex-col justify-center min-h-screen items-center pt-24 sm:pt-0 px-4 md:px-8 py-12 lg:py-0 overflow-hidden">
       
       {/* Soft Ambient Background Glows */}
-      <div className="absolute top-[15%] left-[5%] -z-10 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] rounded-full bg-violet-600/10 dark:bg-violet-500/10 blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-[15%] right-[5%] -z-10 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] rounded-full bg-emerald-600/10 dark:bg-emerald-500/10 blur-3xl pointer-events-none"></div>
+      <div className="absolute top-[15%] left-[5%] -z-10 w-62.5 sm:w-100 h-62.5 sm:h-100 rounded-full bg-violet-600/10 dark:bg-violet-500/10 blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-[15%] right-[5%] -z-10 w-62.5 sm:w-100 h-62.5 sm:h-100 rounded-full bg-emerald-600/10 dark:bg-emerald-500/10 blur-3xl pointer-events-none"></div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 items-center justify-center gap-10 lg:gap-16 container max-w-6xl mx-auto">
         
@@ -18,7 +18,7 @@ const FirstSection = () => {
 
         {/* Profile Pic Column */}
         <div className="w-full lg:col-span-5 order-1 lg:order-2 flex justify-center fade-in-up" style={{ animationDelay: '350ms' }}>
-          <div className="relative group max-w-[280px] sm:max-w-[360px] md:max-w-[400px] w-full aspect-square floating">
+          <div className="relative group max-w-70 sm:max-w-90 md:max-w-100 w-full aspect-square floating">
             
             {/* 1. Ambient Background Glow */}
             <div className="absolute inset-0 rounded-full bg-linear-to-tr from-violet-500 to-emerald-400 opacity-20 dark:opacity-40 blur-2xl group-hover:opacity-60 transition-opacity duration-500 pointer-events-none"></div>

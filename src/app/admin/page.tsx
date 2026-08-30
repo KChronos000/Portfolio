@@ -35,29 +35,33 @@ useEffect(() => {
     durationValue: '',
     durationUnit: '',
     issuer: '',
+    rank: '',
+    level: ''
   }
 
-  interface Project {
-    id?: number;
-    title: string;
-    description: string;
-    fullDescription: string;
-    category: string;
-    image: string;
-    otherImages: string | string[];
-    tags: string | string[];
-    features: string | string[];
-    technologies: string | string[];
-    demoUrl: string | null;
-    githubUrl: string | null;
-    date: string;
-    issuer: string;
-    order_index?: number;
-    startDate?: string;
-    endDate?: string;
-    durationValue?: number | string;
-    durationUnit?: string;
-  }
+interface Project {
+  id?: number;
+  title: string;
+  description: string;
+  fullDescription: string;
+  category: string;
+  image: string;
+  otherImages: string | string[];
+  tags: string | string[];
+  features: string | string[];
+  technologies: string | string[];
+  demoUrl: string | null;
+  githubUrl: string | null;
+  date: string;
+  issuer: string;
+  order_index?: number;
+  startDate?: string;
+  endDate?: string;
+  durationValue?: number | string;
+  durationUnit?: string;
+  rank?: string;      
+  level?: string;     
+}
 
   const [formData, setFormData] = useState(initialFormState)
 
@@ -149,6 +153,8 @@ const handleSubmitAuth = async (e: React.FormEvent) => {
     body.append('issuer', formData.issuer);
     body.append('demoUrl', formData.demoUrl || '');
     body.append('githubUrl', formData.githubUrl || '');
+    body.append('rank', formData.rank || '');
+    body.append('level', formData.level || '');
 
     body.append('tags', JSON.stringify(stringToArray(formData.tags as string)));
     body.append('technologies', JSON.stringify(stringToArray(formData.technologies as string)));
@@ -198,8 +204,8 @@ const handleEditClick = (project: Project) => {
     fullDescription: project.fullDescription || '',
     category: project.category || '',
     image: project.image || '',
-    otherImages: Array.isArray(project.otherImages) 
-      ? project.otherImages 
+    otherImages: Array.isArray(project.otherImages)
+      ? project.otherImages
       : project.otherImages ? stringToArray(project.otherImages) : [],
     tags: Array.isArray(project.tags) ? project.tags.join(', ') : project.tags || '',
     features: Array.isArray(project.features) ? project.features.join(', ') : project.features || '',
@@ -212,6 +218,8 @@ const handleEditClick = (project: Project) => {
     endDate: project.endDate || '',
     durationValue: project.durationValue?.toString() || '',
     durationUnit: project.durationUnit || '',
+    rank: project.rank || '',     
+    level: project.level || '',   
   });
   setMainFile(null);
   setOtherFiles([]);
@@ -401,9 +409,51 @@ const handleEditClick = (project: Project) => {
                       placeholder="มอบให้โดย..." 
                     />
                   </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-400 mb-2 items-center gap-2">
+                        <span className="w-1 h-4 bg-amber-400 rounded-full"></span>
+                        อันดับ/ผลรางวัล
+                      </label>
+                      <select
+                        className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2"
+                        value={formData.rank}
+                        onChange={e => setFormData({ ...formData, rank: e.target.value })}
+                      >
+                        <option value="">ไม่ระบุ</option>
+                        <option value="เข้าร่วม">เข้าร่วม</option>
+                        <option value="ผ่านเข้ารอบ">ผ่านเข้ารอบ / ผ่านการคัดเลือก</option>
+                        <option value="รางวัลชมเชย">รางวัลชมเชย</option>
+                        <option value="รองชนะเลิศอันดับ 2">รองชนะเลิศอันดับ 2</option>
+                        <option value="รองชนะเลิศอันดับ 1">รองชนะเลิศอันดับ 1</option>
+                        <option value="ชนะเลิศ">ชนะเลิศ / อันดับ 1</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-400 mb-2  items-center gap-2">
+                        <span className="w-1 h-4 bg-rose-400 rounded-full"></span>
+                        ระดับการแข่งขัน
+                      </label>
+                      <select
+                        className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2"
+                        value={formData.level}
+                        onChange={e => setFormData({ ...formData, level: e.target.value })}
+                      >
+                        <option value="">ไม่ระบุ</option>
+                        <option value="ระดับสถาบัน/โรงเรียน">ระดับสถาบัน/โรงเรียน</option>
+                        <option value="ระดับเขตพื้นที่การศึกษา">ระดับเขตพื้นที่การศึกษา</option>
+                        <option value="ระดับจังหวัด">ระดับจังหวัด</option>
+                        <option value="ระดับภาค">ระดับภาค</option>
+                        <option value="ระดับชาติ">ระดับชาติ</option>
+                        <option value="ระดับนานาชาติ">ระดับนานาชาติ</option>
+                      </select>
+                    </div>
+                  </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2 flex items-center gap-2">
+                    <label className="block text-sm font-medium text-gray-400 mb-2 items-center gap-2">
                       <span className="w-1 h-4 bg-pink-400 rounded-full"></span>
                       ช่วงวันที่
                     </label>
@@ -424,7 +474,7 @@ const handleEditClick = (project: Project) => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2 flex items-center gap-2">
+                    <label className="block text-sm font-medium text-gray-400 mb-2 items-center gap-2">
                       <span className="w-1 h-4 bg-orange-400 rounded-full"></span>
                       ระยะเวลาที่ใช้ทำ
                     </label>
@@ -621,7 +671,7 @@ const handleEditClick = (project: Project) => {
                     <div className="flex flex-wrap gap-2 mt-2">
                       {otherFiles.map((file, idx) => (
                         <span key={`new-${idx}`} className="flex items-center gap-1.5 text-xs bg-cyan-500/20 text-cyan-400 px-3 py-1.5 rounded-lg border border-cyan-500/30">
-                          <span className="truncate max-w-[100px]">{file.name}</span>
+                          <span className="truncate max-w-25">{file.name}</span>
                           <button type="button" onClick={() => removeSelectedFile(idx)} className="hover:text-red-400">✕</button>
                         </span>
                       ))}

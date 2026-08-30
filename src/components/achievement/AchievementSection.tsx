@@ -2,10 +2,11 @@
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import type { Project } from "@/app/assets/Projects/types";
-import { Calendar, ExternalLink, Github, X, ChevronLeft, ChevronRight, Award, ShieldCheck, Bookmark, Globe, Copy, Check, Columns2, Rows2 ,Clock } from "lucide-react";
+import { Calendar, ExternalLink, Github, X, ChevronLeft, ChevronRight, Award, ShieldCheck, Bookmark, Globe, Copy, Check, Columns2, Rows2 ,Clock, Trophy, MapPin } from "lucide-react";
 import { Palette, Gamepad2, Grid3x3, LayoutGrid } from 'lucide-react';
 import { ArrowUpRight } from 'lucide-react';
 import { SkeletonCardAchievement } from '@/components/SkeletonCardAchievement';
+import Link from 'next/link';
 
 const isValidUrl = (url?: string | null) => {
   if (!url) return false;
@@ -47,7 +48,7 @@ const AchievementSection = () => {
       <section className="w-full max-w-7xl px-4">
         <div className="mb-12 text-center relative">
           {/* Subtle radial gradient glow (purple/teal) behind hero title, low opacity */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-[280px] sm:w-[450px] md:w-[600px] h-[120px] sm:h-[180px] md:h-[220px] rounded-full 
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-70 sm:w-112.5 md:w-150 h-30 sm:h-45 md:h-55 rounded-full 
           bg-[radial-gradient(circle,rgba(167,139,250,0.2)_0%,rgba(45,212,191,0.1)_50%,transparent_70%)] dark:bg-[radial-gradient(circle,rgba(139,92,246,0.12)_0%,rgba(20,184,166,0.08)_50%,transparent_70%)] blur-2xl pointer-events-none" />
 
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 relative z-10">
@@ -199,7 +200,9 @@ const ProjectCard = ({
   const [isHovered, setIsHovered] = useState(false);
   const displayImage = project.image;
   const isCertificate = project.category === "Certificate";
-
+  const isCertificateAndGame = project.category === "Certificate" || project.category === "Game";
+  const showCompetitionInfo = project.category === "Certificate" || project.category === "Web App"  || project.category === "Design";
+  const allAcheivementInfo = project.category === "Certificate" || project.category === "Web App"  || project.category === "Design" || project.category === "Game";
   const [canHover, setCanHover] = useState(true);
 
   const category = project.category?.trim().toLowerCase();
@@ -220,7 +223,7 @@ useEffect(() => {
     <div
       className={`group relative bg-white dark:bg-neutral-900 border border-neutral-200/60 dark:border-neutral-800/60 shadow-md shadow-neutral-400/70 dark:shadow-black/40 rounded-2xl
          overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
-        isCertificate ? 'hover:shadow-emerald-500/10 hover:border-emerald-500/30' : 'hover:shadow-violet-500/10 hover:border-violet-500/30'
+        showCompetitionInfo ? 'hover:shadow-emerald-500/10 hover:border-emerald-500/30' : 'hover:shadow-violet-500/10 hover:border-violet-500/30'
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -234,7 +237,7 @@ useEffect(() => {
     >
       {/* Holographic glowing borders for Certificates */}
       <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl -z-10 p-[1.5px] ${
-        isCertificate
+        isCertificateAndGame
           ? 'bg-linear-to-r from-[#6ee7b7] via-[#34d399] to-[#a5b4fc] dark:from-[#34d399] dark:via-[#10b981] dark:to-[#6366f1]'
           : 'bg-linear-to-r from-[#6ee7b7] to-[#c084fc] dark:from-[#34d399] dark:to-[#8b5cf6]'
       }`}
@@ -269,7 +272,7 @@ useEffect(() => {
           {/* Special Ribbon/Badge for Achievements */}
           <div className="absolute top-4 left-4 flex gap-2">
             <span className={`px-3 py-1 text-xs font-semibold rounded-full backdrop-blur-md flex items-center gap-1.5 border ${
-              isCertificate 
+              isCertificateAndGame 
                 ? 'bg-emerald-950/80 text-emerald-300 border-emerald-500/30' 
                 : 'bg-neutral-950/80 text-violet-300 border-violet-500/30'
             }`}>
@@ -277,6 +280,19 @@ useEffect(() => {
               {project.category}
             </span>
           </div>
+
+          {project.rank && (
+            <div className="absolute top-4 right-4 flex flex-col gap-1 items-end">
+              <span className="flex gap-2 px-2.5 py-1 text-xs font-semibold rounded-full backdrop-blur-md text-amber-700 bg-yellow-300/80 border-amber-600/30 dark:bg-amber-950/80 dark:text-amber-300 border dark:border-amber-500/30">
+                <Trophy className="w-3.5 h-3.5" /> {project.rank}
+              </span>
+              {project.level && (
+                <span className="px-2.5 py-1 text-xs font-semibold rounded-full backdrop-blur-md bg-neutral-950/80 text-neutral-300 border border-neutral-500/30">
+                  {project.level}
+                </span>
+              )}
+            </div>
+          )}
 
           {!canHover && (
             <div className="absolute bottom-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-neutral-950/60 backdrop-blur-md">
@@ -302,7 +318,7 @@ useEffect(() => {
         {/* Content Details */}
         <div className="p-6 flex flex-col grow justify-between">
           <div>
-            <h3 className={`text-xl font-bold text-gray-900 dark:text-white mb-2 line-clamp-1 transition-colors duration-300 ${
+            <h3 className={`text-xl font-bold text-gray-900 dark:text-white mb-2 truncate transition-colors duration-300 ${
               category === "web app" || category === "design"
                 ? "group-hover:text-violet-500 dark:group-hover:text-violet-500"
                 : "group-hover:text-emerald-400 dark:group-hover:text-emerald-500"
@@ -383,6 +399,9 @@ const ProjectModal = ({
 
 
   const isCertificate = project.category === "Certificate";
+  const showCompetitionInfo = project.category === "Certificate" || project.category === "Web App"  || project.category === "Design";
+  const allAcheivementInfo = project.category === "Certificate" || project.category === "Web App"  || project.category === "Design" || project.category === "Game";
+  const isCertificateAndGame = project.category === "Certificate" || project.category === "Game"; 
   const hasDemo = isValidUrl(project.demoUrl);
   const hasGithub = isValidUrl(project.githubUrl);
 
@@ -532,7 +551,7 @@ const ProjectModal = ({
               <div>
                 {/* Category & Badge */}
                 <span className={`inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full mb-4 border ${
-                  isCertificate 
+                  isCertificateAndGame
                     ? 'bg-emerald-100/60 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border-emerald-300/20 dark:border-emerald-500/20' 
                     : 'bg-violet-100/60 dark:bg-violet-950/60 text-violet-700 dark:text-violet-400 border-violet-300/20 dark:border-violet-500/20'
                 }`}>
@@ -555,6 +574,26 @@ const ProjectModal = ({
                       </div>
                     </div>
                   )}
+
+                  {project.rank && (
+                    <div className="flex items-start gap-2.5">
+                      <Trophy className="w-5 h-5 text-amber-500 dark:text-amber-400 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-xs text-neutral-500 dark:text-gray-500">ผลรางวัล</p>
+                        <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{project.rank}</p>
+                      </div>
+                    </div>
+                  )}
+                  {project.level && (
+                    <div className="flex items-start gap-2.5">
+                      <MapPin className="w-5 h-5 text-rose-500 dark:text-rose-400 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-xs text-neutral-500 dark:text-gray-500">ระดับการแข่งขัน</p>
+                        <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{project.level}</p>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="flex items-start gap-2.5">
                     <Calendar className="w-5 h-5 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
                     <div>
@@ -564,7 +603,7 @@ const ProjectModal = ({
                   </div>
                   {project.durationValue && project.durationUnit && (
                     <div className="flex items-center gap-2 text-sm text-neutral-500 dark:text-gray-400">
-                      <Clock className="w-4.5 h-4.5 text-violet-500 dark:text-violet-400" />
+                      <Clock className="w-4.5 h-4.5 text-violet-500 dark:text-violet-600" />
                       <span>ใช้เวลา {project.durationValue} {project.durationUnit}</span>
                     </div>
                   )}
@@ -572,16 +611,34 @@ const ProjectModal = ({
               ) : (
                 /* Standard Project Info Block */
                 <div className="flex flex-col gap-2.5 text-sm text-neutral-500 dark:text-gray-400 mb-6">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4.5 h-4.5 text-violet-500 dark:text-violet-400" />
-                    <span>{formatDateRange(project)}</span>
-                  </div>
-                  {project.issuer && (
-                    <div className="flex items-start gap-2">
-                      <ShieldCheck className="w-4.5 h-4.5 text-violet-500 dark:text-violet-400 shrink-0 mt-0.5" />
-                      <span>{project.issuer.replace("มอบโดย : ", "")}</span>
+                  {project.rank && (
+                    <div className="flex items-start gap-2.5">
+                      <Trophy className="w-5 h-5 text-amber-500 dark:text-amber-400 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-xs text-neutral-500 dark:text-gray-500">ผลรางวัล</p>
+                        <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{project.rank}</p>
+                      </div>
                     </div>
                   )}
+                  {project.level && (
+                    <div className="flex items-start gap-2.5">
+                      <MapPin className="w-5 h-5 text-rose-500 dark:text-rose-400 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-xs text-neutral-500 dark:text-gray-500">ระดับการแข่งขัน</p>
+                        <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{project.level}</p>
+                      </div>
+                    </div>
+                  )}
+                  {project.issuer && (
+                    <div className="flex items-start gap-2">
+                      <ShieldCheck className="w-4.5 h-4.5 text-violet-500 dark:text-violet-600 shrink-0 mt-0.5" />
+                      <span>{project.issuer}</span>
+                    </div>
+                  )}
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4.5 h-4.5 text-violet-500 dark:text-violet-600" />
+                    <span>{formatDateRange(project)}</span>
+                  </div>
                   {project.durationValue && project.durationUnit && (
                     <div className="flex items-center gap-2">
                       <Clock className="w-4.5 h-4.5 text-violet-500 dark:text-violet-400" />
@@ -620,14 +677,14 @@ const ProjectModal = ({
                 {(project.technologies && project.technologies.length > 0) && (
                   <div className="mb-6">
                     <h3 className="text-sm font-semibold text-neutral-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-                      {isCertificate ? "ทักษะที่ได้ฝึกฝน & เครื่องมือ" : "เทคโนโลยีที่เลือกใช้"}
+                      {allAcheivementInfo ? "ทักษะที่ได้ฝึกฝน & เครื่องมือ" : "เทคโนโลยีที่เลือกใช้"}
                     </h3>
                     <div className="flex flex-wrap gap-1.5">
                       {project.technologies.map((tech, i) => (
                         <span
                           key={i}
                           className={`px-3 py-1.5 text-xs rounded-lg font-medium border ${
-                            isCertificate 
+                            isCertificateAndGame
                               ? 'bg-emerald-100/20 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-300 border-emerald-300/20 dark:border-emerald-500/20' 
                               : 'bg-violet-100/20 dark:bg-violet-950/20 text-violet-700 dark:text-violet-300 border-violet-300/20 dark:border-violet-500/20'
                           }`}
@@ -642,8 +699,8 @@ const ProjectModal = ({
 
               {/* Action Buttons Footer */}
               <div className="flex flex-wrap gap-3 pt-6 border-t border-neutral-200 dark:border-neutral-800">
-                {isCertificate && project.demoUrl ? (
-                  <a
+                {allAcheivementInfo && project.demoUrl ? (
+                  <Link
                     href={project.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -651,11 +708,11 @@ const ProjectModal = ({
                   >
                     <Globe className="w-4.5 h-4.5" />
                     ลิงก์
-                  </a>
+                  </Link>
                 ) : (
                   <>
                     {hasDemo && (
-                      <a
+                      <Link
                         href={project.demoUrl!}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -663,11 +720,11 @@ const ProjectModal = ({
                       >
                         <ExternalLink className="w-4.5 h-4.5" />
                         View Project
-                      </a>
+                      </Link>
                     )}
 
                     {hasGithub && (
-                      <a
+                      <Link
                         href={project.githubUrl!}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -675,7 +732,7 @@ const ProjectModal = ({
                       >
                         <Github className="w-4.5 h-4.5" />
                         Source Code
-                      </a>
+                      </Link>
                     )}
                   </>
                 )}
