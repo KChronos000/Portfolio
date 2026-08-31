@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import type { Project } from "@/app/assets/Projects/types";
-import { Calendar, ExternalLink, Github, X, ChevronLeft, ChevronRight, Award, ShieldCheck, Bookmark, Globe, Copy, Check, Columns2, Rows2 ,Clock, Trophy, MapPin } from "lucide-react";
+import { Calendar, ExternalLink, Github, X, ChevronLeft, ChevronRight, Award, ShieldCheck, Bookmark, Globe, Copy, Check, Columns2, Rows2 ,Clock, Trophy, MapPin, Building2 } from "lucide-react";
 import { Palette, Gamepad2, Grid3x3, LayoutGrid } from 'lucide-react';
 import { ArrowUpRight } from 'lucide-react';
 import { SkeletonCardAchievement } from '@/components/SkeletonCardAchievement';
@@ -214,6 +214,7 @@ useEffect(() => {
   const mq = window.matchMedia('(hover: hover) and (pointer: fine)');
   setCanHover(mq.matches);
 
+
   const handler = (e: MediaQueryListEvent) => setCanHover(e.matches);
   mq.addEventListener('change', handler);
   return () => mq.removeEventListener('change', handler);
@@ -267,7 +268,7 @@ useEffect(() => {
           )}
 
           {/* Elegant Overlay */}
-          <div className="absolute inset-0 bg-linear-to-t dark:from-neutral-950 dark:via-neutral-900/40 from-neutral-700/30 via-35% to-transparent opacity-90" />
+          <div className="absolute inset-0 bg-linear-to-t dark:from-neutral-950/50 dark:via-neutral-700/40 from-neutral-700/30 via-35% to-transparent opacity-90" />
 
           {/* Special Ribbon/Badge for Achievements */}
           <div className="absolute top-4 left-4 flex gap-2">
@@ -293,6 +294,7 @@ useEffect(() => {
               )}
             </div>
           )}
+          
 
           {!canHover && (
             <div className="absolute bottom-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-neutral-950/60 backdrop-blur-md">
@@ -318,10 +320,10 @@ useEffect(() => {
         {/* Content Details */}
         <div className="p-6 flex flex-col grow justify-between">
           <div>
-            <h3 className={`text-xl font-bold text-gray-900 dark:text-white mb-2 truncate transition-colors duration-300 ${
+            <h3 className={`text-xl font-bold mb-2 truncate transition-colors duration-300 lg:text-gray-900 lg:dark:text-white ${
               category === "web app" || category === "design"
-                ? "group-hover:text-violet-500 dark:group-hover:text-violet-500"
-                : "group-hover:text-emerald-400 dark:group-hover:text-emerald-500"
+                ? "text-violet-600 dark:text-violet-300 lg:group-hover:text-violet-600 lg:dark:group-hover:text-violet-400"
+                : "text-emerald-600 dark:text-emerald-400 lg:group-hover:text-emerald-600 lg:dark:group-hover:text-emerald-500"
             }`}>
               {project.title}
             </h3>
@@ -330,7 +332,7 @@ useEffect(() => {
             {project.issuer && (
               <div className={`flex items-center gap-1.5 text-xs font-medium mb-3 ${
                 category === "web app" || category === "design"
-                  ? "text-violet-500/80 dark:text-violet-400/80"
+                  ? "text-violet-500/80 dark:text-violet-600/80"
                   : "text-emerald-500/80 dark:text-emerald-600/80"
               }`}>
                 <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
@@ -432,11 +434,52 @@ const ProjectModal = ({
   }`;
 
   // Custom active background class for the layout toggle segment control
-  const activeBgClass = isCertificate 
-    ? 'bg-linear-to-r from-emerald-400 to-teal-500 dark:from-emerald-400 dark:to-teal-500 text-neutral-950 shadow-md shadow-emerald-400/20 font-bold' 
-    : 'bg-linear-to-r from-teal-400 to-violet-500 dark:from-teal-400 dark:to-violet-500 text-neutral-950 dark:text-white shadow-md shadow-violet-500/20 font-bold';
+  const activeBgClass = isCertificateAndGame 
+    ? 'bg-linear-to-r from-emerald-400 to-teal-500 dark:from-emerald-400 dark:to-teal-500 text-gray-800/90 dark:text-white shadow-md shadow-emerald-400/20 font-bold' 
+    : 'bg-linear-to-r from-violet-400 to-cyan-400 dark:from-violet-400 dark:to-cyan-500 text-gray-800/90 dark:text-white shadow-md shadow-violet-500/20 font-bold';
 
-  return (
+  // วางไว้ก่อน return ของ component (เหนือ isCertificate ? ... : ...)
+  const rankBlock = project.rank && (
+    <div className="flex items-start gap-2.5">
+      <Trophy className="w-5 h-5 text-amber-500 dark:text-amber-400 shrink-0 mt-0.5" />
+      <div>
+        <p className="text-xs text-neutral-500 dark:text-gray-500">ผลรางวัล</p>
+        <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{project.rank}</p>
+      </div>
+    </div>
+  );
+
+  const levelBlock = project.level && (
+    <div className="flex items-start gap-2.5">
+      <MapPin className="w-5 h-5 text-rose-500 dark:text-rose-400 shrink-0 mt-0.5" />
+      <div>
+        <p className="text-xs text-neutral-500 dark:text-gray-500">
+          {isCertificate ? "ระดับการแข่งขัน" : "ระดับ"}
+        </p>
+        <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{project.level}</p>
+      </div>
+    </div>
+  );
+
+  const durationBlock = project.durationValue && project.durationUnit && (
+    <div className={`flex items-center gap-2 ${isCertificate ? "text-sm text-neutral-500 dark:text-gray-400" : ""}`}>
+      <Clock className={`w-4.5 h-4.5 text-violet-500 ${isCertificate ? "dark:text-violet-600" : "dark:text-violet-400"}`} />
+      <span>ใช้เวลา {project.durationValue} {project.durationUnit}</span>
+    </div>
+  );
+
+  const organizerBlock = project.organizer && (
+    <div className="flex items-start gap-2.5">
+      <Building2 className="w-5 h-5 text-cyan-500 dark:text-cyan-400 shrink-0 mt-0.5" />
+      <div>
+        <p className="text-xs text-neutral-500 dark:text-gray-500">หน่วยงานผู้จัด</p>
+        <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{project.organizer}</p>
+      </div>
+    </div>
+  );
+
+
+    return (
     <>
       <div 
         className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 dark:bg-black/85 backdrop-blur-md animate-fadeIn"
@@ -455,7 +498,7 @@ const ProjectModal = ({
                 className={`flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-300 cursor-pointer ${
                   isSideLayout
                     ? activeBgClass
-                    : 'text-neutral-500 dark:text-gray-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-200/60 dark:hover:bg-neutral-800/60'
+                    : 'text-gray-400 dark:text-gray-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-200/60 dark:hover:bg-neutral-800/60'
                 }`}
                 title="แสดงรูปด้านข้าง (Side-by-Side)"
               >
@@ -574,25 +617,9 @@ const ProjectModal = ({
                       </div>
                     </div>
                   )}
-
-                  {project.rank && (
-                    <div className="flex items-start gap-2.5">
-                      <Trophy className="w-5 h-5 text-amber-500 dark:text-amber-400 shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-xs text-neutral-500 dark:text-gray-500">ผลรางวัล</p>
-                        <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{project.rank}</p>
-                      </div>
-                    </div>
-                  )}
-                  {project.level && (
-                    <div className="flex items-start gap-2.5">
-                      <MapPin className="w-5 h-5 text-rose-500 dark:text-rose-400 shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-xs text-neutral-500 dark:text-gray-500">ระดับการแข่งขัน</p>
-                        <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{project.level}</p>
-                      </div>
-                    </div>
-                  )}
+                  {organizerBlock}
+                  {rankBlock}
+                  {levelBlock}
 
                   <div className="flex items-start gap-2.5">
                     <Calendar className="w-5 h-5 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
@@ -601,50 +628,24 @@ const ProjectModal = ({
                       <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{formatDateRange(project)}</p>
                     </div>
                   </div>
-                  {project.durationValue && project.durationUnit && (
-                    <div className="flex items-center gap-2 text-sm text-neutral-500 dark:text-gray-400">
-                      <Clock className="w-4.5 h-4.5 text-violet-500 dark:text-violet-600" />
-                      <span>ใช้เวลา {project.durationValue} {project.durationUnit}</span>
-                    </div>
-                  )}
+                  {durationBlock}
                 </div>
               ) : (
                 /* Standard Project Info Block */
                 <div className="flex flex-col gap-2.5 text-sm text-neutral-500 dark:text-gray-400 mb-6">
-                  {project.rank && (
-                    <div className="flex items-start gap-2.5">
-                      <Trophy className="w-5 h-5 text-amber-500 dark:text-amber-400 shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-xs text-neutral-500 dark:text-gray-500">ผลรางวัล</p>
-                        <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{project.rank}</p>
-                      </div>
-                    </div>
-                  )}
-                  {project.level && (
-                    <div className="flex items-start gap-2.5">
-                      <MapPin className="w-5 h-5 text-rose-500 dark:text-rose-400 shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-xs text-neutral-500 dark:text-gray-500">ระดับการแข่งขัน</p>
-                        <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{project.level}</p>
-                      </div>
-                    </div>
-                  )}
                   {project.issuer && (
                     <div className="flex items-start gap-2">
                       <ShieldCheck className="w-4.5 h-4.5 text-violet-500 dark:text-violet-600 shrink-0 mt-0.5" />
-                      <span>{project.issuer}</span>
+                      <span>{project.issuer.replace("มอบโดย : ", "")}</span>
                     </div>
                   )}
+                  {rankBlock}
+                  {levelBlock}
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4.5 h-4.5 text-violet-500 dark:text-violet-600" />
                     <span>{formatDateRange(project)}</span>
                   </div>
-                  {project.durationValue && project.durationUnit && (
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4.5 h-4.5 text-violet-500 dark:text-violet-400" />
-                      <span>ใช้เวลา {project.durationValue} {project.durationUnit}</span>
-                    </div>
-                  )}
+                  {durationBlock}
                 </div>
               )}
 
@@ -660,12 +661,12 @@ const ProjectModal = ({
                 {(project.features && project.features.length > 0) && (
                   <div className="mb-6">
                     <h3 className="text-sm font-semibold text-neutral-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-                      {isCertificate ? " เนื้อหาและหัวข้อหลักในการฝึกอบรม" : "💡 ฟีเจอร์เด่น / ระบบหลัก"}
+                      {isCertificate ? " เนื้อหาและหัวข้อหลักในการฝึกอบรม" : " ฟีเจอร์เด่น / ระบบหลัก"}
                     </h3>
                     <ul className="space-y-1.5">
                       {project.features.map((feature, i) => (
                         <li key={i} className="flex items-start gap-2 text-sm text-neutral-700 dark:text-gray-300">
-                          <span className={`mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 ${isCertificate ? 'bg-emerald-500 dark:bg-emerald-400' : 'bg-violet-500 dark:bg-violet-400'}`} />
+                          <span className={`mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 ${isCertificateAndGame ? 'bg-emerald-500 dark:bg-emerald-400' : 'bg-violet-500 dark:bg-violet-400'}`} />
                           <span className="leading-tight">{feature}</span>
                         </li>
                       ))}

@@ -36,7 +36,8 @@ useEffect(() => {
     durationUnit: '',
     issuer: '',
     rank: '',
-    level: ''
+    level: '',
+    organizer: ''
   }
 
 interface Project {
@@ -60,7 +61,8 @@ interface Project {
   durationValue?: number | string;
   durationUnit?: string;
   rank?: string;      
-  level?: string;     
+  level?: string;
+  organizer?: string;
 }
 
   const [formData, setFormData] = useState(initialFormState)
@@ -163,6 +165,7 @@ const handleSubmitAuth = async (e: React.FormEvent) => {
     body.append('endDate', formData.endDate || '');
     body.append('durationValue', formData.durationValue?.toString() || '');
     body.append('durationUnit', formData.durationUnit || '');
+    body.append('organizer', formData.organizer || '')
 
     if (mainFile) {
       body.append('mainImageFile', mainFile);
@@ -219,7 +222,8 @@ const handleEditClick = (project: Project) => {
     durationValue: project.durationValue?.toString() || '',
     durationUnit: project.durationUnit || '',
     rank: project.rank || '',     
-    level: project.level || '',   
+    level: project.level || '',
+    organizer: project.organizer || '',
   });
   setMainFile(null);
   setOtherFiles([]);
@@ -297,7 +301,7 @@ const handleEditClick = (project: Project) => {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                    className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
                     placeholder="••••••••"
                   />
                 </div>
@@ -410,6 +414,19 @@ const handleEditClick = (project: Project) => {
                     />
                   </div>
 
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-2 items-center gap-2">
+                      <span className="w-1 h-4 bg-teal-400 rounded-full"></span>
+                      หน่วยงานผู้จัด
+                    </label>
+                    <input
+                      className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2"
+                      value={formData.organizer}
+                      onChange={e => setFormData({ ...formData, organizer: e.target.value })}
+                      placeholder="เช่น วิทยาลัยการคอมพิวเตอร์ มหาวิทยาลัยขอนแก่น"
+                    />
+                  </div>
+
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-400 mb-2 items-center gap-2">
@@ -446,6 +463,7 @@ const handleEditClick = (project: Project) => {
                         <option value="ระดับเขตพื้นที่การศึกษา">ระดับเขตพื้นที่การศึกษา</option>
                         <option value="ระดับจังหวัด">ระดับจังหวัด</option>
                         <option value="ระดับภาค">ระดับภาค</option>
+                        <option value="ระดับภาค/จังหวัด">ระดับภาค</option>
                         <option value="ระดับชาติ">ระดับชาติ</option>
                         <option value="ระดับนานาชาติ">ระดับนานาชาติ</option>
                       </select>

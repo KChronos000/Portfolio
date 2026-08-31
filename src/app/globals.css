@@ -12,13 +12,26 @@
     font-style: normal;
 }
 :root {
-  --background: #f8f8fb;   /* เทาอ่อนอมม่วงนิดๆ แทนขาวล้วน */
+  --background: #f8f8fb;
   --foreground: #1a1a1a;
+}
+
+/* default ตาม system ถ้า user ยังไม่เคยกด toggle เอง (ไม่มี .light ครอบ) */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
 
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
+}
+
+.light {
+  --background: #f8f8fb;
+  --foreground: #1a1a1a;
 }
 
 @media (hover: none) {

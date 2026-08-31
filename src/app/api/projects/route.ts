@@ -37,6 +37,7 @@ export type Project = {
   durationUnit?: string;
   rank?: string;
   level?: string;
+  organizer?: string;
   
 };
 
@@ -64,6 +65,7 @@ function dbRowToProject(row: Record<string, unknown>): Project {
     durationUnit: (row.duration_unit as string) || "",
     rank: (row.rank as string) || undefined,
     level: (row.level as string) || undefined,
+    organizer: (row.organizer as string) || undefined,
   };
 }
 
@@ -199,6 +201,7 @@ export async function POST(request: NextRequest) {
       duration_unit: (formData.get('durationUnit') as string) || null,
       rank: (formData.get('rank') as string) || null,
       level: (formData.get('level') as string) || null,
+      organizer: (formData.get('organizer') as string) || null
     };
 
     if (id !== null) {

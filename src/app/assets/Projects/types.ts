@@ -28,4 +28,5 @@ export type Project = {
   durationUnit?: string;
   rank?: string;
   level?: string;
+  organizer?: string;
 };
