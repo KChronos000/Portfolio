@@ -12,9 +12,15 @@ const isValidUrl = (url?: string | null) => {
   if (!url) return false;
   const u = url.trim();
   if (u === "#" || u === "" || u.toLowerCase() === "n/a") return false;
-  return /^https?:\/\//i.test(u);
-};
 
+  try {
+    const urlToTest = /^https?:\/\//i.test(u) ? u : `https://${u}`;
+    new URL(urlToTest);
+    return true;
+  } catch {
+    return false;
+  }
+};
 
 
 const AchievementSection = () => {
@@ -329,14 +335,22 @@ useEffect(() => {
             </h3>
             
            {/* Show issuer if it's an achievement */}
-            {project.issuer && (
+            {(category === "certificate" ? project.issuer : project.organizer) && (
               <div className={`flex items-center gap-1.5 text-xs font-medium mb-3 ${
                 category === "web app" || category === "design"
                   ? "text-violet-500/80 dark:text-violet-600/80"
                   : "text-emerald-500/80 dark:text-emerald-600/80"
               }`}>
-                <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
-                <span className="truncate">{project.issuer.replace("มอบโดย : ", "")}</span>
+                {category === "certificate" ? (
+                  <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
+                ) : (
+                  <Building2 className="w-3.5 h-3.5 shrink-0" />
+                )}
+                <span className="truncate">
+                  {category === "certificate" 
+                    ? project.issuer?.replace("มอบโดย : ", "") 
+                    : project.organizer?.replace("หน่วยงาน : ", "")}
+                </span>
               </div>
             )}
             <p className="text-gray-500 dark:text-gray-400 text-sm mb-4 line-clamp-2 leading-relaxed">
@@ -451,7 +465,7 @@ const ProjectModal = ({
 
   const levelBlock = project.level && (
     <div className="flex items-start gap-2.5">
-      <MapPin className="w-5 h-5 text-rose-500 dark:text-rose-400 shrink-0 mt-0.5" />
+      <MapPin className="w-5 h-5 text-rose-500 dark:text-rose-500 shrink-0 mt-0.5" />
       <div>
         <p className="text-xs text-neutral-500 dark:text-gray-500">
           {isCertificate ? "ระดับการแข่งขัน" : "ระดับ"}
@@ -463,7 +477,7 @@ const ProjectModal = ({
 
   const durationBlock = project.durationValue && project.durationUnit && (
     <div className={`flex items-center gap-2 ${isCertificate ? "text-sm text-neutral-500 dark:text-gray-400" : ""}`}>
-      <Clock className={`w-4.5 h-4.5 text-violet-500 ${isCertificate ? "dark:text-violet-600" : "dark:text-violet-400"}`} />
+      <Clock className={`w-4.5 h-4.5 text-pink-400 ${isCertificate ? "dark:text-pink-400" : "dark:text-pink-400"}`} />
       <span>ใช้เวลา {project.durationValue} {project.durationUnit}</span>
     </div>
   );
@@ -632,7 +646,7 @@ const ProjectModal = ({
                 </div>
               ) : (
                 /* Standard Project Info Block */
-                <div className="flex flex-col gap-2.5 text-sm text-neutral-500 dark:text-gray-400 mb-6">
+                <div className="flex flex-col gap-2.5 text-sm text-neutral-500 dark:text-gray-400 mb-6 bg-neutral-50 dark:bg-neutral-950/60 p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 ">
                   {project.issuer && (
                     <div className="flex items-start gap-2">
                       <ShieldCheck className="w-4.5 h-4.5 text-violet-500 dark:text-violet-600 shrink-0 mt-0.5" />
@@ -641,9 +655,12 @@ const ProjectModal = ({
                   )}
                   {rankBlock}
                   {levelBlock}
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4.5 h-4.5 text-violet-500 dark:text-violet-600" />
-                    <span>{formatDateRange(project)}</span>
+                  <div className="flex items-start gap-2.5">
+                    <Calendar className="w-5 h-5 text-violet-500 dark:text-violet-400 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-xs text-neutral-500 dark:text-gray-500">วันที่ออกใบรับรอง</p>
+                      <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{formatDateRange(project)}</p>
+                    </div>
                   </div>
                   {durationBlock}
                 </div>
@@ -674,6 +691,30 @@ const ProjectModal = ({
                   </div>
                 )}
 
+                {/* tags */}
+                {(project.tags && project.tags.length > 0) && (
+                  <div className="mb-6">
+                    <h3 className="text-sm font-semibold text-neutral-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+                      {allAcheivementInfo ? "หมวดหมู่" : "หมวดหมู่ที่เกี่ยวข้อง"}
+                    </h3>
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.tags.slice(0, 3).map((tag, i) => (
+                        <span
+                          key={i}
+                          className={`px-3 py-1.5 text-xs rounded-lg font-medium border ${
+                            isCertificateAndGame
+                              ? 'bg-emerald-100/20 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-300 border-emerald-300/20 dark:border-emerald-500/20'
+                              : 'bg-violet-100/20 dark:bg-violet-950/20 text-violet-700 dark:text-violet-300 border-violet-300/20 dark:border-violet-500/20'
+                          }`}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                                  
+
                 {/* Technologies / Skills Used */}
                 {(project.technologies && project.technologies.length > 0) && (
                   <div className="mb-6">
@@ -700,12 +741,12 @@ const ProjectModal = ({
 
               {/* Action Buttons Footer */}
               <div className="flex flex-wrap gap-3 pt-6 border-t border-neutral-200 dark:border-neutral-800">
-                {allAcheivementInfo && project.demoUrl ? (
+                { allAcheivementInfo && project.demoUrl && !hasGithub ?(
                   <Link
                     href={project.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-5 py-2.5 w-full bg-linear-to-r from-emerald-400 to-teal-500 dark:from-emerald-400 dark:to-teal-500 text-neutral-950 font-bold rounded-xl hover:shadow-lg hover:shadow-emerald-500/30 transition-all cursor-pointer"
+                    className="flex items-center justify-center gap-2 px-5 py-2.5 w-full bg-linear-to-r from-emerald-400 to-teal-500 dark:from-emerald-400 dark:to-teal-500 text-neutral-950 font-bold rounded-xl hover:shadow-lg hover:shadow-emerald-500/30 hover:scale-105 transition-all cursor-pointer"
                   >
                     <Globe className="w-4.5 h-4.5" />
                     ลิงก์
@@ -717,7 +758,7 @@ const ProjectModal = ({
                         href={project.demoUrl!}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 px-5 py-2.5 flex-1 bg-linear-to-r from-teal-400 to-violet-500 dark:from-teal-400 dark:to-violet-500 text-neutral-950 dark:text-white font-bold rounded-xl hover:shadow-lg hover:shadow-violet-500/30 transition-all cursor-pointer"
+                        className="flex items-center justify-center gap-2 px-5 py-2.5 flex-1 text-gray-800/95 bg-linear-to-r from-teal-400 to-violet-400 dark:from-teal-400 dark:to-violet-500 dark:text-white font-bold rounded-xl hover:shadow-lg hover:scale-105 hover:shadow-violet-500/30 transition-all cursor-pointer"
                       >
                         <ExternalLink className="w-4.5 h-4.5" />
                         View Project
@@ -729,7 +770,7 @@ const ProjectModal = ({
                         href={project.githubUrl!}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 px-5 py-2.5 flex-1 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-750 text-neutral-800 dark:text-white font-bold rounded-xl border border-neutral-300 dark:border-neutral-700 hover:border-violet-500/30 transition-all cursor-pointer"
+                        className="flex items-center justify-center gap-2 px-5 py-2.5 flex-1 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-500 text-neutral-800 dark:text-white font-bold rounded-xl border border-neutral-300 hover:scale-105 dark:border-neutral-700 hover:border-violet-500/30 transition-all cursor-pointer"
                       >
                         <Github className="w-4.5 h-4.5" />
                         Source Code

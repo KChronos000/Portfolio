@@ -33,7 +33,7 @@ export type Project = {
   order_index?: number;
   startDate?: string;
   endDate?: string;
-  durationValue?: number | null;
+  durationValue?: string | null;
   durationUnit?: string;
   rank?: string;
   level?: string;
@@ -61,7 +61,7 @@ function dbRowToProject(row: Record<string, unknown>): Project {
     order_index: (row.order_index as number) ?? 0,
     startDate: (row.start_date as string) || "",
     endDate: (row.end_date as string) || "",
-    durationValue: (row.duration_value as number) ?? null,
+    durationValue: (row.duration_value as string) || null,
     durationUnit: (row.duration_unit as string) || "",
     rank: (row.rank as string) || undefined,
     level: (row.level as string) || undefined,
@@ -197,7 +197,7 @@ export async function POST(request: NextRequest) {
       issuer: (formData.get('issuer') as string) || null,
       start_date: (formData.get('startDate') as string) || null,
       end_date: (formData.get('endDate') as string) || null,
-      duration_value: formData.get('durationValue') ? Number(formData.get('durationValue')) : null,
+      duration_value: formData.get('durationValue') || null,
       duration_unit: (formData.get('durationUnit') as string) || null,
       rank: (formData.get('rank') as string) || null,
       level: (formData.get('level') as string) || null,

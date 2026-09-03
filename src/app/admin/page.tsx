@@ -58,7 +58,7 @@ interface Project {
   order_index?: number;
   startDate?: string;
   endDate?: string;
-  durationValue?: number | string;
+  durationValue?: string;
   durationUnit?: string;
   rank?: string;      
   level?: string;
@@ -163,7 +163,7 @@ const handleSubmitAuth = async (e: React.FormEvent) => {
     body.append('features', JSON.stringify(stringToArray(formData.features as string)));
     body.append('startDate', formData.startDate || '');
     body.append('endDate', formData.endDate || '');
-    body.append('durationValue', formData.durationValue?.toString() || '');
+    body.append('durationValue', formData.durationValue || '');
     body.append('durationUnit', formData.durationUnit || '');
     body.append('organizer', formData.organizer || '')
 
@@ -219,7 +219,7 @@ const handleEditClick = (project: Project) => {
     issuer: project.issuer || '',
     startDate: project.startDate || '',
     endDate: project.endDate || '',
-    durationValue: project.durationValue?.toString() || '',
+    durationValue: project.durationValue || '',
     durationUnit: project.durationUnit || '',
     rank: project.rank || '',     
     level: project.level || '',
@@ -441,6 +441,8 @@ const handleEditClick = (project: Project) => {
                         <option value="">ไม่ระบุ</option>
                         <option value="เข้าร่วม">เข้าร่วม</option>
                         <option value="ผ่านเข้ารอบ">ผ่านเข้ารอบ / ผ่านการคัดเลือก</option>
+                        <option value="ผ่านการคัดเลือก">ผ่านการคัดเลือก</option>
+                        <option value="ผ่าน">ผ่าน </option>
                         <option value="รางวัลชมเชย">รางวัลชมเชย</option>
                         <option value="รองชนะเลิศอันดับ 2">รองชนะเลิศอันดับ 2</option>
                         <option value="รองชนะเลิศอันดับ 1">รองชนะเลิศอันดับ 1</option>
@@ -461,9 +463,10 @@ const handleEditClick = (project: Project) => {
                         <option value="">ไม่ระบุ</option>
                         <option value="ระดับสถาบัน/โรงเรียน">ระดับสถาบัน/โรงเรียน</option>
                         <option value="ระดับเขตพื้นที่การศึกษา">ระดับเขตพื้นที่การศึกษา</option>
+                        <option value="อำเภอ">ระดับอำเภอ</option>
                         <option value="ระดับจังหวัด">ระดับจังหวัด</option>
                         <option value="ระดับภาค">ระดับภาค</option>
-                        <option value="ระดับภาค/จังหวัด">ระดับภาค</option>
+                        <option value="ระดับภาค/จังหวัด">ระดับภาค/จังหวัด</option>
                         <option value="ระดับชาติ">ระดับชาติ</option>
                         <option value="ระดับนานาชาติ">ระดับนานาชาติ</option>
                       </select>
@@ -498,7 +501,7 @@ const handleEditClick = (project: Project) => {
                     </label>
                     <div className="grid grid-cols-2 gap-3">
                       <input
-                        type="number"
+                        type="text"
                         min="0"
                         className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
                         value={formData.durationValue}
@@ -514,6 +517,7 @@ const handleEditClick = (project: Project) => {
                         <option value="ชม.">ชั่วโมง</option>
                         <option value="วัน">วัน</option>
                         <option value="สัปดาห์">สัปดาห์</option>
+                        <option value="เดือน">เดือน</option>
                       </select>
                     </div>
                   </div>
