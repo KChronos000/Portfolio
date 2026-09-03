@@ -638,7 +638,7 @@ const ProjectModal = ({
                   <div className="flex items-start gap-2.5">
                     <Calendar className="w-5 h-5 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
                     <div>
-                      <p className="text-xs text-neutral-500 dark:text-gray-500">วันที่ออกใบรับรอง</p>
+                      <p className="text-xs text-neutral-500 dark:text-gray-500">ช่วงเวลา</p>
                       <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{formatDateRange(project)}</p>
                     </div>
                   </div>
