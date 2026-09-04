@@ -280,27 +280,33 @@ useEffect(() => {
           <div className="absolute top-4 left-4 flex gap-2">
             <span className={`px-3 py-1 text-xs font-semibold rounded-full backdrop-blur-md flex items-center gap-1.5 border ${
               isCertificateAndGame 
-                ? 'bg-emerald-950/80 text-emerald-300 border-emerald-500/30' 
-                : 'bg-neutral-950/80 text-violet-300 border-violet-500/30'
+                ? 'bg-cyan-950/70 text-emerald-300 border-emerald-500/30' 
+                : 'bg-purple-950/70 text-violet-300 border-violet-500/30'
             }`}>
               {isCertificate ? <Award className="w-3.5 h-3.5" /> : <LayoutGrid className="w-3.5 h-3.5" />}
               {project.category}
             </span>
           </div>
 
-          {project.rank && (
+
+          {(project.rank || project.level) && (
             <div className="absolute top-4 right-4 flex flex-col gap-1 items-end">
-              <span className="flex gap-2 px-2.5 py-1 text-xs font-semibold rounded-full backdrop-blur-md text-amber-700 bg-yellow-300/80 border-amber-600/30 dark:bg-amber-950/80 dark:text-amber-300 border dark:border-amber-500/30">
-                <Trophy className="w-3.5 h-3.5" /> {project.rank}
-              </span>
+              {project.rank && (
+                <span className="flex gap-2 px-2.5 py-1 text-xs font-semibold rounded-full backdrop-blur-md text-amber-700 bg-yellow-300/80 border-amber-600/30 dark:bg-amber-950/80 dark:text-amber-300 border dark:border-amber-500/30">
+                  <Trophy className="w-3.5 h-3.5" /> {project.rank}
+                </span>
+              )}
               {project.level && (
-                <span className="px-2.5 py-1 text-xs font-semibold rounded-full backdrop-blur-md bg-neutral-950/80 text-neutral-300 border border-neutral-500/30">
+                <span className={`px-2.5 py-1 text-xs font-semibold rounded-full backdrop-blur-md bg-gray-100 dark:bg-neutral-950/80 ${
+                  ["ระดับชาติ", "ระดับนานาชาติ"].includes(project.level?.trim())
+                    ? "text-red-500 dark:text-rose-500/90"
+                    : "dark:text-neutral-300"
+                } border border-neutral-500/30`}>
                   {project.level}
                 </span>
               )}
             </div>
           )}
-          
 
           {!canHover && (
             <div className="absolute bottom-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-neutral-950/60 backdrop-blur-md">
@@ -338,7 +344,7 @@ useEffect(() => {
             {(category === "certificate" ? project.issuer : project.organizer) && (
               <div className={`flex items-center gap-1.5 text-xs font-medium mb-3 ${
                 category === "web app" || category === "design"
-                  ? "text-violet-500/80 dark:text-violet-600/80"
+                  ? "text-violet-500/80 dark:text-violet-500/80"
                   : "text-emerald-500/80 dark:text-emerald-600/80"
               }`}>
                 {category === "certificate" ? (
@@ -638,7 +644,7 @@ const ProjectModal = ({
                   <div className="flex items-start gap-2.5">
                     <Calendar className="w-5 h-5 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
                     <div>
-                      <p className="text-xs text-neutral-500 dark:text-gray-500">ช่วงเวลา</p>
+                      <p className="text-xs text-neutral-500 dark:text-gray-500">ณ วันที่</p>
                       <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{formatDateRange(project)}</p>
                     </div>
                   </div>
@@ -658,7 +664,7 @@ const ProjectModal = ({
                   <div className="flex items-start gap-2.5">
                     <Calendar className="w-5 h-5 text-violet-500 dark:text-violet-400 shrink-0 mt-0.5" />
                     <div>
-                      <p className="text-xs text-neutral-500 dark:text-gray-500">วันที่ออกใบรับรอง</p>
+                      <p className="text-xs text-neutral-500 dark:text-gray-500">ณ วันที่</p>
                       <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{formatDateRange(project)}</p>
                     </div>
                   </div>
@@ -698,7 +704,7 @@ const ProjectModal = ({
                       {allAcheivementInfo ? "หมวดหมู่" : "หมวดหมู่ที่เกี่ยวข้อง"}
                     </h3>
                     <div className="flex flex-wrap gap-1.5">
-                      {project.tags.slice(0, 3).map((tag, i) => (
+                      {project.tags.map((tag, i) => (
                         <span
                           key={i}
                           className={`px-3 py-1.5 text-xs rounded-lg font-medium border ${
