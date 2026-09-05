@@ -767,16 +767,16 @@ const ProjectModal = ({
               </div>
 
               {/* Action Buttons Footer */}
-              <div className="flex flex-wrap gap-3 pt-6 border-t border-neutral-200 dark:border-neutral-800">
-                { allAcheivementInfo && project.demoUrl && !hasGithub ?(
+              <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t border-neutral-200 dark:border-neutral-800">
+                {allAcheivementInfo && project.demoUrl && !hasGithub ? (
                   <Link
                     href={project.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-5 py-2.5 w-full bg-linear-to-r from-emerald-400 to-teal-500 dark:from-emerald-400 dark:to-teal-500 text-neutral-950 font-bold rounded-xl hover:shadow-lg hover:shadow-emerald-500/30 hover:scale-105 transition-all cursor-pointer"
+                    className="flex items-center justify-center gap-2 px-5 py-2.5 w-full bg-linear-to-r text-gray-800/90 dark:text-gray-100 from-teal-400 to-violet-400 dark:from-teal-400 dark:to-violet-500 font-bold rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 hover:scale-105 transition-all cursor-pointer whitespace-nowrap"
                   >
-                    <Globe className="w-4.5 h-4.5" />
-                    ลิงก์
+                    <Globe className="w-4.5 h-4.5 shrink-0" />
+                    <span>ลิงก์</span>
                   </Link>
                 ) : (
                   <>
@@ -785,10 +785,10 @@ const ProjectModal = ({
                         href={project.demoUrl!}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 px-5 py-2.5 flex-1 text-gray-800/95 bg-linear-to-r from-teal-400 to-violet-400 dark:from-teal-400 dark:to-violet-500 dark:text-white font-bold rounded-xl hover:shadow-lg hover:scale-105 hover:shadow-violet-500/30 transition-all cursor-pointer"
+                        className="flex items-center justify-center gap-2 px-4 py-2.5 w-full sm:flex-1 text-gray-800/95 bg-linear-to-r from-teal-400 to-violet-400 dark:from-teal-400 dark:to-violet-500 dark:text-white font-bold rounded-xl hover:shadow-lg hover:scale-105 hover:shadow-violet-500/30 transition-all cursor-pointer whitespace-nowrap"
                       >
-                        <ExternalLink className="w-4.5 h-4.5" />
-                        View Project
+                        <ExternalLink className="w-4.5 h-4.5 shrink-0" />
+                        <span>View Project</span>
                       </Link>
                     )}
 
@@ -797,10 +797,10 @@ const ProjectModal = ({
                         href={project.githubUrl!}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 px-5 py-2.5 flex-1 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-500 text-neutral-800 dark:text-white font-bold rounded-xl border border-neutral-300 hover:scale-105 dark:border-neutral-700 hover:border-violet-500/30 transition-all cursor-pointer"
+                        className="flex items-center justify-center gap-2 px-4 py-2.5 w-full sm:flex-1 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-500 text-neutral-800 dark:text-white font-bold rounded-xl border border-neutral-300 hover:scale-105 dark:border-neutral-700 hover:border-violet-500/30 transition-all cursor-pointer whitespace-nowrap"
                       >
-                        <Github className="w-4.5 h-4.5" />
-                        Source Code
+                        <Github className="w-4.5 h-4.5 shrink-0" />
+                        <span>Source Code</span>
                       </Link>
                     )}
                   </>
