@@ -173,16 +173,14 @@ const handleSubmitAuth = async (e: React.FormEvent) => {
       body.append('image', formData.image);
     }
 
-    if (otherFiles.length > 0) {
-      otherFiles.forEach((file) => {
-        body.append('otherImageFiles', file);
-      });
-    } else {
-      const existingOthers = Array.isArray(formData.otherImages) 
-        ? formData.otherImages 
-        : stringToArray(formData.otherImages);
-      body.append('otherImages', JSON.stringify(existingOthers));
-    }
+const existingOthers = Array.isArray(formData.otherImages)
+  ? formData.otherImages
+  : stringToArray(formData.otherImages as string);
+body.append('otherImages', JSON.stringify(existingOthers));
+
+otherFiles.forEach((file) => {
+  body.append('otherImageFiles', file);
+});
 
     const res = await fetch('/api/projects', {
       method: 'POST',
@@ -340,17 +338,29 @@ const handleEditClick = (project: Project) => {
               </h1>
               <p className="text-gray-400 text-sm">จัดการและแก้ไขโปรเจกต์ของคุณ</p>
             </div>
-            <button 
-              onClick={handleLogout} 
-              className="bg-gray-800/80 hover:bg-gray-700/80 text-gray-300 px-6 py-2.5 rounded-xl transition-all duration-200 font-medium border border-gray-700/50 hover:border-gray-600 backdrop-blur-sm"
-            >
-              <span className="flex items-center gap-2">
+            {/* Button Group */}
+            <div className="flex items-center gap-3">
+              <Link
+                href="/"
+                className="bg-gray-800/80 hover:bg-gray-700/80 text-gray-300 px-5 py-2.5 rounded-xl transition-all duration-200 font-medium border border-gray-700/50 hover:border-gray-600 backdrop-blur-sm flex items-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                หน้าหลัก
+              </Link>
+
+              {/* ปุ่ม Logout */}
+              <button 
+                onClick={handleLogout} 
+                className="bg-red-500/10 hover:bg-red-500/20 text-red-400 px-5 py-2.5 rounded-xl transition-all duration-200 font-medium border border-red-500/20 hover:border-red-500/40 backdrop-blur-sm flex items-center gap-2"
+              >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                 </svg>
                 Logout
-              </span>
-            </button>
+              </button>
+            </div>
           </div>
 
           {/* Form Card */}
@@ -530,7 +540,6 @@ const handleEditClick = (project: Project) => {
                       รูปภาพหลัก (Upload)
                     </label>
 
-                    {/* ส่วนแสดงรูปภาพหลัก (ไม่ว่าจะเป็นรูปเดิมจาก DB หรือรูปใหม่ที่เพิ่งเลือก) */}
                     {(mainFile || (formData.image && formData.image.trim() !== "")) ? (
                       <div className="relative w-40 h-40 mb-4 group">
                         <div className="w-full h-full rounded-2xl overflow-hidden border-2 border-cyan-500/30 shadow-lg shadow-cyan-500/10">

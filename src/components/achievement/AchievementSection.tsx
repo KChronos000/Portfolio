@@ -494,7 +494,7 @@ const ProjectModal = ({
     <div className="flex items-start gap-2.5">
       <Building2 className="w-5 h-5 text-cyan-500 dark:text-cyan-400 shrink-0 mt-0.5" />
       <div>
-        <p className="text-xs text-neutral-500 dark:text-gray-500">หน่วยงานผู้จัด</p>
+        <p className="text-xs text-neutral-500 dark:text-gray-500">หน่วยงาน</p>
         <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{project.organizer}</p>
       </div>
     </div>
@@ -649,7 +649,7 @@ const ProjectModal = ({
                   {levelBlock}
 
                   <div className="flex items-start gap-2.5">
-                    <Calendar className="w-5 h-5 text-cyan-500 dark:text-cyan-400 shrink-0 mt-0.5" />
+                    <Calendar className="w-5 h-5 text-teal-500 dark:text-teal-400 shrink-0 mt-0.5" />
                     <div>
                       <p className="text-xs text-neutral-500 dark:text-gray-500">ณ วันที่</p>
                       <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{formatDateRange(project)}</p>
@@ -662,7 +662,7 @@ const ProjectModal = ({
                 <div className="flex flex-col gap-2.5 text-sm text-neutral-500 dark:text-gray-400 mb-6 bg-neutral-50 dark:bg-neutral-950/60 p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 ">
                   {project.issuer && (
                     <div className="flex items-start gap-2.5">
-                      <ShieldCheck className="w-5 h-5 text-violet-500 dark:text-violet-400 shrink-0 mt-0.5" />
+                      <ShieldCheck className="w-5 h-5 text-violet-400 dark:text-violet-500 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-xs text-neutral-500 dark:text-gray-500">
                           {isWebApp ? "การรับรอง" : "การรับรอง"}
@@ -673,10 +673,11 @@ const ProjectModal = ({
                       </div>
                     </div>
                   )}
+                  {organizerBlock}
                   {rankBlock}
                   {levelBlock}
                   <div className="flex items-start gap-2.5">
-                    <Calendar className="w-5 h-5 text-purple-500 dark:text-purple-400 shrink-0 mt-0.5" />
+                    <Calendar className="w-5 h-5 text-purple-400 dark:text-purple-500 shrink-0 mt-0.5" />
                     <div>
                       <p className="text-xs text-neutral-500 dark:text-gray-500">ณ วันที่</p>
                       <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{formatDateRange(project)}</p>

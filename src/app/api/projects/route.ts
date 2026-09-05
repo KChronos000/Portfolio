@@ -170,17 +170,16 @@ export async function POST(request: NextRequest) {
 
     // รูปภาพประกอบ
     const otherImageFiles = formData.getAll('otherImageFiles');
-    let otherImagesPaths: string[] = [];
+    const existingOtherImages = safeParseJSON(formData.get('otherImages') as string, [] as string[]);
 
-    if (otherImageFiles.length > 0 && otherImageFiles[0] instanceof File) {
-      for (const file of otherImageFiles) {
+    let otherImagesPaths: string[] = [...existingOtherImages]; // เริ่มจากรูปเก่าที่เหลือ
+
+    for (const file of otherImageFiles) {
+      if (file instanceof File) {
         const url = await uploadToCloudinary(file);
-        if (url) otherImagesPaths.push(url);
+        if (url) otherImagesPaths.push(url); // เพิ่มรูปใหม่ต่อท้าย
       }
-    } else {
-      otherImagesPaths = safeParseJSON(formData.get('otherImages') as string, []);
     }
-
     const projectData = {
       title: (formData.get('title') as string) || "",
       image: imagePath,
