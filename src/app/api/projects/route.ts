@@ -24,7 +24,7 @@ export type Project = {
   tags: string[];
   demoUrl?: string | null;
   githubUrl?: string | null;
-  date: string;
+  date?: string | null;
   issuer?: string;
   fullDescription?: string;
   features?: string[];
@@ -192,7 +192,7 @@ export async function POST(request: NextRequest) {
       technologies: safeParseJSON(formData.get('technologies') as string, []),
       demo_url: (formData.get('demoUrl') as string) || null,
       github_url: (formData.get('githubUrl') as string) || null,
-      date: (formData.get('date') as string) || new Date().toISOString().split('T')[0],
+      date: (formData.get('date') as string) || null,
       issuer: (formData.get('issuer') as string) || null,
       start_date: (formData.get('startDate') as string) || null,
       end_date: (formData.get('endDate') as string) || null,

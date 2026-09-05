@@ -17,6 +17,7 @@ useEffect(() => {
 
   const [mainFile, setMainFile] = useState<File | null>(null);
   const [otherFiles, setOtherFiles] = useState<File[]>([]);
+  const [isDateText, setIsDateText] = useState(false);
   const initialFormState = {
     title: '',
     description: '',
@@ -29,7 +30,7 @@ useEffect(() => {
     technologies: '',
     demoUrl: '',
     githubUrl: '',
-    date: new Date().toISOString().split('T')[0],
+    date: '',
     startDate: '',
     endDate: '',
     durationValue: '',
@@ -198,7 +199,8 @@ otherFiles.forEach((file) => {
   };
 
 const handleEditClick = (project: Project) => {
-  setEditingId(project.id || null);
+  const isValidDateFormat = /^\d{4}-\d{2}-\d{2}$/.test(project.date || '');
+  setIsDateText(!isValidDateFormat && !!project.date);  setEditingId(project.id || null);
   setFormData({
     title: project.title || '',
     description: project.description || '',
@@ -213,7 +215,7 @@ const handleEditClick = (project: Project) => {
     technologies: Array.isArray(project.technologies) ? project.technologies.join(', ') : project.technologies || '',
     demoUrl: project.demoUrl || '',
     githubUrl: project.githubUrl || '',
-    date: project.date || new Date().toISOString().split('T')[0],
+    date: project.date || '',
     issuer: project.issuer || '',
     startDate: project.startDate || '',
     endDate: project.endDate || '',
@@ -504,6 +506,38 @@ const handleEditClick = (project: Project) => {
                       />
                     </div>
                   </div>
+
+                 <div>
+                <label className="block text-sm font-medium text-gray-400 mb-2 items-center justify-between gap-2">
+                  <span className="flex items-center gap-2">
+                    <span className="w-1 h-4 bg-yellow-400 rounded-full"></span>
+                    วันที่ (แสดงหน้าเว็บ)
+                  </span>
+                  <span className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setFormData({ ...formData, date: '' })}
+                      className="text-xs text-red-400 hover:text-red-300 underline"
+                    >
+                      ล้างค่า
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setIsDateText(!isDateText)}
+                      className="text-xs text-cyan-400 hover:text-cyan-300 underline"
+                    >
+                      {isDateText ? 'สลับเป็นเลือกวันที่' : 'สลับเป็นพิมพ์ข้อความ'}
+                    </button>
+                  </span>
+                </label>
+                <input
+                  type={isDateText ? 'text' : 'date'}
+                  className="w-full bg-gray-800/60 border border-gray-700/50 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                  value={formData.date}
+                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                  placeholder={isDateText ? 'เช่น ฤดูร้อน 2568 หรือ ต้นปี 2569' : ''}
+                />
+              </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-400 mb-2 items-center gap-2">

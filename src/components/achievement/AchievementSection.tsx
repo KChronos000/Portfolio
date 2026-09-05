@@ -392,6 +392,12 @@ function formatDateRange(project: { date: string; startDate?: string; endDate?: 
     const e = new Date(project.endDate).toLocaleDateString("th-TH", opts);
     return `${s} - ${e}`;
   }
+
+  const isValidDateFormat = /^\d{4}-\d{2}-\d{2}$/.test(project.date || '');
+  if (!isValidDateFormat) {
+    return project.date || '';
+  }
+
   return new Date(project.date).toLocaleDateString("th-TH", opts);
 }
 const ProjectModal = ({
