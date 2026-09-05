@@ -341,20 +341,20 @@ useEffect(() => {
             </h3>
             
            {/* Show issuer if it's an achievement */}
-            {(category === "certificate" ? project.issuer : project.organizer) && (
+            {(category === "certificate" || category === "game" ? project.issuer : project.organizer) && (
               <div className={`flex items-center gap-1.5 text-xs font-medium mb-3 ${
                 category === "web app" || category === "design"
                   ? "text-violet-500/80 dark:text-violet-500/80"
                   : "text-emerald-500/80 dark:text-emerald-600/80"
               }`}>
-                {category === "certificate" ? (
+                {category === "certificate"|| category === "game" ? (
                   <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
                 ) : (
                   <Building2 className="w-3.5 h-3.5 shrink-0" />
                 )}
                 <span className="truncate">
-                  {category === "certificate" 
-                    ? project.issuer?.replace("มอบโดย : ", "") 
+                  {category === "certificate" || category === "game" 
+                    ? project.issuer?.replace("ผู้รับรอง : ", "") 
                     : project.organizer?.replace("หน่วยงาน : ", "")}
                 </span>
               </div>
@@ -422,6 +422,8 @@ const ProjectModal = ({
 
   const isCertificate = project.category === "Certificate";
   const showCompetitionInfo = project.category === "Certificate" || project.category === "Web App"  || project.category === "Design";
+  const isWebAppAndDesign = project.category === "Web App"  || project.category === "Design";
+  const isWebApp = project.category === "Web App";
   const allAcheivementInfo = project.category === "Certificate" || project.category === "Web App"  || project.category === "Design" || project.category === "Game";
   const isCertificateAndGame = project.category === "Certificate" || project.category === "Game"; 
   const hasDemo = isValidUrl(project.demoUrl);
@@ -626,23 +628,28 @@ const ProjectModal = ({
                   {project.title}
                 </h2>
 
-               {isCertificate ? (
+               {isCertificateAndGame ? (
                 <div className="bg-neutral-50 dark:bg-neutral-950/60 p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 mb-6 flex flex-col gap-3">
                   {project.issuer && (
                     <div className="flex items-start gap-2.5">
                       <ShieldCheck className="w-5 h-5 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
                       <div>
-                        <p className="text-xs text-neutral-500 dark:text-gray-500">ผู้มอบ/ผู้รับรอง</p>
-                        <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200 leading-tight">{project.issuer.replace("มอบโดย : ", "")}</p>
+                        <p className="text-xs text-neutral-500 dark:text-gray-500">
+                          {isCertificate ? "ผู้มอบ/ผู้รับรอง" : "การรับรอง"}
+                        </p>
+                        <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200 leading-tight">
+                          {project.issuer}
+                        </p>
                       </div>
                     </div>
                   )}
+
                   {organizerBlock}
                   {rankBlock}
                   {levelBlock}
 
                   <div className="flex items-start gap-2.5">
-                    <Calendar className="w-5 h-5 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
+                    <Calendar className="w-5 h-5 text-cyan-500 dark:text-cyan-400 shrink-0 mt-0.5" />
                     <div>
                       <p className="text-xs text-neutral-500 dark:text-gray-500">ณ วันที่</p>
                       <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{formatDateRange(project)}</p>
@@ -654,15 +661,22 @@ const ProjectModal = ({
                 /* Standard Project Info Block */
                 <div className="flex flex-col gap-2.5 text-sm text-neutral-500 dark:text-gray-400 mb-6 bg-neutral-50 dark:bg-neutral-950/60 p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 ">
                   {project.issuer && (
-                    <div className="flex items-start gap-2">
-                      <ShieldCheck className="w-4.5 h-4.5 text-violet-500 dark:text-violet-600 shrink-0 mt-0.5" />
-                      <span>{project.issuer.replace("มอบโดย : ", "")}</span>
+                    <div className="flex items-start gap-2.5">
+                      <ShieldCheck className="w-5 h-5 text-violet-500 dark:text-violet-400 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-xs text-neutral-500 dark:text-gray-500">
+                          {isWebApp ? "การรับรอง" : "การรับรอง"}
+                        </p>
+                        <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200 leading-tight">
+                          {project.issuer}
+                        </p>
+                      </div>
                     </div>
                   )}
                   {rankBlock}
                   {levelBlock}
                   <div className="flex items-start gap-2.5">
-                    <Calendar className="w-5 h-5 text-violet-500 dark:text-violet-400 shrink-0 mt-0.5" />
+                    <Calendar className="w-5 h-5 text-purple-500 dark:text-purple-400 shrink-0 mt-0.5" />
                     <div>
                       <p className="text-xs text-neutral-500 dark:text-gray-500">ณ วันที่</p>
                       <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{formatDateRange(project)}</p>

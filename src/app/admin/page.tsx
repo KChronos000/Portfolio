@@ -442,7 +442,8 @@ const handleEditClick = (project: Project) => {
                         <option value="เข้าร่วม">เข้าร่วม</option>
                         <option value="ผ่านเข้ารอบ">ผ่านเข้ารอบ / ผ่านการคัดเลือก</option>
                         <option value="ผ่านการคัดเลือก">ผ่านการคัดเลือก</option>
-                        <option value="ผ่าน">ผ่าน </option>
+                        <option value="ผ่าน">ผ่าน</option>
+                        <option value="ผ่านการทดสอบ">ผ่านการทดสอบ</option>
                         <option value="รางวัลชมเชย">รางวัลชมเชย</option>
                         <option value="รองชนะเลิศอันดับ 2">รองชนะเลิศอันดับ 2</option>
                         <option value="รองชนะเลิศอันดับ 1">รองชนะเลิศอันดับ 1</option>

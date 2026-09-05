@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import { Namecard } from './Namecard'
 
+export const skillTags = ["Computer Engineering", "Com-Sci", "IT & ICT"];
+
 const FirstSection = () => {
   return (
     <section id='home' className="w-full relative z-10 flex flex-col justify-center min-h-screen items-center pt-24 sm:pt-0 px-4 md:px-8 py-12 lg:py-0 overflow-hidden">
@@ -18,13 +20,13 @@ const FirstSection = () => {
 
         {/* Profile Pic Column */}
         <div className="w-full lg:col-span-5 order-1 lg:order-2 flex justify-center fade-in-up" style={{ animationDelay: '350ms' }}>
-          <div className="relative group max-w-70 sm:max-w-90 md:max-w-100 w-full aspect-square floating">
+          <div className="relative max-w-xs sm:max-w-sm md:max-w-md w-full aspect-square floating">
             
             {/* 1. Ambient Background Glow */}
-            <div className="absolute inset-0 rounded-full bg-linear-to-tr from-violet-500 to-emerald-400 opacity-20 dark:opacity-40 blur-2xl group-hover:opacity-60 transition-opacity duration-500 pointer-events-none"></div>
+            <div className="absolute inset-0 rounded-full bg-linear-to-tr from-violet-500 to-emerald-400 opacity-20 dark:opacity-40 blur-2xl group-hover:opacity-60 transition-opacity duration-500 pointer-events-none" />
             
             {/* 2. Simple Border Frame */}
-            <div className="relative rounded-full p-1 bg-linear-to-tr from-violet-500 via-emerald-400 to-violet-500 w-full h-full shadow-lg">
+            <div className="relative rounded-full p-1 bg-linear-to-tr from-violet-500 via-emerald-400 to-violet-500 w-full h-full shadow-lg group">
               
               {/* 3. Image Box */}
               <div className="w-full h-full rounded-full bg-gray-200 dark:bg-neutral-900 overflow-hidden flex items-center justify-center relative">
@@ -40,15 +42,22 @@ const FirstSection = () => {
 
             </div>
 
-            {/* Interactive Floating Badge */}
-            <div className="absolute bottom-2 right-2 z-20 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border border-violet-300/60 dark:border-violet-500/30 rounded-full px-4 py-2 shadow-lg flex items-center gap-2 select-none hover:border-violet-400 transition-colors duration-300">
-              <div className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-              </div>
-              <span className="text-xs sm:text-sm font-semibold text-zinc-800 dark:text-zinc-100 tracking-wider">
-                Hi 👋
-              </span>
+            {/* Badges: จัดวางเป็นชิ้นๆ แบบลอยรอบรูป ไม่ให้บังกัน */}
+            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center gap-2 w-full max-w-sm px-2 flex-wrap select-none">
+              {skillTags.map((tag) => (
+                <div
+                  key={tag}
+                  className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border border-violet-300/50 dark:border-violet-500/30 rounded-full px-3.5 py-1.5 shadow-md flex items-center gap-2 hover:scale-105 transition-all duration-300"
+                >
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
+                  <span className="text-xs font-semibold text-zinc-800 dark:text-zinc-100 whitespace-nowrap">
+                    {tag}
+                  </span>
+                </div>
+              ))}
             </div>
 
           </div>

@@ -1,7 +1,17 @@
 import { FacebookIcon, GithubIcon, GmailIcon } from '../Svgicon'
 import Link from 'next/link'
-
+import { useState, useEffect } from "react";
+import { skillTags } from "./FirstSection";
+import { motion, AnimatePresence } from 'framer-motion';
 export const Namecard = () => {
+  const [tagIndex, setTagIndex] = useState(0);
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setTagIndex((prev) => (prev + 1) % skillTags.length);
+  }, 4000);
+  return () => clearInterval(interval);
+}, []);
   return (
     <div className="relative group p-1 rounded-2xl  bg-linear-to-tr from-violet-500/20 via-transparent to-emerald-500/10 dark:from-violet-500/10 dark:to-emerald-500/5 hover:from-violet-500/40 hover:to-emerald-500/30 transition-all duration-500">
       {/* Outer subtle glow on hover */}
@@ -34,15 +44,28 @@ export const Namecard = () => {
             Game • Website Developer
           </span>
           <span className="hidden sm:inline h-1.5 w-1.5 rounded-full bg-teal-500 dark:bg-teal-400"></span>
-          <span className="text-zinc-500 dark:text-zinc-400 text-sm font-medium">Aspiring Engineer</span>
+          <span className="text-zinc-500 dark:text-zinc-400 text-sm font-medium">Student</span>
         </div>
 
         {/* Bio Text */}
         <p className="fade-in-up mt-6 text-base sm:text-lg text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal" style={{ animationDelay: '400ms' }}>
           จุดเริ่มต้นของดิฉันมาจากความอยากรู้อยากเห็นง่าย ๆ ว่าเว็บไซต์และเกมที่เล่นอยู่ทุกวันมันทำงานยังไงเบื้องหลัง ความสงสัยนั้นค่อย ๆ พาดิฉันเข้าสู่โลกของการเขียนโปรแกรมและ{" "}
-          <span className="text-transparent bg-clip-text bg-linear-to-r from-violet-500 to-emerald-500 dark:from-violet-400 dark:to-emerald-400 font-extrabold">
-            "Computer Engineering"
+          
+          <span className="inline-inline-flex relative h-[1.5em] align-baseline overflow-hidden px-1">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={tagIndex}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="inline-block text-transparent bg-clip-text bg-linear-to-r from-violet-500 to-emerald-500 dark:from-violet-400 dark:to-emerald-400 font-extrabold"
+              >
+                "{skillTags[tagIndex]}"
+              </motion.span>
+            </AnimatePresence>
           </span>{" "}
+          
           อย่างเต็มตัว ตลอดเส้นทางที่ผ่านมา ดิฉันได้ลองผิดลองถูก ล้มบ้าง เรียนรู้บ้าง แต่สิ่งที่ไม่เคยเปลี่ยนคือความตั้งใจที่จะพัฒนาตัวเองให้เก่งขึ้นในทุก ๆ วัน
         </p>
 
