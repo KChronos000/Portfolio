@@ -1,12 +1,13 @@
 "use client"
 import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useMemo} from 'react';
 import type { Project } from "@/app/assets/Projects/types";
 import { Calendar, ExternalLink, Github, X, ChevronLeft, ChevronRight, Award, ShieldCheck, Bookmark, Globe, Copy, Check, Columns2, Rows2 ,Clock, Trophy, MapPin, Building2 } from "lucide-react";
 import { Palette, Gamepad2, Grid3x3, LayoutGrid } from 'lucide-react';
 import { ArrowUpRight } from 'lucide-react';
 import { SkeletonCardAchievement } from '@/components/SkeletonCardAchievement';
 import Link from 'next/link';
+// import { softBreak } from '@/libary/thai-break';
 
 const isValidUrl = (url?: string | null) => {
   if (!url) return false;
@@ -21,6 +22,7 @@ const isValidUrl = (url?: string | null) => {
     return false;
   }
 };
+
 
 
 const AchievementSection = () => {
@@ -74,10 +76,11 @@ const AchievementSection = () => {
 const AGrid = ({ projects, loading }: { projects: Project[]; loading: boolean }) => {
   const [filter, setFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [modalLayoutMode, setModalLayoutMode] = useState<'side' | 'top'>('side');
+  const [modalLayoutMode, setModalLayoutMode] = useState<'side' | 'top'>('top');
   const categories = ["All", "Web App", "Design", "Game", "Certificate"];
   const categoryIcons: Record<string, React.ReactNode> = {
     "All": <Grid3x3 size={18} />,
+    "Web App": <LayoutGrid size={18} />,
     "Design": <Palette size={18} />,
     "Game": <Gamepad2 size={18} />,
     "Certificate": <Award size={18} />,
@@ -211,6 +214,7 @@ const ProjectCard = ({
   const allAcheivementInfo = project.category === "Certificate" || project.category === "Web App"  || project.category === "Design" || project.category === "Game";
   const [canHover, setCanHover] = useState(true);
 
+  
   const category = project.category?.trim().toLowerCase();
 category === "web app" || category === "design"
   ? "group-hover:text-violet-500 dark:group-hover:text-violet-500"
@@ -283,7 +287,10 @@ useEffect(() => {
                 ? 'bg-cyan-950/70 text-emerald-300 border-emerald-500/30' 
                 : 'bg-purple-950/70 text-violet-300 border-violet-500/30'
             }`}>
-              {isCertificate ? <Award className="w-3.5 h-3.5" /> : <LayoutGrid className="w-3.5 h-3.5" />}
+              {project.category === "Web App" && <LayoutGrid className="w-3.5 h-3.5" />}
+              {project.category === "Design" && <Palette className="w-3.5 h-3.5" />}
+              {project.category === "Game" && <Gamepad2 className="w-3.5 h-3.5" />}
+              {project.category === "Certificate" && <Award className="w-3.5 h-3.5" />}
               {project.category}
             </span>
           </div>
@@ -410,13 +417,13 @@ const ProjectModal = ({
   layoutMode: 'side' | 'top';
   onChangeLayoutMode: (mode: 'side' | 'top') => void;
   onClose: () => void;
-}) => {                                          // ← เปิดวงเล็บฟังก์ชันตรงนี้
+}) => {                                          
   const allImages = [project.image, ...(project.otherImages || [])];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isImageExpanded, setIsImageExpanded] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {                              // ← ต้องอยู่ตรงนี้ ก่อนวงเล็บปิดของฟังก์ชัน
+  useEffect(() => {                              
     document.body.classList.add('modal-open');
     document.body.style.overflow = 'hidden';
     return () => {
@@ -425,10 +432,15 @@ const ProjectModal = ({
     };
   }, []);
 
+  // const displayFullDescription = useMemo(
+  //   () => softBreak(project.fullDescription || project.description, "th"),
+  //   [project.fullDescription, project.description]
+  // );
 
   const isCertificate = project.category === "Certificate";
   const showCompetitionInfo = project.category === "Certificate" || project.category === "Web App"  || project.category === "Design";
   const isWebAppAndDesign = project.category === "Web App"  || project.category === "Design";
+  const isDesign = project.category === "Design";
   const isWebApp = project.category === "Web App";
   const allAcheivementInfo = project.category === "Certificate" || project.category === "Web App"  || project.category === "Design" || project.category === "Game";
   const isCertificateAndGame = project.category === "Certificate" || project.category === "Game"; 
@@ -626,7 +638,10 @@ const ProjectModal = ({
                     ? 'bg-emerald-100/60 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border-emerald-300/20 dark:border-emerald-500/20' 
                     : 'bg-violet-100/60 dark:bg-violet-950/60 text-violet-700 dark:text-violet-400 border-violet-300/20 dark:border-violet-500/20'
                 }`}>
-                  {isCertificate ? <Award className="w-3.5 h-3.5" /> : <LayoutGrid className="w-3.5 h-3.5" />}
+                  {project.category === "Web App" && <LayoutGrid className="w-3.5 h-3.5" />}
+                  {project.category === "Design" && <Palette className="w-3.5 h-3.5" />}
+                  {project.category === "Game" && <Gamepad2 className="w-3.5 h-3.5" />}
+                  {project.category === "Certificate" && <Award className="w-3.5 h-3.5" />}
                   {project.category}
                 </span>
 
@@ -685,7 +700,7 @@ const ProjectModal = ({
                   <div className="flex items-start gap-2.5">
                     <Calendar className="w-5 h-5 text-purple-400 dark:text-purple-500 shrink-0 mt-0.5" />
                     <div>
-                      <p className="text-xs text-neutral-500 dark:text-gray-500">ณ วันที่</p>
+                      <p className="text-xs text-neutral-500 dark:text-gray-500">ณ วันที่/ช่วงเวลา</p>
                       <p className="text-sm font-semibold text-neutral-800 dark:text-gray-200">{formatDateRange(project)}</p>
                     </div>
                   </div>
