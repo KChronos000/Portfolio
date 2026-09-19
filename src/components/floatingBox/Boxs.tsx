@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 
-export const Boxs = () => {
+export const Boxes = () => {
   const [boxCount, setBoxCount] = useState(11) // default = desktop, กันปัญหา hydration
 
   useEffect(() => {

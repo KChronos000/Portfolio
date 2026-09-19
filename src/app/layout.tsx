@@ -12,7 +12,7 @@ import { K2D } from 'next/font/google'
 const k2d = K2D({
   subsets: ['thai', 'latin'],
   weight: ['400', '500', '700'],
-  display: 'swap', // หรือ 'optional' เพื่อลด layout shift
+  display: 'swap',
 })
 
 const geistMono = Geist_Mono({

@@ -34,6 +34,10 @@
   --foreground: #1a1a1a;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 @media (hover: none) {
   .group\/item:active {
     transform: none !important;
