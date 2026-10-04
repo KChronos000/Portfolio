@@ -446,6 +446,7 @@ const ProjectModal = ({
   const isCertificateAndGame = project.category === "Certificate" || project.category === "Game"; 
   const hasDemo = isValidUrl(project.demoUrl);
   const hasGithub = isValidUrl(project.githubUrl);
+  
 
   const handleCopyId = (idText: string) => {
     navigator.clipboard.writeText(idText);
@@ -720,7 +721,13 @@ const ProjectModal = ({
                 {(project.features && project.features.length > 0) && (
                   <div className="mb-6">
                     <h3 className="text-sm font-semibold text-neutral-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-                      {isCertificate ? " เนื้อหาและหัวข้อหลักในการฝึกอบรม" : " ฟีเจอร์เด่น / ระบบหลัก"}
+                      {isCertificate
+                      ? "เนื้อหาที่เรียนรู้"
+                      : isDesign
+                      ? "จุดเด่นของงานออกแบบ"
+                      : project.category === "Game"
+                      ? "ฟีเจอร์เกม / กลไกการเล่น"
+                      : "ฟีเจอร์เด่น / ระบบหลัก"}
                     </h3>
                     <ul className="space-y-1.5">
                       {project.features.map((feature, i) => (

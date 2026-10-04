@@ -10,7 +10,7 @@ const token = await createSessionToken()
   const cookieStore = await cookies()
   cookieStore.set('admin_session', token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',  // ← เปลี่ยนตรงนี้
+    secure: process.env.NODE_ENV === 'production', 
     sameSite: 'strict',
     maxAge: 60 * 60 * 8,
     path: '/',
